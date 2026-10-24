@@ -37,10 +37,10 @@
 
         @media (prefers-color-scheme: dark) {
             :root {
-                --bg-color: #120F1D;
+                --bg-color: #1A1528;
                 --text-color: #E2D9F3;
-                --card-bg: #1E1A29;
-                --border-color: #3B2E56;
+                --card-bg: #27213C;
+                --border-color: #4D3B73;
             }
         }
 
@@ -111,13 +111,13 @@
     <!-- CANVAS PARA EL DESTELLO Y POLVO ESTELAR BRILLANTE -->
     <canvas id="explosion-canvas"></canvas>
 
-    <!-- REPRODUCTOR DE AUDIO OCULTO -->
+    <!-- REPRODUCTOR DE AUDIO -->
     <audio id="audio-player" loop></audio>
 
     <!-- HEADER / NAVEGACIÓN SUPERIOR -->
     <header class="max-w-md mx-auto w-full pt-6 px-4">
         <div class="flex items-center space-x-3 mb-4">
-            <div class="w-12 h-12 rounded-2xl bg-purple-100 dark:bg-purple-950/60 flex items-center justify-center overflow-hidden p-1.5 shadow-sm border border-purple-200 dark:border-purple-800">
+            <div class="w-12 h-12 rounded-2xl bg-purple-100 dark:bg-purple-950 flex items-center justify-center overflow-hidden p-1.5 shadow-sm border border-purple-200 dark:border-purple-800">
                 <img src="assets/icono-camino.png" alt="Logo Te" class="w-full h-full object-contain">
             </div>
             <div>
@@ -169,18 +169,18 @@
                     <div id="progress-bar" class="bg-gradient-to-r from-purple-400 to-brand-purple h-full rounded-full transition-all duration-500" style="width: 1%;"></div>
                 </div>
                 <div class="flex justify-between items-center pt-1">
-                    <button onclick="changeDay(-1)" class="px-3 py-1.5 bg-purple-50 dark:bg-purple-950/60 hover:bg-purple-100 dark:hover:bg-purple-900 text-purple-700 dark:text-purple-300 font-bold rounded-xl text-xs transition">⬅️ Anterior</button>
+                    <button onclick="changeDay(-1)" class="px-3 py-1.5 bg-purple-50 dark:bg-purple-900/50 hover:bg-purple-100 dark:hover:bg-purple-900 text-purple-700 dark:text-purple-300 font-bold rounded-xl text-xs transition">⬅️ Anterior</button>
                     <div class="flex items-center space-x-1 text-xs text-purple-600 dark:text-purple-300 font-medium">
                         <span>Ir al día:</span>
-                        <input type="number" id="day-select" min="1" max="365" value="1" onchange="jumpToDay(this.value)" class="w-12 bg-purple-50 dark:bg-purple-950 border border-purple-200 dark:border-purple-800 text-center py-1 rounded-lg text-brand-darkPurple dark:text-purple-200 font-bold">
+                        <input type="number" id="day-select" min="1" max="365" value="1" onchange="jumpToDay(this.value)" class="w-12 bg-purple-50 dark:bg-purple-900/50 border border-purple-200 dark:border-purple-700 text-center py-1 rounded-lg text-brand-darkPurple dark:text-purple-200 font-bold">
                     </div>
-                    <button onclick="changeDay(1)" class="px-3 py-1.5 bg-purple-50 dark:bg-purple-950/60 hover:bg-purple-100 dark:hover:bg-purple-900 text-purple-700 dark:text-purple-300 font-bold rounded-xl text-xs transition">Siguiente ➡️</button>
+                    <button onclick="changeDay(1)" class="px-3 py-1.5 bg-purple-50 dark:bg-purple-900/50 hover:bg-purple-100 dark:hover:bg-purple-900 text-purple-700 dark:text-purple-300 font-bold rounded-xl text-xs transition">Siguiente ➡️</button>
                 </div>
             </div>
 
             <div class="bg-white dynamic-card p-5 rounded-3xl shadow-sm border border-purple-100 space-y-4">
                 <div class="flex items-center space-x-3">
-                    <div class="w-12 h-12 rounded-2xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-100 dark:border-emerald-900/50 flex items-center justify-center overflow-hidden p-1.5">
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-100 dark:border-emerald-900 flex items-center justify-center overflow-hidden p-1.5">
                         <img src="assets/icono-te.png" alt="Te sugerido" class="w-full h-full object-contain">
                     </div>
                     <div>
@@ -193,7 +193,7 @@
                     </div>
                 </div>
 
-                <div class="bg-emerald-50/80 dark:bg-emerald-950/40 p-4 rounded-2xl border border-emerald-100/80 dark:border-emerald-900/40 text-xs text-emerald-900 dark:text-emerald-200 leading-relaxed flex items-start space-x-2">
+                <div class="bg-emerald-50/80 dark:bg-emerald-950/40 p-4 rounded-2xl border border-emerald-100 dark:border-emerald-900/60 text-xs text-emerald-900 dark:text-emerald-200 leading-relaxed flex items-start space-x-2">
                     <img src="assets/icono-beneficio.png" alt="Beneficios" class="w-4 h-4 object-contain flex-shrink-0 mt-0.5">
                     <div>
                         <strong class="font-bold block text-emerald-950 dark:text-emerald-100 mb-0.5">¿Qué emoción despierta y sus beneficios?</strong>
@@ -201,7 +201,7 @@
                     </div>
                 </div>
 
-                <div class="bg-amber-50/80 dark:bg-amber-950/30 p-4 rounded-2xl border border-amber-100/80 dark:border-amber-900/40 text-xs text-amber-950 dark:text-amber-200 leading-relaxed space-y-1">
+                <div class="bg-amber-50/80 dark:bg-amber-950/30 p-4 rounded-2xl border border-amber-100 dark:border-amber-950 text-xs text-amber-950 dark:text-amber-200 leading-relaxed space-y-1">
                     <p class="font-bold text-amber-900 dark:text-amber-300 flex items-center space-x-1">
                         <img src="assets/icono-idea.png" alt="Idea" class="w-4 h-4 object-contain flex-shrink-0">
                         <span>LA IDEA DE HOY <span id="glasses-title-label">(GAFAS DE PAZ: MIRADA AMABLE)</span></span>
@@ -211,7 +211,7 @@
                     </p>
                 </div>
 
-                <div class="bg-purple-50/60 dark:bg-purple-950/30 p-4 rounded-2xl border border-purple-100 dark:border-purple-900/40 text-xs text-purple-900 dark:text-purple-200 leading-relaxed space-y-1">
+                <div class="bg-purple-50/60 dark:bg-purple-950/30 p-4 rounded-2xl border border-purple-100 dark:border-purple-900/60 text-xs text-purple-900 dark:text-purple-200 leading-relaxed space-y-1">
                     <strong class="font-bold text-brand-purple dark:text-purple-300 flex items-center space-x-1">
                         <img src="assets/icono-sorbito.png" alt="Sorbito" class="w-4 h-4 object-contain flex-shrink-0">
                         <span>Sorbito de 1 minuto:</span>
@@ -223,7 +223,7 @@
             </div>
         </section>
 
-        <!-- 2. SORBITO DE EMERGENCIA (SOS) - AUDIOS EN CARPETA ASSETS -->
+        <!-- 2. SORBITO DE EMERGENCIA (SOS) - TUS NOMBRES ORIGINALES (cuencos.mp3, olas.mp3, etc.) -->
         <section id="sec-sos" class="hidden space-y-4 text-center">
             <div class="bg-white dynamic-card p-6 rounded-3xl shadow-sm border border-purple-100 space-y-4">
                 <div class="w-12 h-12 mx-auto overflow-hidden">
@@ -275,7 +275,7 @@
                 </div>
 
                 <div id="input-box-wrapper" class="space-y-3 transition-all duration-300">
-                    <textarea id="thought-input" rows="4" placeholder="Ejemplo: 'Hoy me siento horrible', 'Tengo mucho agobio' o 'Siento que no sirvo para nada...'" class="w-full bg-purple-50/50 dark:bg-purple-950/50 dynamic-card border border-purple-100 dark:border-purple-900 rounded-2xl p-4 text-xs text-slate-700 dark:text-slate-200 focus:border-purple-300 outline-none resize-none"></textarea>
+                    <textarea id="thought-input" rows="4" placeholder="Ejemplo: 'Hoy me siento horrible', 'Tengo mucho agobio' o 'Siento que no sirvo para nada...'" class="w-full bg-purple-50/50 dark:bg-purple-950/40 dynamic-card border border-purple-100 dark:border-purple-900 rounded-2xl p-4 text-xs text-slate-700 dark:text-slate-200 focus:border-purple-300 outline-none resize-none"></textarea>
 
                     <button onclick="disintegrateThought()" class="w-full py-3.5 bg-brand-purple hover:bg-purple-700 text-white font-bold rounded-2xl text-xs shadow-md transition flex items-center justify-center space-x-2">
                         <span>✨</span> <span>Desintegrar en Gran Explosión Estelar</span>
@@ -309,7 +309,7 @@
                 </div>
 
                 <div class="flex space-x-2">
-                    <input type="text" id="piropero-input" placeholder="Escribe una cualidad bonita sobre ti..." class="flex-grow bg-purple-50/50 dark:bg-purple-950/50 dynamic-card border border-purple-100 dark:border-purple-900 rounded-xl px-4 py-2 text-xs outline-none focus:border-purple-300 text-slate-700 dark:text-slate-200">
+                    <input type="text" id="piropero-input" placeholder="Escribe una cualidad bonita sobre ti..." class="flex-grow bg-purple-50/50 dark:bg-purple-950/40 dynamic-card border border-purple-100 dark:border-purple-900 rounded-xl px-4 py-2 text-xs outline-none focus:border-purple-300 text-slate-700 dark:text-slate-200">
                     <button onclick="addPiropo()" class="px-4 py-2 bg-amber-400 hover:bg-amber-500 text-slate-900 font-bold rounded-xl text-xs shadow-sm transition">Guardar</button>
                 </div>
 
@@ -542,6 +542,7 @@
         let currentDayIndex = 0;
         let currentActiveKey = null;
 
+        /* 🔀 NAVEGACIÓN DE PESTAÑAS */
         function showSection(id) {
             const sections = document.querySelectorAll('main > section');
             sections.forEach(s => s.classList.add('hidden'));
@@ -635,70 +636,7 @@
             }, 1000);
         }
 
-        /* 🔊 AUDIO Y SINTETIZADOR */
-        let audioCtx = null;
-        let activeOscillators = [];
-
-        function stopSynthSound() {
-            activeOscillators.forEach(osc => {
-                try { osc.stop(); osc.disconnect(); } catch(e){}
-            });
-            activeOscillators = [];
-        }
-
-        function playSynthSound(type) {
-            if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            stopSynthSound();
-
-            if (type === 'cuencos') {
-                [216, 432, 648].forEach(freq => {
-                    const osc = audioCtx.createOscillator();
-                    const gain = audioCtx.createGain();
-                    osc.type = 'sine';
-                    osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-                    gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
-                    osc.connect(gain);
-                    gain.connect(audioCtx.destination);
-                    osc.start();
-                    activeOscillators.push(osc);
-                });
-            } else if (type === 'olas' || type === 'agua') {
-                const bufferSize = audioCtx.sampleRate * 2;
-                const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
-                const data = buffer.getChannelData(0);
-                for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
-
-                const noise = audioCtx.createBufferSource();
-                noise.buffer = buffer;
-                noise.loop = true;
-
-                const filter = audioCtx.createBiquadFilter();
-                filter.type = 'lowpass';
-                filter.frequency.setValueAtTime(400, audioCtx.currentTime);
-
-                const gain = audioCtx.createGain();
-                gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
-
-                noise.connect(filter);
-                filter.connect(gain);
-                gain.connect(audioCtx.destination);
-                noise.start();
-                activeOscillators.push(noise);
-            } else if (type === 'campanitas') {
-                [1046.50, 1318.51, 1567.98].forEach((freq, idx) => {
-                    const osc = audioCtx.createOscillator();
-                    const gain = audioCtx.createGain();
-                    osc.type = 'sine';
-                    osc.frequency.setValueAtTime(freq, audioCtx.currentTime + idx * 0.4);
-                    gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
-                    osc.connect(gain);
-                    gain.connect(audioCtx.destination);
-                    osc.start(audioCtx.currentTime + idx * 0.4);
-                    activeOscillators.push(osc);
-                });
-            }
-        }
-
+        /* 🔊 REPRODUCTOR DE TUS ARCHIVOS ORIGINALES (cuencos.mp3, olas.mp3, etc.) */
         function toggleAudio(key, filename) {
             const player = document.getElementById('audio-player');
             const buttons = document.querySelectorAll('#sec-sos button');
@@ -707,7 +645,6 @@
 
             if (currentActiveKey === key) {
                 player.pause();
-                stopSynthSound();
                 currentActiveKey = null;
                 return;
             }
@@ -717,9 +654,7 @@
                 currentActiveKey = key;
                 document.getElementById('btn-' + key).classList.add('border-purple-400', 'bg-purple-100');
             }).catch(err => {
-                playSynthSound(key);
-                currentActiveKey = key;
-                document.getElementById('btn-' + key).classList.add('border-purple-400', 'bg-purple-100');
+                console.error("Error al reproducir el audio:", err);
             });
         }
 
