@@ -37,10 +37,10 @@
 
         @media (prefers-color-scheme: dark) {
             :root {
-                --bg-color: #1a1625;
-                --text-color: #e2d9f3;
-                --card-bg: #262135;
-                --border-color: #4a3b6c;
+                --bg-color: #120F1D;
+                --text-color: #E2D9F3;
+                --card-bg: #1E1A29;
+                --border-color: #3B2E56;
             }
         }
 
@@ -117,30 +117,30 @@
     <!-- HEADER / NAVEGACIÓN SUPERIOR -->
     <header class="max-w-md mx-auto w-full pt-6 px-4">
         <div class="flex items-center space-x-3 mb-4">
-            <div class="w-12 h-12 rounded-2xl bg-purple-100 flex items-center justify-center overflow-hidden p-1.5 shadow-sm border border-purple-200">
+            <div class="w-12 h-12 rounded-2xl bg-purple-100 dark:bg-purple-950/60 flex items-center justify-center overflow-hidden p-1.5 shadow-sm border border-purple-200 dark:border-purple-800">
                 <img src="assets/icono-camino.png" alt="Logo Te" class="w-full h-full object-contain">
             </div>
             <div>
-                <h1 class="text-xl md:text-2xl font-bold text-brand-darkPurple tracking-wide leading-none">EL TE DE LAS EMOCIONES</h1>
+                <h1 class="text-xl md:text-2xl font-bold text-brand-darkPurple dark:text-purple-300 tracking-wide leading-none">EL TE DE LAS EMOCIONES</h1>
                 <p class="text-xs text-purple-400 font-medium mt-1">Un sorbo de paz para tu mente cada día</p>
             </div>
         </div>
 
         <!-- PESTAÑAS SUPERIORES PERFECTAMENTE DISTRIBUIDAS (PC Y MÓVIL) -->
-        <div class="bg-white dynamic-card p-1.5 rounded-2xl shadow-sm border border-purple-100 flex flex-nowrap items-center justify-between text-[10px] sm:text-[11px] font-bold text-brand-darkPurple gap-1">
+        <div class="bg-white dynamic-card p-1.5 rounded-2xl shadow-sm border border-purple-100 flex flex-nowrap items-center justify-between text-[10px] sm:text-[11px] font-bold text-brand-darkPurple dark:text-purple-200 gap-1">
             <button onclick="showSection('daily')" id="top-btn-daily" class="tab-btn flex-1 py-2 px-1 rounded-xl bg-brand-purple text-white transition flex items-center justify-center space-x-1">
                 <img src="assets/icono-camino.png" alt="Camino" class="w-3.5 h-3.5 object-contain flex-shrink-0"> <span>365 Días</span>
             </button>
-            <button onclick="showSection('sos')" id="top-btn-sos" class="tab-btn flex-1 py-2 px-1 rounded-xl text-purple-600 hover:bg-purple-50 transition flex items-center justify-center space-x-1">
+            <button onclick="showSection('sos')" id="top-btn-sos" class="tab-btn flex-1 py-2 px-1 rounded-xl text-purple-600 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/40 transition flex items-center justify-center space-x-1">
                 <img src="assets/icono-sos.png" alt="Emergencia" class="w-3.5 h-3.5 object-contain flex-shrink-0"> <span>SOS</span>
             </button>
-            <button onclick="showSection('blackhole')" id="top-btn-blackhole" class="tab-btn flex-1 py-2 px-1 rounded-xl text-purple-600 hover:bg-purple-50 transition flex items-center justify-center space-x-1">
+            <button onclick="showSection('blackhole')" id="top-btn-blackhole" class="tab-btn flex-1 py-2 px-1 rounded-xl text-purple-600 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/40 transition flex items-center justify-center space-x-1">
                 <img src="assets/icono-agujero.png" alt="Agujero" class="w-3.5 h-3.5 object-contain flex-shrink-0"> <span>Agujero</span>
             </button>
-            <button onclick="showSection('piropero')" id="top-btn-piropero" class="tab-btn flex-1 py-2 px-1 rounded-xl text-purple-600 hover:bg-purple-50 transition flex items-center justify-center space-x-1">
+            <button onclick="showSection('piropero')" id="top-btn-piropero" class="tab-btn flex-1 py-2 px-1 rounded-xl text-purple-600 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/40 transition flex items-center justify-center space-x-1">
                 <img src="assets/icono-piropero.png" alt="Piropero" class="w-3.5 h-3.5 object-contain flex-shrink-0"> <span>Piropero</span>
             </button>
-            <button onclick="showSection('mirror')" id="top-btn-mirror" class="tab-btn flex-1 py-2 px-1 rounded-xl text-purple-600 hover:bg-purple-50 transition flex items-center justify-center space-x-1">
+            <button onclick="showSection('mirror')" id="top-btn-mirror" class="tab-btn flex-1 py-2 px-1 rounded-xl text-purple-600 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/40 transition flex items-center justify-center space-x-1">
                 <img src="assets/icono-emocionometro.png" alt="Emocionómetro" class="w-3.5 h-3.5 object-contain flex-shrink-0"> <span>Emocionómetro</span>
             </button>
         </div>
@@ -158,94 +158,94 @@
                             <img src="assets/icono-progreso.png" alt="Progreso" class="w-4 h-4 object-contain inline-block flex-shrink-0">
                             <span>TU PROGRESO DE TRANSFORMACIÓN</span>
                         </span>
-                        <h2 class="text-xl font-bold text-brand-darkPurple mt-1 flex items-center space-x-1.5">
+                        <h2 class="text-xl font-bold text-brand-darkPurple dark:text-purple-200 mt-1 flex items-center space-x-1.5">
                             <span id="day-header">Día 1: ama-TE</span>
                             <img src="assets/icono-flor.png" alt="Flor" class="w-5 h-5 object-contain inline-block flex-shrink-0">
                         </h2>
                     </div>
-                    <span id="progress-percent" class="text-3xl font-extrabold text-brand-darkPurple">1%</span>
+                    <span id="progress-percent" class="text-3xl font-extrabold text-brand-darkPurple dark:text-purple-200">1%</span>
                 </div>
-                <div class="w-full bg-purple-100 h-2.5 rounded-full overflow-hidden">
+                <div class="w-full bg-purple-100 dark:bg-purple-950 h-2.5 rounded-full overflow-hidden">
                     <div id="progress-bar" class="bg-gradient-to-r from-purple-400 to-brand-purple h-full rounded-full transition-all duration-500" style="width: 1%;"></div>
                 </div>
                 <div class="flex justify-between items-center pt-1">
-                    <button onclick="changeDay(-1)" class="px-3 py-1.5 bg-purple-50 hover:bg-purple-100 text-purple-700 font-bold rounded-xl text-xs transition">⬅️ Anterior</button>
-                    <div class="flex items-center space-x-1 text-xs text-purple-600 font-medium">
+                    <button onclick="changeDay(-1)" class="px-3 py-1.5 bg-purple-50 dark:bg-purple-950/60 hover:bg-purple-100 dark:hover:bg-purple-900 text-purple-700 dark:text-purple-300 font-bold rounded-xl text-xs transition">⬅️ Anterior</button>
+                    <div class="flex items-center space-x-1 text-xs text-purple-600 dark:text-purple-300 font-medium">
                         <span>Ir al día:</span>
-                        <input type="number" id="day-select" min="1" max="365" value="1" onchange="jumpToDay(this.value)" class="w-12 bg-purple-50 border border-purple-200 text-center py-1 rounded-lg text-brand-darkPurple font-bold">
+                        <input type="number" id="day-select" min="1" max="365" value="1" onchange="jumpToDay(this.value)" class="w-12 bg-purple-50 dark:bg-purple-950 border border-purple-200 dark:border-purple-800 text-center py-1 rounded-lg text-brand-darkPurple dark:text-purple-200 font-bold">
                     </div>
-                    <button onclick="changeDay(1)" class="px-3 py-1.5 bg-purple-50 hover:bg-purple-100 text-purple-700 font-bold rounded-xl text-xs transition">Siguiente ➡️</button>
+                    <button onclick="changeDay(1)" class="px-3 py-1.5 bg-purple-50 dark:bg-purple-950/60 hover:bg-purple-100 dark:hover:bg-purple-900 text-purple-700 dark:text-purple-300 font-bold rounded-xl text-xs transition">Siguiente ➡️</button>
                 </div>
             </div>
 
             <div class="bg-white dynamic-card p-5 rounded-3xl shadow-sm border border-purple-100 space-y-4">
                 <div class="flex items-center space-x-3">
-                    <div class="w-12 h-12 rounded-2xl bg-emerald-50 border border-emerald-100 flex items-center justify-center overflow-hidden p-1.5">
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-100 dark:border-emerald-900/50 flex items-center justify-center overflow-hidden p-1.5">
                         <img src="assets/icono-te.png" alt="Te sugerido" class="w-full h-full object-contain">
                     </div>
                     <div>
                         <p class="text-xs text-purple-400 font-bold uppercase tracking-wider" id="tea-slogan">TE SUGERIDO DEL DÍA 1</p>
-                        <h3 class="text-xl font-bold text-brand-darkPurple flex items-center space-x-1.5">
+                        <h3 class="text-xl font-bold text-brand-darkPurple dark:text-purple-200 flex items-center space-x-1.5">
                             <span id="tea-title">ama-TE</span>
                             <img src="assets/icono-flor.png" alt="Flor" class="w-5 h-5 object-contain inline-block flex-shrink-0">
                         </h3>
-                        <p id="tea-type" class="text-xs text-slate-500 font-medium">TE de la Mirada Amable</p>
+                        <p id="tea-type" class="text-xs text-slate-500 dark:text-slate-400 font-medium">TE de la Mirada Amable</p>
                     </div>
                 </div>
 
-                <div class="bg-emerald-50/80 p-4 rounded-2xl border border-emerald-100/80 text-xs text-emerald-900 leading-relaxed flex items-start space-x-2">
+                <div class="bg-emerald-50/80 dark:bg-emerald-950/40 p-4 rounded-2xl border border-emerald-100/80 dark:border-emerald-900/40 text-xs text-emerald-900 dark:text-emerald-200 leading-relaxed flex items-start space-x-2">
                     <img src="assets/icono-beneficio.png" alt="Beneficios" class="w-4 h-4 object-contain flex-shrink-0 mt-0.5">
                     <div>
-                        <strong class="font-bold block text-emerald-950 mb-0.5">¿Qué emoción despierta y sus beneficios?</strong>
+                        <strong class="font-bold block text-emerald-950 dark:text-emerald-100 mb-0.5">¿Qué emoción despierta y sus beneficios?</strong>
                         <span id="tea-benefit">Despierta una ternura profunda hacia ti misma. Sirve para derretir la autocrítica, calmar la exigencia y recordarte que eres valiosa tal y como eres ahora misma.</span>
                     </div>
                 </div>
 
-                <div class="bg-amber-50/80 p-4 rounded-2xl border border-amber-100/80 text-xs text-amber-950 leading-relaxed space-y-1">
-                    <p class="font-bold text-amber-900 flex items-center space-x-1">
+                <div class="bg-amber-50/80 dark:bg-amber-950/30 p-4 rounded-2xl border border-amber-100/80 dark:border-amber-900/40 text-xs text-amber-950 dark:text-amber-200 leading-relaxed space-y-1">
+                    <p class="font-bold text-amber-900 dark:text-amber-300 flex items-center space-x-1">
                         <img src="assets/icono-idea.png" alt="Idea" class="w-4 h-4 object-contain flex-shrink-0">
                         <span>LA IDEA DE HOY <span id="glasses-title-label">(GAFAS DE PAZ: MIRADA AMABLE)</span></span>
                     </p>
-                    <p id="day-lesson" class="text-slate-700 text-xs md:text-sm">
+                    <p id="day-lesson" class="text-slate-700 dark:text-slate-300 text-xs md:text-sm">
                         "Las cosas que ves a tu alrededor no significan nada por sí solas. Tú eres quien decide si algo te enfada o te da paz en tu cabeza."
                     </p>
                 </div>
 
-                <div class="bg-purple-50/60 p-4 rounded-2xl border border-purple-100 text-xs text-purple-900 leading-relaxed space-y-1">
-                    <strong class="font-bold text-brand-purple flex items-center space-x-1">
+                <div class="bg-purple-50/60 dark:bg-purple-950/30 p-4 rounded-2xl border border-purple-100 dark:border-purple-900/40 text-xs text-purple-900 dark:text-purple-200 leading-relaxed space-y-1">
+                    <strong class="font-bold text-brand-purple dark:text-purple-300 flex items-center space-x-1">
                         <img src="assets/icono-sorbito.png" alt="Sorbito" class="w-4 h-4 object-contain flex-shrink-0">
                         <span>Sorbito de 1 minuto:</span>
                     </strong>
-                    <p id="day-exercise" class="text-slate-600 italic">
+                    <p id="day-exercise" class="text-slate-600 dark:text-slate-300 italic">
                         Sostén tu taza tibia con ambas manos, toma un sorbo despacio y di en voz baja: "Ama mi mente hoy. Yo elijo mirar este momento con paz y amabilidad."
                     </p>
                 </div>
             </div>
         </section>
 
-        <!-- 2. SORBITO DE EMERGENCIA (SOS) -->
+        <!-- 2. SORBITO DE EMERGENCIA (SOS) - AUDIOS EN CARPETA ASSETS -->
         <section id="sec-sos" class="hidden space-y-4 text-center">
             <div class="bg-white dynamic-card p-6 rounded-3xl shadow-sm border border-purple-100 space-y-4">
                 <div class="w-12 h-12 mx-auto overflow-hidden">
                     <img src="assets/icono-sos.png" alt="SOS" class="w-full h-full object-contain">
                 </div>
-                <h2 class="text-2xl font-bold text-brand-darkPurple">Sorbito de Emergencia</h2>
-                <p class="text-xs text-slate-500 max-w-xs mx-auto">Regresa al presente. Escoge un sonido relajante y sigue el ritmo de respiración para calmar la mente.</p>
+                <h2 class="text-2xl font-bold text-brand-darkPurple dark:text-purple-200">Sorbito de Emergencia</h2>
+                <p class="text-xs text-slate-500 dark:text-slate-400 max-w-xs mx-auto">Regresa al presente. Escoge un sonido relajante y sigue el ritmo de respiración para calmar la mente.</p>
 
                 <div class="grid grid-cols-2 gap-2.5 pt-2">
-                    <button onclick="toggleAudio('cuencos', 'cuencos.mp3')" id="btn-cuencos" class="p-3 bg-purple-50/80 border border-purple-100 hover:border-purple-300 rounded-2xl text-xs font-bold text-purple-900 transition flex items-center justify-center space-x-1.5">
+                    <button onclick="toggleAudio('cuencos', 'assets/cuencos.mp3')" id="btn-cuencos" class="p-3 bg-purple-50/80 dark:bg-purple-950/40 border border-purple-100 dark:border-purple-900 hover:border-purple-300 rounded-2xl text-xs font-bold text-purple-900 dark:text-purple-200 transition flex items-center justify-center space-x-1.5">
                         <img src="assets/icono-cuencos.png" alt="Cuencos" class="w-4 h-4 object-contain flex-shrink-0">
                         <span>Cuencos tibetanos</span>
                     </button>
-                    <button onclick="toggleAudio('olas', 'olas.mp3')" id="btn-olas" class="p-3 bg-purple-50/80 border border-purple-100 hover:border-purple-300 rounded-2xl text-xs font-bold text-purple-900 transition flex items-center justify-center space-x-1.5">
+                    <button onclick="toggleAudio('olas', 'assets/olas.mp3')" id="btn-olas" class="p-3 bg-purple-50/80 dark:bg-purple-950/40 border border-purple-100 dark:border-purple-900 hover:border-purple-300 rounded-2xl text-xs font-bold text-purple-900 dark:text-purple-200 transition flex items-center justify-center space-x-1.5">
                         <img src="assets/icono-olas.png" alt="Olas" class="w-4 h-4 object-contain flex-shrink-0">
                         <span>Olas del mar</span>
                     </button>
-                    <button onclick="toggleAudio('agua', 'agua.mp3')" id="btn-agua" class="p-3 bg-purple-50/80 border border-purple-100 hover:border-purple-300 rounded-2xl text-xs font-bold text-purple-900 transition flex items-center justify-center space-x-1.5">
+                    <button onclick="toggleAudio('agua', 'assets/agua.mp3')" id="btn-agua" class="p-3 bg-purple-50/80 dark:bg-purple-950/40 border border-purple-100 dark:border-purple-900 hover:border-purple-300 rounded-2xl text-xs font-bold text-purple-900 dark:text-purple-200 transition flex items-center justify-center space-x-1.5">
                         <img src="assets/icono-agua.png" alt="Agua" class="w-4 h-4 object-contain flex-shrink-0">
                         <span>Movimiento del agua</span>
                     </button>
-                    <button onclick="toggleAudio('campanitas', 'campanitas.mp3')" id="btn-campanitas" class="p-3 bg-purple-50/80 border border-purple-100 hover:border-purple-300 rounded-2xl text-xs font-bold text-purple-900 transition flex items-center justify-center space-x-1.5">
+                    <button onclick="toggleAudio('campanitas', 'assets/campanitas.mp3')" id="btn-campanitas" class="p-3 bg-purple-50/80 dark:bg-purple-950/40 border border-purple-100 dark:border-purple-900 hover:border-purple-300 rounded-2xl text-xs font-bold text-purple-900 dark:text-purple-200 transition flex items-center justify-center space-x-1.5">
                         <img src="assets/icono-campanitas.png" alt="Campanitas" class="w-4 h-4 object-contain flex-shrink-0">
                         <span>Campanitas de cristal</span>
                     </button>
@@ -253,9 +253,9 @@
 
                 <!-- CIRCULO GUIADO DE RESPIRACIÓN EN 4 TIEMPOS -->
                 <div class="py-8 flex flex-col items-center justify-center relative">
-                    <div class="w-40 h-40 rounded-full bg-purple-100/80 border-2 border-purple-300 flex flex-col items-center justify-center breathing-box transition-all">
-                        <span id="breath-action" class="text-sm font-extrabold text-brand-darkPurple uppercase tracking-wide">Inhala</span>
-                        <span id="breath-timer" class="text-2xl font-bold text-brand-purple mt-1">4</span>
+                    <div class="w-40 h-40 rounded-full bg-purple-100/80 dark:bg-purple-950 border-2 border-purple-300 dark:border-purple-700 flex flex-col items-center justify-center breathing-box transition-all">
+                        <span id="breath-action" class="text-sm font-extrabold text-brand-darkPurple dark:text-purple-200 uppercase tracking-wide">Inhala</span>
+                        <span id="breath-timer" class="text-2xl font-bold text-brand-purple dark:text-purple-300 mt-1">4</span>
                     </div>
                 </div>
             </div>
@@ -269,26 +269,26 @@
                         <img src="assets/icono-agujero.png" alt="Agujero Negro" class="w-full h-full object-contain">
                     </div>
                     <div>
-                        <h2 class="text-xl font-bold text-brand-darkPurple">El Agujero Negro</h2>
-                        <p class="text-xs text-slate-500">Escribe lo que sientes o te preocupa hoy y transfórmalo en luz.</p>
+                        <h2 class="text-xl font-bold text-brand-darkPurple dark:text-purple-200">El Agujero Negro</h2>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Escribe lo que sientes o te preocupa hoy y transfórmalo en luz.</p>
                     </div>
                 </div>
 
                 <div id="input-box-wrapper" class="space-y-3 transition-all duration-300">
-                    <textarea id="thought-input" rows="4" placeholder="Ejemplo: 'Hoy me siento horrible', 'Tengo mucho agobio' o 'Siento que no sirvo para nada...'" class="w-full bg-purple-50/50 dynamic-card border border-purple-100 rounded-2xl p-4 text-xs text-slate-700 focus:border-purple-300 outline-none resize-none"></textarea>
+                    <textarea id="thought-input" rows="4" placeholder="Ejemplo: 'Hoy me siento horrible', 'Tengo mucho agobio' o 'Siento que no sirvo para nada...'" class="w-full bg-purple-50/50 dark:bg-purple-950/50 dynamic-card border border-purple-100 dark:border-purple-900 rounded-2xl p-4 text-xs text-slate-700 dark:text-slate-200 focus:border-purple-300 outline-none resize-none"></textarea>
 
                     <button onclick="disintegrateThought()" class="w-full py-3.5 bg-brand-purple hover:bg-purple-700 text-white font-bold rounded-2xl text-xs shadow-md transition flex items-center justify-center space-x-2">
                         <span>✨</span> <span>Desintegrar en Gran Explosión Estelar</span>
                     </button>
                 </div>
 
-                <div id="reflection-card" class="hidden bg-amber-50/90 p-5 rounded-2xl border border-amber-200 text-xs text-amber-950 space-y-3 shadow-sm">
-                    <div class="flex items-center space-x-2 text-amber-800">
+                <div id="reflection-card" class="hidden bg-amber-50/90 dark:bg-amber-950/40 p-5 rounded-2xl border border-amber-200 dark:border-amber-900 text-xs text-amber-950 dark:text-amber-200 space-y-3 shadow-sm">
+                    <div class="flex items-center space-x-2 text-amber-800 dark:text-amber-300">
                         <span class="text-2xl">🌟</span>
                         <h3 id="congratulations-title" class="text-sm font-bold">¡Felicidades! Ya has soltado este pensamiento.</h3>
                     </div>
-                    <div id="mental-explanation" class="text-slate-700 leading-relaxed text-xs space-y-2"></div>
-                    <button onclick="resetBlackHole()" class="w-full py-2 bg-amber-100 hover:bg-amber-200 text-amber-900 font-bold rounded-xl text-xs transition mt-2">
+                    <div id="mental-explanation" class="text-slate-700 dark:text-slate-300 leading-relaxed text-xs space-y-2"></div>
+                    <button onclick="resetBlackHole()" class="w-full py-2 bg-amber-100 dark:bg-amber-900/60 hover:bg-amber-200 text-amber-900 dark:text-amber-100 font-bold rounded-xl text-xs transition mt-2">
                         ✨ Liberar otro pensamiento
                     </button>
                 </div>
@@ -303,21 +303,21 @@
                         <img src="assets/icono-piropero.png" alt="Piropero" class="w-full h-full object-contain">
                     </div>
                     <div>
-                        <h2 class="text-xl font-bold text-brand-darkPurple">El Piropero</h2>
-                        <p class="text-xs text-slate-500">Tu diario secreto de autoestima y amor propio.</p>
+                        <h2 class="text-xl font-bold text-brand-darkPurple dark:text-purple-200">El Piropero</h2>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Tu diario secreto de autoestima y amor propio.</p>
                     </div>
                 </div>
 
                 <div class="flex space-x-2">
-                    <input type="text" id="piropero-input" placeholder="Escribe una cualidad bonita sobre ti..." class="flex-grow bg-purple-50/50 dynamic-card border border-purple-100 rounded-xl px-4 py-2 text-xs outline-none focus:border-purple-300">
+                    <input type="text" id="piropero-input" placeholder="Escribe una cualidad bonita sobre ti..." class="flex-grow bg-purple-50/50 dark:bg-purple-950/50 dynamic-card border border-purple-100 dark:border-purple-900 rounded-xl px-4 py-2 text-xs outline-none focus:border-purple-300 text-slate-700 dark:text-slate-200">
                     <button onclick="addPiropo()" class="px-4 py-2 bg-amber-400 hover:bg-amber-500 text-slate-900 font-bold rounded-xl text-xs shadow-sm transition">Guardar</button>
                 </div>
 
-                <div id="piropo-affirmation-card" class="hidden bg-emerald-50/90 p-4 rounded-2xl border border-emerald-200 text-xs text-emerald-950 space-y-1 shadow-sm">
-                    <div class="flex items-center space-x-1.5 text-emerald-900 font-bold">
+                <div id="piropo-affirmation-card" class="hidden bg-emerald-50/90 dark:bg-emerald-950/40 p-4 rounded-2xl border border-emerald-200 dark:border-emerald-900 text-xs text-emerald-950 dark:text-emerald-200 space-y-1 shadow-sm">
+                    <div class="flex items-center space-x-1.5 text-emerald-900 dark:text-emerald-300 font-bold">
                         <span>✨</span> <span>AFIRMACIÓN DE HOY:</span>
                     </div>
-                    <p id="piropo-affirmation-text" class="text-slate-700 text-xs italic"></p>
+                    <p id="piropo-affirmation-text" class="text-slate-700 dark:text-slate-300 text-xs italic"></p>
                 </div>
 
                 <div id="piropero-list" class="space-y-2.5 pt-2"></div>
@@ -332,13 +332,13 @@
                         <img src="assets/icono-emocionometro.png" alt="Emocionómetro" class="w-full h-full object-contain">
                     </div>
                     <div>
-                        <h2 class="text-xl font-bold text-brand-darkPurple">Emocionómetro</h2>
-                        <p class="text-xs text-slate-500">Tu registro y progreso de paz emocional.</p>
+                        <h2 class="text-xl font-bold text-brand-darkPurple dark:text-purple-200">Emocionómetro</h2>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Tu registro y progreso de paz emocional.</p>
                     </div>
                 </div>
 
-                <div class="bg-purple-50/60 dynamic-card p-4 rounded-2xl space-y-3 border border-purple-100">
-                    <h3 class="text-xs font-bold text-purple-900 uppercase">¿Cómo te sientes en este instante?</h3>
+                <div class="bg-purple-50/60 dark:bg-purple-950/40 dynamic-card p-4 rounded-2xl space-y-3 border border-purple-100 dark:border-purple-900">
+                    <h3 class="text-xs font-bold text-purple-900 dark:text-purple-200 uppercase">¿Cómo te sientes en este instante?</h3>
                     <div class="flex justify-between items-center px-2">
                         <button onclick="saveMood('Feliz', 'assets/mood-feliz.png')" class="hover:scale-125 transition w-10 h-10 overflow-hidden" title="Feliz">
                             <img src="assets/mood-feliz.png" alt="Feliz" class="w-full h-full object-contain">
@@ -360,15 +360,15 @@
 
                 <!-- RESUMEN DE PROGRESO EMOCIONAL -->
                 <div class="space-y-2">
-                    <h3 class="text-xs font-bold text-purple-900 uppercase">Resumen de tu estado habitual</h3>
-                    <div id="mood-summary" class="grid grid-cols-5 gap-1 text-center bg-purple-50/30 dynamic-card p-3 rounded-2xl border border-purple-100 text-xs">
+                    <h3 class="text-xs font-bold text-purple-900 dark:text-purple-200 uppercase">Resumen de tu estado habitual</h3>
+                    <div id="mood-summary" class="grid grid-cols-5 gap-1 text-center bg-purple-50/30 dark:bg-purple-950/30 dynamic-card p-3 rounded-2xl border border-purple-100 dark:border-purple-900 text-xs">
                         <!-- Generado por JavaScript -->
                     </div>
                 </div>
 
                 <!-- HISTORIAL DE EMOCIONES DIARIAS -->
                 <div class="space-y-2 pt-2">
-                    <h3 class="text-xs font-bold text-purple-900 uppercase">Historial de emociones</h3>
+                    <h3 class="text-xs font-bold text-purple-900 dark:text-purple-200 uppercase">Historial de emociones</h3>
                     <div id="mood-history-list" class="space-y-2 max-h-56 overflow-y-auto pr-1">
                         <!-- Generado por JavaScript -->
                     </div>
@@ -379,7 +379,7 @@
     </main>
 
     <!-- NAVEGACIÓN INFERIOR (MÓVIL) -->
-    <nav class="fixed bottom-0 left-0 right-0 bg-white dynamic-card border-t border-purple-100 py-2 px-4 md:hidden flex justify-around shadow-lg z-50">
+    <nav class="fixed bottom-0 left-0 right-0 bg-white dynamic-card border-t border-purple-100 dark:border-purple-900 py-2 px-4 md:hidden flex justify-around shadow-lg z-50">
         <button onclick="showSection('daily')" id="nav-daily" class="flex flex-col items-center text-brand-purple font-bold">
             <img src="assets/icono-camino.png" alt="Camino" class="w-5 h-5 object-contain">
             <span class="text-[10px] font-bold mt-1">Camino</span>
@@ -412,8 +412,8 @@
 
     <!-- MODAL LEGAL -->
     <div id="legal-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4">
-        <div class="bg-white dynamic-card border border-purple-100 p-6 rounded-3xl max-w-sm w-full space-y-4 max-h-[80vh] overflow-y-auto text-xs text-slate-600 leading-relaxed shadow-xl">
-            <h3 class="text-base font-bold text-brand-darkPurple">Aviso Legal & Propiedad Intelectual</h3>
+        <div class="bg-white dynamic-card border border-purple-100 dark:border-purple-900 p-6 rounded-3xl max-w-sm w-full space-y-4 max-h-[80vh] overflow-y-auto text-xs text-slate-600 dark:text-slate-300 leading-relaxed shadow-xl">
+            <h3 class="text-base font-bold text-brand-darkPurple dark:text-purple-200">Aviso Legal & Propiedad Intelectual</h3>
             <p><strong>Propiedad Intelectual:</strong> Todos los contenidos de esta aplicación web, incluyendo las 365 lecciones diarias, ejercicios, interfaz y diseño, son obra original protegida por los derechos de autor de Núria / El Recreo Mental © 2026.</p>
             <p><strong>Privacidad Local:</strong> Toda la información introducida se almacena exclusivamente de forma local en tu propio dispositivo (LocalStorage). Ningún dato personal es enviado a servidores externos.</p>
             <button onclick="toggleLegalModal()" class="w-full py-2.5 bg-brand-purple text-white font-bold rounded-xl mt-2 text-xs">Cerrar</button>
@@ -556,14 +556,14 @@
                 const navBtn = document.getElementById('nav-' + navKey);
                 if (navBtn) {
                     navBtn.className = (navKey === id) 
-                        ? 'flex flex-col items-center text-brand-purple font-bold'
+                        ? 'flex flex-col items-center text-brand-purple dark:text-purple-300 font-bold'
                         : 'flex flex-col items-center text-slate-400 font-normal';
                 }
                 const topBtn = document.getElementById('top-btn-' + navKey);
                 if (topBtn) {
                     topBtn.className = (navKey === id)
                         ? 'tab-btn flex-1 py-2 px-1 rounded-xl bg-brand-purple text-white transition flex items-center justify-center space-x-1'
-                        : 'tab-btn flex-1 py-2 px-1 rounded-xl text-purple-600 hover:bg-purple-50 transition flex items-center justify-center space-x-1';
+                        : 'tab-btn flex-1 py-2 px-1 rounded-xl text-purple-600 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/40 transition flex items-center justify-center space-x-1';
                 }
             });
         }
@@ -703,7 +703,7 @@
             const player = document.getElementById('audio-player');
             const buttons = document.querySelectorAll('#sec-sos button');
 
-            buttons.forEach(b => b.classList.remove('border-purple-400', 'bg-purple-100'));
+            buttons.forEach(b => b.classList.remove('border-purple-400', 'bg-purple-100', 'dark:bg-purple-900'));
 
             if (currentActiveKey === key) {
                 player.pause();
@@ -911,9 +911,9 @@
 
                 if (explElem) {
                     explElem.innerHTML = `
-                        <p class="font-bold text-amber-900 text-xs">✨ Beneficio para tu mente:</p>
-                        <p class="text-slate-700 leading-relaxed">${resultData.benefit}</p>
-                        <p class="italic text-amber-900 bg-amber-100/70 p-3 rounded-xl mt-2 border border-amber-200/60">
+                        <p class="font-bold text-amber-900 dark:text-amber-300 text-xs">✨ Beneficio para tu mente:</p>
+                        <p class="text-slate-700 dark:text-slate-300 leading-relaxed">${resultData.benefit}</p>
+                        <p class="italic text-amber-900 dark:text-amber-200 bg-amber-100/70 dark:bg-amber-900/50 p-3 rounded-xl mt-2 border border-amber-200/60 dark:border-amber-800">
                             "${resultData.quote}"
                         </p>
                     `;
@@ -985,12 +985,12 @@
             const container = document.getElementById('piropero-list');
             if (container) {
                 container.innerHTML = list.map(p => `
-                    <div class="bg-purple-50/60 dynamic-card p-3.5 rounded-2xl border border-purple-100 text-xs text-purple-900 space-y-1">
-                        <div class="font-bold text-brand-darkPurple flex items-center space-x-1.5">
+                    <div class="bg-purple-50/60 dark:bg-purple-950/40 dynamic-card p-3.5 rounded-2xl border border-purple-100 dark:border-purple-900 text-xs text-purple-900 dark:text-purple-200 space-y-1">
+                        <div class="font-bold text-brand-darkPurple dark:text-purple-200 flex items-center space-x-1.5">
                             <img src="assets/icono-piropero.png" alt="Piropo" class="w-3.5 h-3.5 object-contain flex-shrink-0">
                             <span>${p.text}</span>
                         </div>
-                        <p class="text-slate-600 italic text-[11px] leading-relaxed pl-5">
+                        <p class="text-slate-600 dark:text-slate-300 italic text-[11px] leading-relaxed pl-5">
                             ✨ "${p.affirmation}"
                         </p>
                     </div>
@@ -1033,8 +1033,8 @@
                 summaryContainer.innerHTML = Object.keys(counts).map(key => `
                     <div class="flex flex-col items-center">
                         <img src="${icons[key]}" alt="${key}" class="w-6 h-6 object-contain mb-1">
-                        <span class="font-bold text-brand-darkPurple">${counts[key]}</span>
-                        <span class="text-[9px] text-slate-500">${key}</span>
+                        <span class="font-bold text-brand-darkPurple dark:text-purple-200">${counts[key]}</span>
+                        <span class="text-[9px] text-slate-500 dark:text-slate-400">${key}</span>
                     </div>
                 `).join('');
             }
@@ -1046,15 +1046,15 @@
                 }
 
                 historyContainer.innerHTML = history.map(item => `
-                    <div class="bg-purple-50/60 dynamic-card p-3 rounded-2xl border border-purple-100 flex items-center justify-between text-xs">
+                    <div class="bg-purple-50/60 dark:bg-purple-950/40 dynamic-card p-3 rounded-2xl border border-purple-100 dark:border-purple-900 flex items-center justify-between text-xs">
                         <div class="flex items-center space-x-2.5">
                             <img src="${item.iconSrc}" alt="${item.name}" class="w-7 h-7 object-contain">
                             <div>
-                                <span class="font-bold text-brand-darkPurple block">${item.name}</span>
+                                <span class="font-bold text-brand-darkPurple dark:text-purple-200 block">${item.name}</span>
                                 <span class="text-[10px] text-slate-400">Registrado con éxito</span>
                             </div>
                         </div>
-                        <span class="text-[10px] font-bold text-purple-600 bg-white dynamic-card px-2.5 py-1 rounded-xl border border-purple-100">
+                        <span class="text-[10px] font-bold text-purple-600 dark:text-purple-300 bg-white dark:bg-purple-950 dynamic-card px-2.5 py-1 rounded-xl border border-purple-100 dark:border-purple-800">
                             ${item.dateStr} - ${item.timeStr}
                         </span>
                     </div>
