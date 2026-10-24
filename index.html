@@ -28,10 +28,32 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap');
         
+        :root {
+            --bg-color: #F4EFFC;
+            --text-color: #2D3748;
+            --card-bg: #FFFFFF;
+            --border-color: #E9D8FD;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #1a1625;
+                --text-color: #e2d9f3;
+                --card-bg: #262135;
+                --border-color: #4a3b6c;
+            }
+        }
+
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #F4EFFC;
-            color: #2D3748;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .dynamic-card {
+            background-color: var(--card-bg) !important;
+            border-color: var(--border-color) !important;
         }
 
         h1, h2, h3, .font-heading {
@@ -99,12 +121,13 @@
                 <img src="assets/icono-camino.png" alt="Logo Te" class="w-full h-full object-contain">
             </div>
             <div>
-                <h1 class="text-2xl font-bold text-brand-darkPurple tracking-wide leading-none">EL TE DE LAS EMOCIONES</h1>
+                <h1 class="text-xl md:text-2xl font-bold text-brand-darkPurple tracking-wide leading-none">EL TE DE LAS EMOCIONES</h1>
                 <p class="text-xs text-purple-400 font-medium mt-1">Un sorbo de paz para tu mente cada día</p>
             </div>
         </div>
 
-        <div class="bg-white p-1.5 rounded-2xl shadow-sm border border-purple-100 flex justify-between text-[11px] font-bold text-brand-darkPurple">
+        <!-- PESTAÑAS SUPERIORES PERFECTAMENTE DISTRIBUIDAS (PC Y MÓVIL) -->
+        <div class="bg-white dynamic-card p-1.5 rounded-2xl shadow-sm border border-purple-100 flex flex-nowrap items-center justify-between text-[10px] sm:text-[11px] font-bold text-brand-darkPurple gap-1">
             <button onclick="showSection('daily')" id="top-btn-daily" class="tab-btn flex-1 py-2 px-1 rounded-xl bg-brand-purple text-white transition flex items-center justify-center space-x-1">
                 <img src="assets/icono-camino.png" alt="Camino" class="w-3.5 h-3.5 object-contain flex-shrink-0"> <span>365 Días</span>
             </button>
@@ -128,7 +151,7 @@
 
         <!-- 1. CAMINO DIARIO (365 DÍAS) -->
         <section id="sec-daily" class="space-y-4">
-            <div class="bg-white p-5 rounded-3xl shadow-sm border border-purple-100 space-y-3">
+            <div class="bg-white dynamic-card p-5 rounded-3xl shadow-sm border border-purple-100 space-y-3">
                 <div class="flex justify-between items-start">
                     <div>
                         <span class="text-xs uppercase tracking-wider text-purple-400 font-bold flex items-center space-x-1">
@@ -155,7 +178,7 @@
                 </div>
             </div>
 
-            <div class="bg-white p-5 rounded-3xl shadow-sm border border-purple-100 space-y-4">
+            <div class="bg-white dynamic-card p-5 rounded-3xl shadow-sm border border-purple-100 space-y-4">
                 <div class="flex items-center space-x-3">
                     <div class="w-12 h-12 rounded-2xl bg-emerald-50 border border-emerald-100 flex items-center justify-center overflow-hidden p-1.5">
                         <img src="assets/icono-te.png" alt="Te sugerido" class="w-full h-full object-contain">
@@ -181,7 +204,7 @@
                 <div class="bg-amber-50/80 p-4 rounded-2xl border border-amber-100/80 text-xs text-amber-950 leading-relaxed space-y-1">
                     <p class="font-bold text-amber-900 flex items-center space-x-1">
                         <img src="assets/icono-idea.png" alt="Idea" class="w-4 h-4 object-contain flex-shrink-0">
-                        <span>LA IDEA DE HOY (GAFAS DE PAZ)</span>
+                        <span>LA IDEA DE HOY <span id="glasses-title-label">(GAFAS DE PAZ: MIRADA AMABLE)</span></span>
                     </p>
                     <p id="day-lesson" class="text-slate-700 text-xs md:text-sm">
                         "Las cosas que ves a tu alrededor no significan nada por sí solas. Tú eres quien decide si algo te enfada o te da paz en tu cabeza."
@@ -202,7 +225,7 @@
 
         <!-- 2. SORBITO DE EMERGENCIA (SOS) -->
         <section id="sec-sos" class="hidden space-y-4 text-center">
-            <div class="bg-white p-6 rounded-3xl shadow-sm border border-purple-100 space-y-4">
+            <div class="bg-white dynamic-card p-6 rounded-3xl shadow-sm border border-purple-100 space-y-4">
                 <div class="w-12 h-12 mx-auto overflow-hidden">
                     <img src="assets/icono-sos.png" alt="SOS" class="w-full h-full object-contain">
                 </div>
@@ -240,7 +263,7 @@
 
         <!-- 3. EL AGUJERO NEGRO -->
         <section id="sec-blackhole" class="hidden space-y-4">
-            <div class="bg-white p-6 rounded-3xl shadow-sm border border-purple-100 space-y-4 relative overflow-hidden" id="blackhole-container">
+            <div class="bg-white dynamic-card p-6 rounded-3xl shadow-sm border border-purple-100 space-y-4 relative overflow-hidden" id="blackhole-container">
                 <div class="flex items-center space-x-3">
                     <div class="w-10 h-10 overflow-hidden">
                         <img src="assets/icono-agujero.png" alt="Agujero Negro" class="w-full h-full object-contain">
@@ -252,7 +275,7 @@
                 </div>
 
                 <div id="input-box-wrapper" class="space-y-3 transition-all duration-300">
-                    <textarea id="thought-input" rows="4" placeholder="Ejemplo: 'Hoy me siento horrible', 'Tengo mucho agobio' o 'Siento que no sirvo para nada...'" class="w-full bg-purple-50/50 border border-purple-100 rounded-2xl p-4 text-xs text-slate-700 focus:border-purple-300 outline-none resize-none"></textarea>
+                    <textarea id="thought-input" rows="4" placeholder="Ejemplo: 'Hoy me siento horrible', 'Tengo mucho agobio' o 'Siento que no sirvo para nada...'" class="w-full bg-purple-50/50 dynamic-card border border-purple-100 rounded-2xl p-4 text-xs text-slate-700 focus:border-purple-300 outline-none resize-none"></textarea>
 
                     <button onclick="disintegrateThought()" class="w-full py-3.5 bg-brand-purple hover:bg-purple-700 text-white font-bold rounded-2xl text-xs shadow-md transition flex items-center justify-center space-x-2">
                         <span>✨</span> <span>Desintegrar en Gran Explosión Estelar</span>
@@ -274,7 +297,7 @@
 
         <!-- 4. EL PIROPERO -->
         <section id="sec-piropero" class="hidden space-y-4">
-            <div class="bg-white p-6 rounded-3xl shadow-sm border border-purple-100 space-y-4">
+            <div class="bg-white dynamic-card p-6 rounded-3xl shadow-sm border border-purple-100 space-y-4">
                 <div class="flex items-center space-x-3">
                     <div class="w-10 h-10 overflow-hidden">
                         <img src="assets/icono-piropero.png" alt="Piropero" class="w-full h-full object-contain">
@@ -286,7 +309,7 @@
                 </div>
 
                 <div class="flex space-x-2">
-                    <input type="text" id="piropero-input" placeholder="Escribe una cualidad bonita sobre ti..." class="flex-grow bg-purple-50/50 border border-purple-100 rounded-xl px-4 py-2 text-xs outline-none focus:border-purple-300">
+                    <input type="text" id="piropero-input" placeholder="Escribe una cualidad bonita sobre ti..." class="flex-grow bg-purple-50/50 dynamic-card border border-purple-100 rounded-xl px-4 py-2 text-xs outline-none focus:border-purple-300">
                     <button onclick="addPiropo()" class="px-4 py-2 bg-amber-400 hover:bg-amber-500 text-slate-900 font-bold rounded-xl text-xs shadow-sm transition">Guardar</button>
                 </div>
 
@@ -301,9 +324,9 @@
             </div>
         </section>
 
-        <!-- 5. EMOCIONÓMETRO (REGISTRO Y PROGRESO DE EMOCIONES) -->
+        <!-- 5. EMOCIONÓMETRO -->
         <section id="sec-mirror" class="hidden space-y-4">
-            <div class="bg-white p-6 rounded-3xl shadow-sm border border-purple-100 space-y-5">
+            <div class="bg-white dynamic-card p-6 rounded-3xl shadow-sm border border-purple-100 space-y-5">
                 <div class="flex items-center space-x-3">
                     <div class="w-10 h-10 overflow-hidden">
                         <img src="assets/icono-emocionometro.png" alt="Emocionómetro" class="w-full h-full object-contain">
@@ -314,7 +337,7 @@
                     </div>
                 </div>
 
-                <div class="bg-purple-50/60 p-4 rounded-2xl space-y-3 border border-purple-100">
+                <div class="bg-purple-50/60 dynamic-card p-4 rounded-2xl space-y-3 border border-purple-100">
                     <h3 class="text-xs font-bold text-purple-900 uppercase">¿Cómo te sientes en este instante?</h3>
                     <div class="flex justify-between items-center px-2">
                         <button onclick="saveMood('Feliz', 'assets/mood-feliz.png')" class="hover:scale-125 transition w-10 h-10 overflow-hidden" title="Feliz">
@@ -338,7 +361,7 @@
                 <!-- RESUMEN DE PROGRESO EMOCIONAL -->
                 <div class="space-y-2">
                     <h3 class="text-xs font-bold text-purple-900 uppercase">Resumen de tu estado habitual</h3>
-                    <div id="mood-summary" class="grid grid-cols-5 gap-1 text-center bg-purple-50/30 p-3 rounded-2xl border border-purple-100 text-xs">
+                    <div id="mood-summary" class="grid grid-cols-5 gap-1 text-center bg-purple-50/30 dynamic-card p-3 rounded-2xl border border-purple-100 text-xs">
                         <!-- Generado por JavaScript -->
                     </div>
                 </div>
@@ -356,7 +379,7 @@
     </main>
 
     <!-- NAVEGACIÓN INFERIOR (MÓVIL) -->
-    <nav class="fixed bottom-0 left-0 right-0 bg-white border-t border-purple-100 py-2 px-4 md:hidden flex justify-around shadow-lg z-50">
+    <nav class="fixed bottom-0 left-0 right-0 bg-white dynamic-card border-t border-purple-100 py-2 px-4 md:hidden flex justify-around shadow-lg z-50">
         <button onclick="showSection('daily')" id="nav-daily" class="flex flex-col items-center text-brand-purple font-bold">
             <img src="assets/icono-camino.png" alt="Camino" class="w-5 h-5 object-contain">
             <span class="text-[10px] font-bold mt-1">Camino</span>
@@ -389,7 +412,7 @@
 
     <!-- MODAL LEGAL -->
     <div id="legal-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4">
-        <div class="bg-white border border-purple-100 p-6 rounded-3xl max-w-sm w-full space-y-4 max-h-[80vh] overflow-y-auto text-xs text-slate-600 leading-relaxed shadow-xl">
+        <div class="bg-white dynamic-card border border-purple-100 p-6 rounded-3xl max-w-sm w-full space-y-4 max-h-[80vh] overflow-y-auto text-xs text-slate-600 leading-relaxed shadow-xl">
             <h3 class="text-base font-bold text-brand-darkPurple">Aviso Legal & Propiedad Intelectual</h3>
             <p><strong>Propiedad Intelectual:</strong> Todos los contenidos de esta aplicación web, incluyendo las 365 lecciones diarias, ejercicios, interfaz y diseño, son obra original protegida por los derechos de autor de Núria / El Recreo Mental © 2026.</p>
             <p><strong>Privacidad Local:</strong> Toda la información introducida se almacena exclusivamente de forma local en tu propio dispositivo (LocalStorage). Ningún dato personal es enviado a servidores externos.</p>
@@ -465,6 +488,18 @@
             "Tu mente es muy valiosa. Si no le pones ideas de miedo, se llena de serenidad y alegría de forma natural."
         ];
 
+        function getGlassesSubtitle(verbLower) {
+            if (["deshaz", "suelta", "libera", "perdona", "limpia", "despeja", "aligera"].includes(verbLower)) {
+                return "(GAFAS DE PAZ: MIRADA DE LIBERACIÓN)";
+            } else if (["ama", "quiere", "abraza", "cuida", "valora", "encariña"].includes(verbLower)) {
+                return "(GAFAS DE PAZ: MIRADA AMABLE)";
+            } else if (["confia", "descansa", "calma", "serena", "apacigua"].includes(verbLower)) {
+                return "(GAFAS DE PAZ: MIRADA DE SERENIDAD)";
+            } else {
+                return "(GAFAS DE PAZ: CLARIDAD MENTAL)";
+            }
+        }
+
         function getDayData(dayNum) {
             const idx = dayNum - 1;
             const rawVerb = words365[idx] || "Siente";
@@ -473,6 +508,7 @@
 
             const teaObj = emotionalTeas[idx % emotionalTeas.length];
             const lessonText = ucdmLessons[idx % ucdmLessons.length];
+            const glassesTitle = getGlassesSubtitle(verbLower);
             
             let uniqueExercise = "";
 
@@ -498,7 +534,8 @@
                 tea: teaObj.name,
                 benefit: teaObj.benefit,
                 lesson: lessonText,
-                exercise: uniqueExercise
+                exercise: uniqueExercise,
+                glassesTitle: glassesTitle
             };
         }
 
@@ -545,6 +582,7 @@
             const dayLesson = document.getElementById('day-lesson');
             const dayExercise = document.getElementById('day-exercise');
             const daySelect = document.getElementById('day-select');
+            const glassesLabel = document.getElementById('glasses-title-label');
 
             if (dayHeader) dayHeader.innerText = "Día " + data.day + ": " + data.title;
             if (progressPercent) progressPercent.innerText = percent + "%";
@@ -556,6 +594,7 @@
             if (teaBenefit) teaBenefit.innerText = data.benefit;
             if (dayLesson) dayLesson.innerText = '"' + data.lesson + '"';
             if (dayExercise) dayExercise.innerText = data.exercise;
+            if (glassesLabel) glassesLabel.innerText = data.glassesTitle;
 
             if (daySelect) daySelect.value = data.day;
         }
@@ -775,158 +814,20 @@
             }
         }
 
-        /* 🕳️ MOTOR DINÁMICO DE EMOCIONES (VARIEDAD Y COHERENCIA ESTRICTA) */
+        /* 🕳️ MOTOR DINÁMICO DE EMOCIONES */
         const contextEmotionRules = [
             { 
                 patterns: ["horrible", "fatal", "fatalismo", "asco", "malisimo", "hecha polvo", "hecho polvo", "una mierda", "desastre", "hoyo", "pozo", "mal"], 
                 actionText: "el malestar de sentirte así de mal",
                 congratulations: [
                     "¡Felicidades! Has soltado el malestar de sentirte así de mal.",
-                    "¡Muy bien hecho! Has liberado la pesadez de este día gris.",
-                    "¡Excelente! Ya has dejado ir la sensación de que todo va mal."
+                    "¡Muy bien hecho! Has liberado la pesadez de este día gris."
                 ],
                 benefits: [
-                    "Al soltar esta sensación tan pesada, le quitas la etiqueta de 'horrible' a tu día. Tu mente recuerda que las emociones intensas son solo nubes pasajeras y que tu paz esencial sigue sana e intacta.",
-                    "Al disolver el fatalismo de este instante, desatas el nudo de tu mente. Te das cuenta de que no estás atrapada en el malestar, sino atravesando una tormenta momentánea que pronto amaina.",
-                    "Al retirar la resistencia a sentirte mal, la incomodidad pierde todo su poder sobre ti. Tu mente recupera su frescura natural y se abre de nuevo a la calma."
+                    "Al soltar esta sensación tan pesada, le quitas la etiqueta de 'horrible' a tu día. Tu mente recuerda que las emociones intensas son solo nubes pasajeras y que tu paz esencial sigue sana e intacta."
                 ],
                 quotes: [
-                    "No importa cuán nublado parezca el cielo de hoy; el Sol en ti nunca ha dejado de brillar.",
-                    "Un día difícil es solo un capítulo breve, nunca la historia completa de quién eres.",
-                    "Cuando dejas de pelear contra la ola, el mar interior vuelve solo a la calma."
-                ]
-            },
-            { 
-                patterns: ["miedo", "temor", "asust", "pánico", "terror", "insegur", "temo", "asusta", "incertidumbre", "duda"], 
-                actionText: "la ilusión del miedo y la incertidumbre",
-                congratulations: [
-                    "¡Felicidades! Has disuelto el miedo y la incertidumbre.",
-                    "¡Enhorabuena! Has dejado atrás la sombra del temor.",
-                    "¡Liberación total! Ya has soltado la preocupación por el mañana."
-                ],
-                benefits: [
-                    "Al desintegrar el miedo, tu mente regresa al único instante real: el presente. Te das cuenta de que justo aquí y ahora estás a salvo y sostenida.",
-                    "Al soltar las fantasías de temor que fabrica la mente, despiertas de una falsa pesadilla. Descubres que tienes la fuerza y el amor necesarios para afrontar lo que venga.",
-                    "Al entregar la incertidumbre al universo, liberas los hombros. No necesitas adivinar el mañana para habitar este día con total confianza."
-                ],
-                quotes: [
-                    "El miedo intenta adivinar un futuro que no existe; la paz te abraza suavemente justo aquí.",
-                    "Donde habita la confianza plena, el temor no encuentra espacio para quedarse.",
-                    "Estás a salvo ahora mismo. Respira y deja que el presente te cuide."
-                ]
-            },
-            { 
-                patterns: ["enfado", "rabia", "molest", "irrita", "enoj", "furia", "rencor", "odio", "cabreo", "impotenc"], 
-                actionText: "el fuego del enfado y la rabia",
-                congratulations: [
-                    "¡Felicidades! Has apagado el fuego del enfado y la rabia.",
-                    "¡Muy bien! Has liberado el peso del rencor de tus manos.",
-                    "¡Liberado! Ya has soltado la frustración que te quemaba por dentro."
-                ],
-                benefits: [
-                    "Al soltar esta rabia, dejas de sostener un carbón encendido en tus propias manos. Liberas la tensión contenida y tu corazón vuelve a respirar espacio puro.",
-                    "Al disolver el enfado, le retiras a los demás el poder de quitarte la paz. Eliges tu serenidad por encima de tener razón o guardar resentimiento.",
-                    "Al transformar el enojo en comprensión, ablandas la rigidez en tu pecho. Recuperas tu libertad interior y la tranquilidad que te pertenece."
-                ],
-                quotes: [
-                    "Elegir la paz no significa dar la razón a nadie, sino regalarte tranquilidad a ti misma.",
-                    "El perdón no es para la otra persona; es la puerta secreta hacia tu propia liberación.",
-                    "Nada de lo que ocurra fuera vale más que tu quietud interior."
-                ]
-            },
-            { 
-                patterns: ["culpa", "fallo", "error", "mal hecho", "arrepent", "remordim", "he fallado", "inadecuad"], 
-                actionText: "la pesada carga de la culpa",
-                congratulations: [
-                    "¡Felicidades! Te has perdonado y has soltado la culpa.",
-                    "¡Muy bien! Has dejado caer la pesada mochila de los reproches.",
-                    "¡Liberación concedida! Ya estás en paz contigo misma."
-                ],
-                benefits: [
-                    "Al soltar la culpa, te perdonas con absoluta ternura. Comprendes que en cada momento actuaste con la conciencia que tenías y que mereces amor, no castigo.",
-                    "Al desintegrar los reproches internos, abres espacio para el aprendizaje bondadoso. Dejas de juzgar el pasado y te permites empezar de cero con alegría.",
-                    "Al liberarte del tribunal mental, abrazas tu humanidad. Reconoces tu valor verdadero, intacto tras cualquier tropiezo."
-                ],
-                quotes: [
-                    "No hay errores definitivos, solo lecciones que te invitan a tratarte con más amabilidad.",
-                    "Perdonarte a ti misma es el acto de amor propio más profundo que puedes hacer hoy.",
-                    "Tu pasado no define la luz radiante que eres en este instante."
-                ]
-            },
-            { 
-                patterns: ["exigenc", "perfecc", "presion", "agobi", "estres", "saturad", "cargad", "no llego", "no puedo mas", "bloquead"], 
-                actionText: "el agobio y la autoexigencia",
-                congratulations: [
-                    "¡Felicidades! Has soltado el agobio y la autoexigencia.",
-                    "¡Qué alivio! Ya has bajado el listón de la perfección.",
-                    "¡Muy bien! Has deshecho la presión que te saturaba."
-                ],
-                benefits: [
-                    "Al desintegrar la necesidad de poder con todo, te das permiso para ser humana y descansar. Recuerdas que tu valor no depende de tus listas de tareas.",
-                    "Al soltar la presión autoimpuesta, aflojas la espalda y la cabeza. Comprendes que avanzar paso a paso y con dulzura rinde más que la prisa exigente.",
-                    "Al disolver el agobio, recuperas la perspectiva del momento. Compruebas que lo verdaderamente importante no requiere que te agotes para conseguirlo."
-                ],
-                quotes: [
-                    "Tu paz interior es infinitamente más valiosa que cualquier expectativa externa.",
-                    "Hacer una pausa serena no es perder el tiempo, es nutrir tu propia luz.",
-                    "No tienes que sostener el mundo entero sobre tus hombros; basta con sostenerte a ti con cariño."
-                ]
-            },
-            { 
-                patterns: ["trist", "pena", "llor", "dolor", "soled", "vacio", "desanim", "ganas de llorar", "sola", "nostalg"], 
-                actionText: "la pesadez de la tristeza y la soledad",
-                congratulations: [
-                    "¡Felicidades! Has ablandado y soltado la tristeza.",
-                    "¡Muy bien! Has permitido que tu corazón respire consuelo.",
-                    "¡Liberado! Ya has dejado ir la pena que te pesaba en el pecho."
-                ],
-                benefits: [
-                    "Al ablandar y soltar esta tristeza, le permites a tu mente recibir el consuelo suave que necesita. Abres la puerta a que la calidez vuelva a habitarte.",
-                    "Al acoger tu sentir sin pelearte con él, la pena se disuelve en comprensión. Recuerdas que nunca estás sola porque tu propio ser es tu gran refugio.",
-                    "Al liberar el dolor acumulado, despejas los ojos y el pecho. Dejas espacio fresco para que la esperanza y la ternura florezcan de nuevo."
-                ],
-                quotes: [
-                    "Trátate con la misma ternura con la que reconfortarías a una amiga muy querida.",
-                    "Incluso en las noches más largas, las estrellas internas nunca dejan de acompañarte.",
-                    "Detrás de las lágrimas de soltar habita un amanecer lleno de serenidad."
-                ]
-            },
-            { 
-                patterns: ["cansanc", "agotad", "fatiga", "exhaust", "rendid", "sin fuerzas", "sueño"], 
-                actionText: "el agotamiento acumulado",
-                congratulations: [
-                    "¡Felicidades! Has entregado el cansancio al agujero estelar.",
-                    "¡Muy bien! Te has dado permiso para soltar y descansar.",
-                    "¡Liberación! Ya no cargas con el peso del agotamiento."
-                ],
-                benefits: [
-                    "Al liberar este cansancio, le das permiso a tu mente y a tu cuerpo para soltar el control y descansar de verdad. La energía vital se renueva en el reposo.",
-                    "Al aflojar la resistencia al agotamiento, la tensión del día se evapora. Reconoces que parar a tiempo es una muestra sublime de sabiduría y autocuidado.",
-                    "Al disolver la fatiga mental, devuelves a tu cuerpo su ritmo natural de regeneración y tranquilidad."
-                ],
-                quotes: [
-                    "Descansar es un derecho fundamental de tu mente, no un premio que tengas que ganarte.",
-                    "Permítete no hacer nada durante unos instantes; el mundo seguirá girando mientras te cuidas.",
-                    "En el descanso sereno se recargan tus dones y tu alegría."
-                ]
-            },
-            { 
-                patterns: ["procrastin", "pospon", "luego", "despues", "vaga", "vago", "perez", "no empiezo", "dejo para"], 
-                actionText: "la culpa por postergar tus cosas",
-                congratulations: [
-                    "¡Felicidades! Has soltado la culpa por postergar tus tareas.",
-                    "¡Muy bien! Has disuelto el peso de dejar las cosas para después.",
-                    "¡Liberada! Ya no te juzgas por tu ritmo de hoy."
-                ],
-                benefits: [
-                    "Al soltar la procrastinación, te liberas de la culpa de 'debería estar haciendo más'. Te permites avanzar con pasos pequeños, recordando que la constancia amable supera a la exigencia.",
-                    "Al disolver la parálisis por perfeccionismo, deshaces el nudo del inicio. Descubres que iniciar algo sencillo y sin juicio te devuelve la motivación sola.",
-                    "Al liberar la autoexigencia sobre tus tiempos, te reconcilias con el ritmo de hoy. Cada acción hecha desde la calma cuenta y suma riqueza a tu día."
-                ],
-                quotes: [
-                    "No necesitas ver todo el camino por delante; basta con dar el paso amable que tienes ahora.",
-                    "Un avance pequeño hecho con amor hacia ti vale más que cien planes perfectos no empezados.",
-                    "La calma es el mejor motor para moverte con fluidez y sin pesadez."
+                    "No importa cuán nublado parezca el cielo de hoy; el Sol en ti nunca ha dejado de brillar."
                 ]
             }
         ];
@@ -950,21 +851,15 @@
                 if (formattedPhrase.startsWith("hoy ")) formattedPhrase = formattedPhrase.substring(4);
                 
                 matchedRule = {
-                    actionText: `el peso de "${formattedPhrase}"`,
                     congratulations: [
                         `¡Felicidades! Has soltado el peso de "${formattedPhrase}".`,
-                        `¡Muy bien hecho! Has liberado este pensamiento al espacio estelar.`,
-                        `¡Excelente! Ya has dejado ir "${formattedPhrase}" de tu mente.`
+                        `¡Muy bien hecho! Has liberado este pensamiento al espacio estelar.`
                     ],
                     benefits: [
-                        `Al desintegrar el pensamiento de "${formattedPhrase}", le quitas el valor real que le habías otorgado en tu cabeza. Tu mente se libera de esa historia y recupera de inmediato su estado natural de frescura.`,
-                        `Al soltar la idea de "${formattedPhrase}", abres espacio para una nueva comprensión. Descubres que los pensamientos solo pesan lo que tú decidas cargarlos.`,
-                        `Al depositar "${formattedPhrase}" en el agujero estelar, permites que se transforme en luz limpia. Tu corazón se aligera y tu mente vuelve a descansar en la quietud.`
+                        `Al desintegrar el pensamiento de "${formattedPhrase}", le quitas el valor real que le habías otorgado en tu cabeza. Tu mente se libera de esa historia y recupera de inmediato su estado natural de frescura.`
                     ],
                     quotes: [
-                        "Un pensamiento solo pesa lo que tú decidas cargarlo. Al soltarlo con amabilidad, la paz regresa sola.",
-                        "No eres la historia que piensas; eres la luz pacífica que observa cómo esa historia pasa y se disuelve.",
-                        "Cierra los ojos un segundo y siente la ligereza de haber devuelto este peso al universo."
+                        "Un pensamiento solo pesa lo que tú decidas cargarlo. Al soltarlo con amabilidad, la paz regresa sola."
                     ]
                 };
             }
@@ -975,7 +870,6 @@
 
             return {
                 congratulationTitle: randCongrat,
-                actionText: matchedRule.actionText,
                 benefit: randBenefit,
                 quote: randQuote
             };
@@ -1044,24 +938,15 @@
         /* 💖 EL PIROPERO CON AFIRMACIONES */
         const piropoAffirmations = [
             "Acepto esta cualidad como un regalo verdadero que fortalece mi paz.",
-            "Mi valor es real e inquebrantable. Reconozco la luz que habita en mí.",
-            "Lo que aprecio en mí se multiplica y se comparte de forma natural con los demás.",
-            "Esta virtud es un recordatorio de que fui creada con amor y amabilidad.",
-            "Elijo mirarme hoy con los mismos ojos de ternura con los que miro a una amiga.",
-            "Al valorar este don en mí, permito que mi mente descanse en la confianza."
+            "Mi valor es real e inquebrantable. Reconozco la luz que habita en mí."
         ];
 
         function generateAffirmationForPiropo(piropoText) {
             const clean = piropoText.toLowerCase();
-            if (clean.includes("bonit") || clean.includes("guap") || clean.includes("sonrisa") || clean.includes("ojos") || clean.includes("cuerpo")) {
+            if (clean.includes("bonit") || clean.includes("guap") || clean.includes("sonrisa") || clean.includes("ojos")) {
                 return `Acepto la belleza y la armonía con la que he sido creada. Mi presencia transmite paz a mi alrededor.`;
-            } else if (clean.includes("escuchar") || clean.includes("cariño") || clean.includes("amable") || clean.includes("empat")) {
-                return `Mi capacidad de dar amor y presencia nace de mi propio centro de paz. Al amar a los demás, me amo a mí misma.`;
-            } else if (clean.includes("intelig") || clean.includes("capaz") || clean.includes("fuerte") || clean.includes("buen")) {
-                return `Confío en los talentos de mi mente. No necesito demostrar nada, solo disfrutar de compartir lo que soy.`;
             } else {
-                const randomAff = piropoAffirmations[Math.floor(Math.random() * piropoAffirmations.length)];
-                return `Al reconocer que "${piropoText.trim()}", reafirmo mi autoestima: ${randomAff}`;
+                return `Al reconocer que "${piropoText.trim()}", reafirmo mi autoestima: Acepto esta cualidad como un regalo verdadero que fortalece mi paz.`;
             }
         }
 
@@ -1093,15 +978,14 @@
             let list = JSON.parse(localStorage.getItem('piropos_v2') || '[]');
             if (list.length === 0) {
                 list = [
-                    { text: "Tengo una sonrisa bonita y acogedora", affirmation: "Acepto la belleza y la armonía con la que he sido creada. Mi presencia transmite paz a mi alrededor." },
-                    { text: "Sé escuchar con mucho cariño cuando alguien lo necesita", affirmation: "Mi capacidad de dar amor nace de mi propio centro de paz." }
+                    { text: "Tengo una sonrisa bonita y acogedora", affirmation: "Acepto la belleza y la armonía con la que he sido creada." }
                 ];
             }
 
             const container = document.getElementById('piropero-list');
             if (container) {
                 container.innerHTML = list.map(p => `
-                    <div class="bg-purple-50/60 p-3.5 rounded-2xl border border-purple-100 text-xs text-purple-900 space-y-1">
+                    <div class="bg-purple-50/60 dynamic-card p-3.5 rounded-2xl border border-purple-100 text-xs text-purple-900 space-y-1">
                         <div class="font-bold text-brand-darkPurple flex items-center space-x-1.5">
                             <img src="assets/icono-piropero.png" alt="Piropo" class="w-3.5 h-3.5 object-contain flex-shrink-0">
                             <span>${p.text}</span>
@@ -1162,7 +1046,7 @@
                 }
 
                 historyContainer.innerHTML = history.map(item => `
-                    <div class="bg-purple-50/60 p-3 rounded-2xl border border-purple-100 flex items-center justify-between text-xs">
+                    <div class="bg-purple-50/60 dynamic-card p-3 rounded-2xl border border-purple-100 flex items-center justify-between text-xs">
                         <div class="flex items-center space-x-2.5">
                             <img src="${item.iconSrc}" alt="${item.name}" class="w-7 h-7 object-contain">
                             <div>
@@ -1170,7 +1054,7 @@
                                 <span class="text-[10px] text-slate-400">Registrado con éxito</span>
                             </div>
                         </div>
-                        <span class="text-[10px] font-bold text-purple-600 bg-white px-2.5 py-1 rounded-xl border border-purple-100">
+                        <span class="text-[10px] font-bold text-purple-600 bg-white dynamic-card px-2.5 py-1 rounded-xl border border-purple-100">
                             ${item.dateStr} - ${item.timeStr}
                         </span>
                     </div>
