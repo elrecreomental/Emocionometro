@@ -1,0 +1,1349 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EL -TE DE LES EMOCIONS | Un glopet de pau per la teva ment cada dia</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Si un icono de assets/ no carga (nombre distinto, mayúsculas, carpeta ausente), se muestra un emoji
+        (function () {
+            var EMOJI = {
+                'icono-camino': '🛤️', 'icono-sos': '🆘', 'icono-agujero': '🕳️', 'icono-piropero': '💌',
+                'icono-emocionometro': '🌡️', 'icono-progreso': '📈', 'icono-flor': '🌸', 'icono-te': '🍵',
+                'icono-beneficio': '🌿', 'icono-idea': '💡', 'icono-sorbito': '🍵', 'icono-cuencos': '🎶',
+                'icono-olas': '🌊', 'icono-agua': '💧', 'icono-campanitas': '🔔',
+                'mood-feliz': '😊', 'mood-paz': '😌', 'mood-neutro': '😐', 'mood-triste': '😢', 'mood-fuego': '🔥'
+            };
+            window.addEventListener('error', function (e) {
+                var img = e.target;
+                if (!img || img.tagName !== 'IMG') return;
+                var m = (img.getAttribute('src') || '').match(/assets\/([^\/]+?)\.(png|webp|jpg|jpeg|svg)/i);
+                var key = m ? m[1].toLowerCase() : '';
+                var span = document.createElement('span');
+                span.textContent = EMOJI[key] || '✨';
+                span.className = 'inline-block flex-shrink-0 leading-none';
+                span.style.fontSize = /\bw-full\b/.test(img.className) ? '1.75rem' : '0.95rem';
+                span.title = img.alt || '';
+                if (img.parentNode) img.parentNode.replaceChild(span, img);
+            }, true);
+        })();
+    </script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            purple: '#6B46C1',
+                            darkPurple: '#4A1D96',
+                            softBg: '#F4EFFC',
+                            cardBg: '#FFFFFF',
+                            greenPastel: '#E6F4EA',
+                            yellowPastel: '#FEF7E0',
+                            borderPastel: '#E9D8FD'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap');
+        
+        :root {
+            --bg-color: #F4EFFC;
+            --text-color: #2D3748;
+            --card-bg: #FFFFFF;
+            --border-color: #E9D8FD;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #1A1528;
+                --text-color: #E2D9F3;
+                --card-bg: #27213C;
+                --border-color: #4D3B73;
+            }
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .dynamic-card {
+            background-color: var(--card-bg) !important;
+            border-color: var(--border-color) !important;
+        }
+
+        h1, h2, h3, .font-heading {
+            font-family: 'Fredoka', cursive, sans-serif;
+        }
+
+        /* 🫁 ANIMACIÓN DE RESPIRACIÓN EN 4 TIEMPOS (16 SEGUNDOS) */
+        .breathing-box {
+            animation: boxBreathing 16s infinite ease-in-out;
+        }
+        @keyframes boxBreathing {
+            0% { transform: scale(1); opacity: 0.6; }
+            25% { transform: scale(1.45); opacity: 0.95; }
+            50% { transform: scale(1.45); opacity: 0.95; }
+            75% { transform: scale(1); opacity: 0.6; }
+            100% { transform: scale(1); opacity: 0.6; }
+        }
+
+        /* 💥 VIBRACIÓN Y DISOLUCIÓN DE TARJETA */
+        .shake-box {
+            animation: intenseShake 0.35s ease-in-out infinite;
+        }
+        @keyframes intenseShake {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            15% { transform: translate(-8px, 4px) rotate(-2deg); }
+            30% { transform: translate(8px, -4px) rotate(2deg); }
+            45% { transform: translate(-6px, -2px) rotate(-1deg); }
+            60% { transform: translate(6px, 3px) rotate(1deg); }
+            75% { transform: translate(-4px, 1px); }
+        }
+
+        .disintegrate-card {
+            animation: suckAndBurn 0.75s cubic-bezier(0.6, -0.28, 0.735, 0.045) forwards;
+        }
+        @keyframes suckAndBurn {
+            0% { transform: scale(1) rotate(0deg); opacity: 1; filter: brightness(1) blur(0px); }
+            30% { transform: scale(1.1) rotate(-3deg); opacity: 0.95; filter: brightness(4) blur(2px); }
+            100% { transform: scale(0.01) rotate(45deg); opacity: 0; filter: brightness(10) blur(20px); }
+        }
+
+        /* 🌌 CANVAS DE EXPLOSIÓN BRILLANTE SOBRE TODO EL SITIO */
+        #explosion-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between pb-20 md:pb-6">
+
+    <!-- CANVAS PARA EL DESTELLO Y POLVO ESTELAR BRILLANTE -->
+    <canvas id="explosion-canvas"></canvas>
+
+    <!-- REPRODUCTOR DE AUDIO ORIGINAL -->
+    <audio id="audio-player" loop></audio>
+
+    <!-- HEADER / NAVEGACIÓN SUPERIOR -->
+    <header class="max-w-md mx-auto w-full pt-6 px-4">
+        <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center space-x-3">
+                <div class="w-12 h-12 rounded-2xl bg-purple-100 dark:bg-purple-950 flex items-center justify-center overflow-hidden p-1.5 shadow-sm border border-purple-200 dark:border-purple-800">
+                    <img src="assets/icono-camino.png" alt="Logo Te" class="w-full h-full object-contain">
+                </div>
+                <div>
+                    <h1 id="app-title" class="text-xl md:text-2xl font-bold text-brand-darkPurple dark:text-purple-300 tracking-wide leading-none">EL -TE DE LES EMOCIONS</h1>
+                    <p id="app-subtitle" class="text-xs text-purple-400 font-medium mt-1">Un glopet de pau per la teva ment cada dia</p>
+                </div>
+            </div>
+            <!-- SELECTOR DE IDIOMA Y BOTÓN ACTIVAR -->
+            <div class="flex items-center space-x-2">
+                <div class="bg-white dynamic-card p-1 rounded-xl border border-purple-100 dark:border-purple-800 flex space-x-1">
+                    <button id="lang-es-btn" onclick="switchLanguage('es')" class="px-2 py-1 bg-purple-50 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300 rounded-lg text-[10px] font-bold">ES</button>
+                    <button id="lang-ca-btn" onclick="switchLanguage('ca')" class="px-2 py-1 bg-brand-purple text-white rounded-lg text-[10px] font-bold shadow-sm">CA</button>
+                </div>
+                <button id="activate-top-btn" onclick="openActivationModal()" class="text-[10px] bg-amber-400 hover:bg-amber-500 text-slate-900 font-bold px-3 py-1.5 rounded-xl shadow-sm transition flex items-center space-x-1">
+                    <span>🔑</span> <span id="btn-activate-text">Activar</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- PESTAÑAS SUPERIORES PERFECTAMENTE DISTRIBUIDAS (PC Y MÓVIL) -->
+        <div class="bg-white dynamic-card p-1.5 rounded-2xl shadow-sm border border-purple-100 flex flex-nowrap items-center justify-between text-[10px] sm:text-[11px] font-bold text-brand-darkPurple dark:text-purple-200 gap-1">
+            <button onclick="showSection('daily')" id="top-btn-daily" class="tab-btn flex-1 py-2 px-1 rounded-xl bg-brand-purple text-white transition flex items-center justify-center space-x-1">
+                <img src="assets/icono-camino.png" alt="Camino" class="w-3.5 h-3.5 object-contain flex-shrink-0"> <span id="tab-daily-text">365 dies</span>
+            </button>
+            <button onclick="showSection('sos')" id="top-btn-sos" class="tab-btn flex-1 py-2 px-1 rounded-xl text-purple-600 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/40 transition flex items-center justify-center space-x-1">
+                <img src="assets/icono-sos.png" alt="Emergencia" class="w-3.5 h-3.5 object-contain flex-shrink-0"> <span>SOS</span>
+            </button>
+            <button onclick="showSection('blackhole')" id="top-btn-blackhole" class="tab-btn flex-1 py-2 px-1 rounded-xl text-purple-600 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/40 transition flex items-center justify-center space-x-1">
+                <img src="assets/icono-agujero.png" alt="Agujero" class="w-3.5 h-3.5 object-contain flex-shrink-0"> <span id="tab-blackhole-text">forat</span>
+            </button>
+            <button onclick="showSection('piropero')" id="top-btn-piropero" class="tab-btn flex-1 py-2 px-1 rounded-xl text-purple-600 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/40 transition flex items-center justify-center space-x-1">
+                <img src="assets/icono-piropero.png" alt="Piropero" class="w-3.5 h-3.5 object-contain flex-shrink-0"> <span id="tab-piropero-text">Piropero</span>
+            </button>
+            <button onclick="showSection('mirror')" id="top-btn-mirror" class="tab-btn flex-1 py-2 px-1 rounded-xl text-purple-600 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/40 transition flex items-center justify-center space-x-1">
+                <img src="assets/icono-emocionometro.png" alt="Emocionómetro" class="w-3.5 h-3.5 object-contain flex-shrink-0"> <span id="tab-mirror-text">Emocionòmetre</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- CONTENEDOR PRINCIPAL -->
+    <main class="max-w-md mx-auto w-full px-4 pt-4 flex-grow">
+
+        <!-- 1. CAMINO DIARIO (365 DÍAS) -->
+        <section id="sec-daily" class="space-y-4">
+            <div id="data-error-banner" class="hidden bg-red-50 border border-red-200 text-red-800 p-3 rounded-2xl text-xs"></div>
+            <!-- AVISO DE VERSIÓN DE PRUEBA -->
+            <div id="trial-banner" class="bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-900 p-3.5 rounded-2xl text-xs text-amber-900 dark:text-amber-200 flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <span>✨</span>
+                    <div>
+                        <strong id="trial-title" class="font-bold block">Versión de Prueba Activa</strong>
+                        <span id="trial-desc">Estás probando los Días 1 al 3. Introduce tu código para desbloquear los 365 días.</span>
+                    </div>
+                </div>
+                <button onclick="openActivationModal()" id="trial-btn" class="px-3 py-1.5 bg-amber-400 hover:bg-amber-500 text-slate-900 font-bold rounded-xl text-[10px] whitespace-nowrap shadow-sm">Activar</button>
+            </div>
+
+            <div class="bg-white dynamic-card p-5 rounded-3xl shadow-sm border border-purple-100 space-y-3">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <span id="progress-title-label" class="text-xs uppercase tracking-wider text-purple-400 font-bold flex items-center space-x-1">
+                            <img src="assets/icono-progreso.png" alt="Progreso" class="w-4 h-4 object-contain inline-block flex-shrink-0">
+                            <span>EL TEU PROGRÈS DE TRANSFORMACIÓ</span>
+                        </span>
+                        <h2 class="text-xl font-bold text-brand-darkPurple dark:text-purple-200 mt-1 flex items-center space-x-1.5">
+                            <span id="day-header">Dia 1: qüestiona-TE</span>
+                            <img src="assets/icono-flor.png" alt="Flor" class="w-5 h-5 object-contain inline-block flex-shrink-0">
+                        </h2>
+                    </div>
+                    <span id="progress-percent" class="text-3xl font-extrabold text-brand-darkPurple dark:text-purple-200">1%</span>
+                </div>
+                <div class="w-full bg-purple-100 dark:bg-purple-950 h-2.5 rounded-full overflow-hidden">
+                    <div id="progress-bar" class="bg-gradient-to-r from-purple-400 to-brand-purple h-full rounded-full transition-all duration-500" style="width: 1%;"></div>
+                </div>
+                <div class="flex justify-between items-center pt-1">
+                    <button onclick="changeDay(-1)" id="btn-prev" class="px-3 py-1.5 bg-purple-50 dark:bg-purple-900/50 hover:bg-purple-100 dark:hover:bg-purple-900 text-purple-700 dark:text-purple-300 font-bold rounded-xl text-xs transition">⬅️ Anterior</button>
+                    <div class="flex items-center space-x-1 text-xs text-purple-600 dark:text-purple-300 font-medium">
+                        <span id="goto-label">Ir al día:</span>
+                        <input type="number" id="day-select" min="1" max="365" value="1" onchange="jumpToDay(this.value)" class="w-12 bg-purple-50 dark:bg-purple-900/50 border border-purple-200 dark:border-purple-700 text-center py-1 rounded-lg text-brand-darkPurple dark:text-purple-200 font-bold">
+                    </div>
+                    <button onclick="changeDay(1)" id="btn-next" class="px-3 py-1.5 bg-purple-50 dark:bg-purple-900/50 hover:bg-purple-100 dark:hover:bg-purple-900 text-purple-700 dark:text-purple-300 font-bold rounded-xl text-xs transition">Següent ➡️</button>
+                </div>
+            </div>
+
+            <div class="bg-white dynamic-card p-5 rounded-3xl shadow-sm border border-purple-100 space-y-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-100 dark:border-emerald-900 flex items-center justify-center overflow-hidden p-1.5">
+                        <img src="assets/icono-te.png" alt="Te sugerido" class="w-full h-full object-contain">
+                    </div>
+                    <div>
+                        <p class="text-xs text-purple-400 font-bold uppercase tracking-wider" id="tea-slogan">TÈ SUGERIT DEL DIA 1</p>
+                        <h3 class="text-xl font-bold text-brand-darkPurple dark:text-purple-200 flex items-center space-x-1.5">
+                            <span id="tea-title">qüestiona-TE</span>
+                            <img src="assets/icono-flor.png" alt="Flor" class="w-5 h-5 object-contain inline-block flex-shrink-0">
+                        </h3>
+                        <p id="tea-type" class="text-xs text-slate-500 dark:text-slate-400 font-medium">Infusió de claredat i discerniment</p>
+                    </div>
+                </div>
+
+                <div class="bg-emerald-50/80 dark:bg-emerald-950/40 p-4 rounded-2xl border border-emerald-100 dark:border-emerald-900/60 text-xs text-emerald-900 dark:text-emerald-200 leading-relaxed flex items-start space-x-2">
+                    <img src="assets/icono-beneficio.png" alt="Beneficios" class="w-4 h-4 object-contain flex-shrink-0 mt-0.5">
+                    <div>
+                        <strong class="font-bold block text-emerald-950 dark:text-emerald-100 mb-0.5" id="benefit-question-label">Quina emoció desperta i els seus beneficis?</strong>
+                        <span id="tea-benefit">Res del que veig en aquesta habitació té un significat real per si mateix</span>
+                    </div>
+                </div>
+
+                <div class="bg-amber-50/80 dark:bg-amber-950/30 p-4 rounded-2xl border border-amber-100 dark:border-amber-950 text-xs text-amber-950 dark:text-amber-200 leading-relaxed space-y-1">
+                    <p class="font-bold text-amber-900 dark:text-amber-300 flex items-center space-x-1">
+                        <img src="assets/icono-idea.png" alt="Idea" class="w-4 h-4 object-contain flex-shrink-0">
+                        <span id="idea-label">LA IDEA D'AVUI <span id="glasses-title-label"></span></span>
+                    </p>
+                    <p id="day-lesson" class="text-slate-700 dark:text-slate-300 text-xs md:text-sm">
+                        "Imagina que la teva ment és com una pissarra..."
+                    </p>
+                </div>
+
+                <div class="bg-purple-50/60 dark:bg-purple-950/30 p-4 rounded-2xl border border-purple-100 dark:border-purple-900/60 text-xs text-purple-900 dark:text-purple-200 leading-relaxed space-y-1">
+                    <strong class="font-bold text-brand-purple dark:text-purple-300 flex items-center space-x-1">
+                        <img src="assets/icono-sorbito.png" alt="Sorbito" class="w-4 h-4 object-contain flex-shrink-0">
+                        <span id="sorbito-label">Glopet d'1 minut:</span>
+                    </strong>
+                    <p id="day-exercise" class="text-slate-600 dark:text-slate-300 italic">
+                        Aguanta la teva tassa mig tèbia...
+                    </p>
+                    <button id="btn-complete-day" onclick="completeToday()" class="mt-3 w-full py-2.5 bg-brand-purple text-white font-bold rounded-xl text-xs shadow-sm transition">✅ He completat l'exercici d'avui</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. SORBITO DE EMERGENCIA (SOS) -->
+        <section id="sec-sos" class="hidden space-y-4 text-center">
+            <div class="bg-white dynamic-card p-6 rounded-3xl shadow-sm border border-purple-100 space-y-4">
+                <div class="w-12 h-12 mx-auto overflow-hidden">
+                    <img src="assets/icono-sos.png" alt="SOS" class="w-full h-full object-contain">
+                </div>
+                <h2 id="sos-title" class="text-2xl font-bold text-brand-darkPurple dark:text-purple-200">Sorbito de Emergencia</h2>
+                <p id="sos-desc" class="text-xs text-slate-500 dark:text-slate-400 max-w-xs mx-auto">Regresa al presente. Escoge un sonido relajante y sigue el ritmo de respiración para calmar la mente.</p>
+
+                <div class="grid grid-cols-2 gap-2.5 pt-2">
+                    <button onclick="toggleAudio('cuencos', 'assets/cuencos.mp3')" id="btn-cuencos" class="p-3 bg-purple-50/80 dark:bg-purple-950/40 border border-purple-100 dark:border-purple-900 hover:border-purple-300 rounded-2xl text-xs font-bold text-purple-900 dark:text-purple-200 transition flex items-center justify-center space-x-1.5">
+                        <img src="assets/icono-cuencos.png" alt="Cuencos" class="w-4 h-4 object-contain flex-shrink-0">
+                        <span id="sos-lbl-cuencos">Cuencos tibetanos</span>
+                    </button>
+                    <button onclick="toggleAudio('olas', 'assets/olas.mp3')" id="btn-olas" class="p-3 bg-purple-50/80 dark:bg-purple-950/40 border border-purple-100 dark:border-purple-900 hover:border-purple-300 rounded-2xl text-xs font-bold text-purple-900 dark:text-purple-200 transition flex items-center justify-center space-x-1.5">
+                        <img src="assets/icono-olas.png" alt="Olas" class="w-4 h-4 object-contain flex-shrink-0">
+                        <span id="sos-lbl-olas">Olas del mar</span>
+                    </button>
+                    <button onclick="toggleAudio('agua', 'assets/agua.mp3')" id="btn-agua" class="p-3 bg-purple-50/80 dark:bg-purple-950/40 border border-purple-100 dark:border-purple-900 hover:border-purple-300 rounded-2xl text-xs font-bold text-purple-900 dark:text-purple-200 transition flex items-center justify-center space-x-1.5">
+                        <img src="assets/icono-agua.png" alt="Agua" class="w-4 h-4 object-contain flex-shrink-0">
+                        <span id="sos-lbl-agua">Movimiento del agua</span>
+                    </button>
+                    <button onclick="toggleAudio('campanitas', 'assets/campanitas.mp3')" id="btn-campanitas" class="p-3 bg-purple-50/80 dark:bg-purple-950/40 border border-purple-100 dark:border-purple-900 hover:border-purple-300 rounded-2xl text-xs font-bold text-purple-900 dark:text-purple-200 transition flex items-center justify-center space-x-1.5">
+                        <img src="assets/icono-campanitas.png" alt="Campanitas" class="w-4 h-4 object-contain flex-shrink-0">
+                        <span id="sos-lbl-campanitas">Campanitas de cristal</span>
+                    </button>
+                </div>
+
+                <!-- CIRCULO GUIADO DE RESPIRACIÓN EN 4 TIEMPOS -->
+                <div class="py-8 flex flex-col items-center justify-center relative">
+                    <div class="w-40 h-40 rounded-full bg-purple-100/80 dark:bg-purple-950 border-2 border-purple-300 dark:border-purple-700 flex flex-col items-center justify-center breathing-box transition-all">
+                        <span id="breath-action" class="text-sm font-extrabold text-brand-darkPurple dark:text-purple-200 uppercase tracking-wide">Inhala</span>
+                        <span id="breath-timer" class="text-2xl font-bold text-brand-purple dark:text-purple-300 mt-1">4</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. EL AGUJERO NEGRO -->
+        <section id="sec-blackhole" class="hidden space-y-4">
+            <div class="bg-white dynamic-card p-6 rounded-3xl shadow-sm border border-purple-100 space-y-4 relative overflow-hidden" id="blackhole-container">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 overflow-hidden">
+                        <img src="assets/icono-agujero.png" alt="Agujero Negro" class="w-full h-full object-contain">
+                    </div>
+                    <div>
+                        <h2 id="bh-title" class="text-xl font-bold text-brand-darkPurple dark:text-purple-200">El Agujero Negro</h2>
+                        <p id="bh-desc" class="text-xs text-slate-500 dark:text-slate-400">Escribe lo que sientes o te preocupa hoy y transfórmalo en luz.</p>
+                    </div>
+                </div>
+
+                <div id="input-box-wrapper" class="space-y-3 transition-all duration-300">
+                    <textarea id="thought-input" rows="4" placeholder="Ejemplo: 'Hoy me siento horrible'..." class="w-full bg-purple-50/50 dark:bg-purple-950/40 dynamic-card border border-purple-100 dark:border-purple-900 rounded-2xl p-4 text-xs text-slate-700 dark:text-slate-200 focus:border-purple-300 outline-none resize-none"></textarea>
+
+                    <button onclick="disintegrateThought()" id="bh-btn" class="w-full py-3.5 bg-brand-purple hover:bg-purple-700 text-white font-bold rounded-2xl text-xs shadow-md transition flex items-center justify-center space-x-2">
+                        <span>✨</span> <span id="bh-btn-text">Desintegrar en Gran Explosión Estelar</span>
+                    </button>
+                </div>
+
+                <div id="reflection-card" class="hidden bg-amber-50/90 dark:bg-amber-950/40 p-5 rounded-2xl border border-amber-200 dark:border-amber-900 text-xs text-amber-950 dark:text-amber-200 space-y-3 shadow-sm">
+                    <div class="flex items-center space-x-2 text-amber-800 dark:text-amber-300">
+                        <span class="text-2xl">🌟</span>
+                        <h3 id="congratulations-title" class="text-sm font-bold">¡Felicidades! Ya has soltado este pensamiento.</h3>
+                    </div>
+                    <div id="mental-explanation" class="text-slate-700 dark:text-slate-300 leading-relaxed text-xs space-y-2"></div>
+                    <button onclick="resetBlackHole()" id="bh-reset-btn" class="w-full py-2 bg-amber-100 dark:bg-amber-900/60 hover:bg-amber-200 text-amber-900 dark:text-amber-100 font-bold rounded-xl text-xs transition mt-2">
+                        ✨ Liberar otro pensamiento
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. EL PIROPERO -->
+        <section id="sec-piropero" class="hidden space-y-4">
+            <div class="bg-white dynamic-card p-6 rounded-3xl shadow-sm border border-purple-100 space-y-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 overflow-hidden">
+                        <img src="assets/icono-piropero.png" alt="Piropero" class="w-full h-full object-contain">
+                    </div>
+                    <div>
+                        <h2 id="piropo-heading" class="text-xl font-bold text-brand-darkPurple dark:text-purple-200">El Piropero</h2>
+                        <p id="piropo-sub" class="text-xs text-slate-500 dark:text-slate-400">Tu diario secreto de autoestima y amor propio.</p>
+                    </div>
+                </div>
+
+                <div class="flex space-x-2">
+                    <input type="text" id="piropero-input" placeholder="Escribe una cualidad bonita sobre ti..." class="flex-grow bg-purple-50/50 dark:bg-purple-950/40 dynamic-card border border-purple-100 dark:border-purple-900 rounded-xl px-4 py-2 text-xs outline-none focus:border-purple-300 text-slate-700 dark:text-slate-200">
+                    <button onclick="addPiropo()" id="piropo-save-btn" class="px-4 py-2 bg-amber-400 hover:bg-amber-500 text-slate-900 font-bold rounded-xl text-xs shadow-sm transition">Guardar</button>
+                </div>
+
+                <div id="piropo-affirmation-card" class="hidden bg-emerald-50/90 dark:bg-emerald-950/40 p-4 rounded-2xl border border-emerald-200 dark:border-emerald-900 text-xs text-emerald-950 dark:text-emerald-200 space-y-1 shadow-sm">
+                    <div id="piropo-aff-label" class="flex items-center space-x-1.5 text-emerald-900 dark:text-emerald-300 font-bold">
+                        <span>✨</span> <span>AFIRMACIÓN DE HOY:</span>
+                    </div>
+                    <p id="piropo-affirmation-text" class="text-slate-700 dark:text-slate-300 text-xs italic"></p>
+                </div>
+
+                <div id="piropero-list" class="space-y-2.5 pt-2"></div>
+            </div>
+        </section>
+
+        <!-- 5. EMOCIONÓMETRO -->
+        <section id="sec-mirror" class="hidden space-y-4">
+            <div class="bg-white dynamic-card p-6 rounded-3xl shadow-sm border border-purple-100 space-y-5">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 overflow-hidden">
+                        <img src="assets/icono-emocionometro.png" alt="Emocionómetro" class="w-full h-full object-contain">
+                    </div>
+                    <div>
+                        <h2 id="emo-heading" class="text-xl font-bold text-brand-darkPurple dark:text-purple-200">Emocionòmetre</h2>
+                        <p id="emo-sub" class="text-xs text-slate-500 dark:text-slate-400">Tu registro y progreso de paz emocional.</p>
+                    </div>
+                </div>
+
+                <div class="bg-purple-50/60 dark:bg-purple-950/40 dynamic-card p-4 rounded-2xl space-y-3 border border-purple-100 dark:border-purple-900">
+                    <h3 id="emo-question" class="text-xs font-bold text-purple-900 dark:text-purple-200 uppercase">¿Cómo te sientes en este instante?</h3>
+                    <div id="mood-buttons" class="flex justify-between items-center px-2"></div>
+                </div>
+
+                <!-- RESUMEN DE PROGRESO EMOCIONAL -->
+                <div class="space-y-2">
+                    <h3 id="emo-summary-title" class="text-xs font-bold text-purple-900 dark:text-purple-200 uppercase">Resumen de tu estado habitual</h3>
+                    <div id="mood-summary" class="grid grid-cols-5 gap-1 text-center bg-purple-50/30 dark:bg-purple-950/30 dynamic-card p-3 rounded-2xl border border-purple-100 dark:border-purple-900 text-xs">
+                        <!-- Generado por JavaScript -->
+                    </div>
+                </div>
+
+                <!-- HISTORIAL DE EMOCIONES DIARIAS -->
+                <div class="space-y-2 pt-2">
+                    <h3 id="emo-history-title" class="text-xs font-bold text-purple-900 dark:text-purple-200 uppercase">Historial de emociones</h3>
+                    <div id="mood-history-list" class="space-y-2 max-h-56 overflow-y-auto pr-1">
+                        <!-- Generado por JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- MODAL DE BLOQUEO / PRUEBA EXHAUSTA -->
+    <div id="lock-modal" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4">
+        <div class="bg-white dynamic-card border border-purple-100 dark:border-purple-900 p-6 rounded-3xl max-w-sm w-full space-y-4 text-center shadow-xl">
+            <div class="w-14 h-14 bg-purple-100 dark:bg-purple-950 rounded-2xl mx-auto flex items-center justify-center text-2xl">
+                🔒
+            </div>
+            <h3 class="text-lg font-bold text-brand-darkPurple dark:text-purple-200">Contenido Exclusivo del Pack</h3>
+            <p id="lock-message" class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                Has disfrutado de la versión de prueba (Días 1 a 3 y SOS). Para desbloquear los 365 días y todas las herramientas de bienestar, introduce el código único incluido en tu pack físico de tés.
+            </p>
+            <button onclick="openActivationModal()" class="w-full py-3 bg-brand-purple hover:bg-purple-700 text-white font-bold rounded-2xl text-xs shadow-md transition">
+                🔑 Introducir Código de Activación
+            </button>
+            <button onclick="showSection('daily')" class="w-full py-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-xs">
+                Volver al inicio (Versión prueba)
+            </button>
+        </div>
+    </div>
+
+    <!-- MODAL PARA INTRODUCIR EL CÓDIGO -->
+    <div id="activation-modal" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4">
+        <div class="bg-white dynamic-card border border-purple-100 dark:border-purple-900 p-6 rounded-3xl max-w-sm w-full space-y-4 text-center shadow-xl">
+            <div class="w-14 h-14 bg-amber-100 dark:bg-amber-950 rounded-2xl mx-auto flex items-center justify-center text-2xl">
+                🍵
+            </div>
+            <h3 class="text-lg font-bold text-brand-darkPurple dark:text-purple-200">Activa tu Pack de Tés</h3>
+            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                Escribe el código secreto que encontrarás en la tarjeta dentro de tu caja física.
+            </p>
+            <input type="text" id="activation-code-input" placeholder="Ej: TEA-482-XR-9152" class="w-full bg-purple-50 dark:bg-purple-950/50 border border-purple-200 dark:border-purple-700 rounded-xl px-4 py-2.5 text-center text-sm font-bold text-brand-darkPurple dark:text-purple-200 uppercase tracking-widest outline-none focus:border-brand-purple">
+            <p id="activation-error" class="text-[11px] text-red-500 font-bold hidden">Código incorrecto. Comprueba las letras y números.</p>
+            <button onclick="verifyActivationCode()" class="w-full py-3 bg-amber-400 hover:bg-amber-500 text-slate-900 font-bold rounded-2xl text-xs shadow-md transition">
+                ✨ Desbloquear Aplicación Completa
+            </button>
+            <button onclick="closeActivationModal()" class="w-full py-2 text-slate-400 hover:text-slate-600 text-xs">
+                Cancelar
+            </button>
+        </div>
+    </div>
+
+    <!-- NAVEGACIÓN INFERIOR (MÓVIL) -->
+    <nav class="fixed bottom-0 left-0 right-0 bg-white dynamic-card border-t border-purple-100 dark:border-purple-900 py-2 px-4 md:hidden flex justify-around shadow-lg z-50">
+        <button onclick="showSection('daily')" id="nav-daily" class="flex flex-col items-center text-brand-purple font-bold">
+            <img src="assets/icono-camino.png" alt="Camino" class="w-5 h-5 object-contain">
+            <span id="nav-text-daily" class="text-[10px] font-bold mt-1">365 dies</span>
+        </button>
+        <button onclick="showSection('sos')" id="nav-sos" class="flex flex-col items-center text-slate-400 font-normal">
+            <img src="assets/icono-sos.png" alt="Emergencia" class="w-5 h-5 object-contain">
+            <span class="text-[10px] font-bold mt-1">SOS</span>
+        </button>
+        <button onclick="showSection('blackhole')" id="nav-blackhole" class="flex flex-col items-center text-slate-400 font-normal">
+            <img src="assets/icono-agujero.png" alt="Agujero" class="w-5 h-5 object-contain">
+            <span id="nav-text-bh" class="text-[10px] font-bold mt-1">forat</span>
+        </button>
+        <button onclick="showSection('piropero')" id="nav-piropero" class="flex flex-col items-center text-slate-400 font-normal">
+            <img src="assets/icono-piropero.png" alt="Piropero" class="w-5 h-5 object-contain">
+            <span id="nav-text-piropo" class="text-[10px] font-bold mt-1">Piropero</span>
+        </button>
+        <button onclick="showSection('mirror')" id="nav-mirror" class="flex flex-col items-center text-slate-400 font-normal">
+            <img src="assets/icono-emocionometro.png" alt="Emocionómetro" class="w-5 h-5 object-contain">
+            <span id="nav-text-emo" class="text-[10px] font-bold mt-1">Emocionòmetre</span>
+        </button>
+    </nav>
+
+    <!-- FOOTER LEGAL -->
+    <footer class="max-w-md mx-auto w-full text-center py-4 text-[10px] text-slate-400 space-y-1">
+        <p>© 2026 Núria / El Recreo Mental. Todos los derechos reservados.</p>
+        <p id="logout-wrap" class="hidden">
+            <button id="logout-btn" onclick="logoutUser()" class="underline hover:text-purple-600">Cerrar sesión</button>
+        </p>
+        <p>
+            <button onclick="toggleLegalModal()" class="underline hover:text-purple-600">Aviso Legal, Propiedad Intelectual & Privacidad</button>
+        </p>
+    </footer>
+
+    <!-- MODAL LEGAL -->
+    <div id="legal-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4">
+        <div class="bg-white dynamic-card border border-purple-100 dark:border-purple-900 p-6 rounded-3xl max-w-sm w-full space-y-4 max-h-[80vh] overflow-y-auto text-xs text-slate-600 dark:text-slate-300 leading-relaxed shadow-xl">
+            <h3 class="text-base font-bold text-brand-darkPurple dark:text-purple-200">Aviso Legal & Propiedad Intelectual</h3>
+            <p><strong>Propiedad Intelectual:</strong> Todos los contenidos de esta aplicación web, incluyendo las 365 lecciones diarias, ejercicios, interfaz y diseño, son obra original protegida por los derechos de autor de Núria / El Recreo Mental © 2026.</p>
+            <p><strong>Privacidad Local:</strong> Toda la información introducida se almacena exclusivamente de forma local en tu propio dispositivo (LocalStorage). Ningún dato personal es enviado a servidores externos.</p>
+            <button onclick="toggleLegalModal()" class="w-full py-2.5 bg-brand-purple text-white font-bold rounded-xl mt-2 text-xs">Cerrar</button>
+        </div>
+    </div>
+
+    <script src="days-data.js?v=4"></script>
+    <script src="days-ca-data.js?v=4"></script>
+    <!-- SCRIPT DE PROGRAMACIÓN ROBUSTO CON LOS 365 DÍAS INCURSTADOS -->
+    <script>
+        let currentLanguage = 'ca'; // Arranca en catalán por defecto
+        let lessonsData = [];
+
+        // ================= DATOS DE LOS 365 DÍAS (cada idioma lee su propio archivo) =================
+        // ES -> days-data.js | CA -> days-ca-data.js
+        // Campos de cada día: day, title, teaName, benefit, lesson, exercise
+        const DATA_FILES = { es: 'days-data.js', ca: 'days-ca-data.js' };
+        const dayDataCache = {};
+
+        function parseDaysText(text) {
+            // 1) Formato correcto: JS (const X = [ ... ];) o JSON ([ ... ])
+            try {
+                const a = text.indexOf('['), b = text.lastIndexOf(']');
+                if (a !== -1 && b > a) {
+                    const arr = JSON.parse(text.slice(a, b + 1));
+                    if (Array.isArray(arr) && arr.length) return arr;
+                }
+            } catch (e) { /* se prueba el formato roto */ }
+
+            // 2) Formato roto (CSV con comillas dobladas): se recupera registro a registro
+            const items = [];
+            let cur = null;
+            text.split(/\r?\n/).forEach(function (line) {
+                const l = line.trim().replace(/""/g, '"');
+                if (/^"?\s*\{\s*$/.test(l)) { cur = {}; return; }
+                if (/^\}[",\s]*$/.test(l)) { if (cur) items.push(cur); cur = null; return; }
+                if (!cur) return;
+                const m = l.match(/^"(\w+)":\s*(.*?),?$/);
+                if (!m) return;
+                if (m[1] === 'day') cur.day = parseInt(m[2], 10);
+                else cur[m[1]] = m[2].replace(/^"/, '').replace(/"$/, '');
+            });
+            return items;
+        }
+
+        function isValidDays(list) {
+            return Array.isArray(list) && list.length >= 365 && list.every(function (d) { return d && d.day && d.title; });
+        }
+
+        async function ensureDays(lang) {
+            if (dayDataCache[lang]) return dayDataCache[lang];
+            let list = [];
+
+            // a) Variable global cargada por <script src="..."> (funciona también abriendo el archivo en local)
+            try {
+                if (lang === 'es' && typeof DAYS_ES !== 'undefined') list = DAYS_ES;
+                if (lang === 'ca' && typeof DAYS_CA !== 'undefined') list = DAYS_CA;
+            } catch (e) { list = []; }
+
+            // b) Si no es válida, se lee el archivo del idioma como texto y se interpreta
+            if (!isValidDays(list)) {
+                try {
+                    const res = await fetch(DATA_FILES[lang] + '?v=' + Date.now(), { cache: 'no-store' });
+                    if (res.ok) list = parseDaysText(await res.text());
+                } catch (e) { list = []; }
+            }
+
+            if (isValidDays(list)) {
+                list = list.slice().sort(function (x, y) { return x.day - y.day; });
+                dayDataCache[lang] = list;
+                return list;
+            }
+            return [];
+        }
+
+        async function loadAppData() {
+            const lang = currentLanguage;
+            updateInterfaceTexts();
+            renderMoodButtons();
+            renderMoodHistory();
+            renderPiropos();
+            const list = await ensureDays(lang);
+            if (lang !== currentLanguage) return; // se cambió de idioma mientras cargaba
+            lessonsData = list;
+
+            const dataBanner = document.getElementById('data-error-banner');
+            if (dataBanner) {
+                const ok = list.length >= 365;
+                dataBanner.classList.toggle('hidden', ok);
+                if (!ok) dataBanner.innerText = '⚠️ No se han podido leer los 365 días de ' + DATA_FILES[lang] + '. Comprueba que está en la misma carpeta que index.html.';
+            }
+            checkActivationStatus();
+            updateDayUI();
+        }
+
+        function updateInterfaceTexts() {
+            const btnEs = document.getElementById('lang-es-btn');
+            const btnCa = document.getElementById('lang-ca-btn');
+            
+            if (currentLanguage === 'es') {
+                if (btnEs) btnEs.className = 'px-2 py-1 bg-brand-purple text-white rounded-lg text-[10px] font-bold shadow-sm';
+                if (btnCa) btnCa.className = 'px-2 py-1 bg-purple-50 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300 rounded-lg text-[10px] font-bold';
+            } else {
+                if (btnCa) btnCa.className = 'px-2 py-1 bg-brand-purple text-white rounded-lg text-[10px] font-bold shadow-sm';
+                if (btnEs) btnEs.className = 'px-2 py-1 bg-purple-50 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300 rounded-lg text-[10px] font-bold';
+            }
+
+            if (currentLanguage === 'ca') {
+                document.getElementById('app-title').innerText = "EL -TE DE LES EMOCIONS";
+                document.getElementById('app-subtitle').innerText = "Un glopet de pau per la teva ment cada dia";
+                document.getElementById('tab-daily-text').innerText = "365 dies";
+                document.getElementById('tab-blackhole-text').innerText = "forat";
+                document.getElementById('tab-piropero-text').innerText = "Piropero";
+                document.getElementById('tab-mirror-text').innerText = "Emocionòmetre";
+                
+                document.getElementById('trial-title').innerText = "Versió de Prova Activa";
+                document.getElementById('trial-desc').innerText = "Estàs provant els Dies 1 al 3. Introdueix el teu codi per desbloquejar els 365 dies.";
+                document.getElementById('trial-btn').innerText = "Activar";
+                document.getElementById('btn-activate-text').innerText = "Activar";
+
+                document.getElementById('sos-title').innerText = "Glopet d'Emergència";
+                document.getElementById('sos-desc').innerText = "Torna al present. Tria un so relaxant i segueix el ritme de respiració per calmar la ment.";
+                document.getElementById('sos-lbl-cuencos').innerText = "Tassons cantaires";
+                document.getElementById('sos-lbl-olas').innerText = "Onades";
+                document.getElementById('sos-lbl-agua').innerText = "Moviment de l'aigua";
+                document.getElementById('sos-lbl-campanitas').innerText = "Campanetes de cristall";
+
+                document.getElementById('progress-title-label').innerHTML = `<img src="assets/icono-progreso.png" alt="Progreso" class="w-4 h-4 object-contain inline-block flex-shrink-0"><span>EL TEU PROGRÈS DE TRANSFORMACIÓ</span>`;
+                document.getElementById('btn-prev').innerText = "⬅️ Anterior";
+                document.getElementById('goto-label').innerText = "Anar al dia:";
+                document.getElementById('btn-next').innerText = "Següent ➡️";
+
+                document.getElementById('benefit-question-label').innerText = "Quina emoció desperta i els seus beneficis?";
+                document.getElementById('idea-label').innerHTML = `LA IDEA D'AVUI <span id="glasses-title-label"></span>`;
+                document.getElementById('sorbito-label').innerText = "Glopet d'1 minut:";
+
+                document.getElementById('bh-title').innerText = "El Forat Negre";
+                document.getElementById('bh-desc').innerText = "Escriu el que sents o et preocupa avui i transforma'l en llum.";
+                document.getElementById('bh-btn-text').innerText = "Desintegrar en Gran Explosió Estelar";
+                document.getElementById('bh-reset-btn').innerText = "✨ Alliberar un altre pensament";
+
+                document.getElementById('piropo-heading').innerText = "El Piropero";
+                document.getElementById('piropo-sub').innerText = "El teu diari secret d'autoestima i amor propi.";
+                document.getElementById('piropo-save-btn').innerText = "Desar";
+                document.getElementById('piropo-aff-label').innerHTML = "<span>✨</span> <span>AFIRMACIÓ D'AVUI:</span>";
+
+                document.getElementById('emo-heading').innerText = "Emocionòmetre";
+                document.getElementById('emo-sub').innerText = "El teu registre i progrés de pau emocional.";
+                document.getElementById('emo-question').innerText = "Com et sents en aquest instant?";
+                document.getElementById('emo-summary-title').innerText = "Resum del teu estat habitual";
+                document.getElementById('emo-history-title').innerText = "Historial d'emocions";
+
+                document.getElementById('nav-text-daily').innerText = "365 dies";
+                document.getElementById('nav-text-bh').innerText = "forat";
+                document.getElementById('nav-text-piropo').innerText = "Piropero";
+                document.getElementById('nav-text-emo').innerText = "Emocionòmetre";
+            } else {
+                document.getElementById('app-title').innerText = "EL -TE DE LAS EMOCIONES";
+                document.getElementById('app-subtitle').innerText = "Un sorbo de paz para tu mente cada día";
+                document.getElementById('tab-daily-text').innerText = "365 Días";
+                document.getElementById('tab-blackhole-text').innerText = "Agujero";
+                document.getElementById('tab-piropero-text').innerText = "Piropero";
+                document.getElementById('tab-mirror-text').innerText = "Emocionómetro";
+                
+                document.getElementById('trial-title').innerText = "Versión de Prueba Activa";
+                document.getElementById('trial-desc').innerText = "Estás probando los Días 1 al 3. Introduce tu código para desbloquear los 365 días.";
+                document.getElementById('trial-btn').innerText = "Activar";
+                document.getElementById('btn-activate-text').innerText = "Activar";
+
+                document.getElementById('sos-title').innerText = "Sorbito de Emergencia";
+                document.getElementById('sos-desc').innerText = "Regresa al presente. Escoge un sonido relajante y sigue el ritmo de respiración para calmar la mente.";
+                document.getElementById('sos-lbl-cuencos').innerText = "Cuencos tibetanos";
+                document.getElementById('sos-lbl-olas').innerText = "Olas del mar";
+                document.getElementById('sos-lbl-agua').innerText = "Movimiento del agua";
+                document.getElementById('sos-lbl-campanitas').innerText = "Campanitas de cristal";
+
+                document.getElementById('progress-title-label').innerHTML = `<img src="assets/icono-progreso.png" alt="Progreso" class="w-4 h-4 object-contain inline-block flex-shrink-0"><span>TU PROGRESO DE TRANSFORMACIÓN</span>`;
+                document.getElementById('btn-prev').innerText = "⬅️ Anterior";
+                document.getElementById('goto-label').innerText = "Ir al día:";
+                document.getElementById('btn-next').innerText = "Siguiente ➡️";
+
+                document.getElementById('benefit-question-label').innerText = "¿Qué emoción despierta y sus beneficios?";
+                document.getElementById('idea-label').innerHTML = `LA IDEA DE HOY <span id="glasses-title-label"></span>`;
+                document.getElementById('sorbito-label').innerText = "Sorbito de 1 minuto:";
+
+                document.getElementById('bh-title').innerText = "El Agujero Negro";
+                document.getElementById('bh-desc').innerText = "Escribe lo que sientes o te preocupa hoy y transfórmalo en luz.";
+                document.getElementById('bh-btn-text').innerText = "Desintegrar en Gran Explosión Estelar";
+                document.getElementById('bh-reset-btn').innerText = "✨ Liberar otro pensamiento";
+
+                document.getElementById('piropo-heading').innerText = "El Piropero";
+                document.getElementById('piropo-sub').innerText = "Tu diario secreto de autoestima y amor propio.";
+                document.getElementById('piropo-save-btn').innerText = "Guardar";
+                document.getElementById('piropo-aff-label').innerHTML = "<span>✨</span> <span>AFIRMACIÓN DE HOY:</span>";
+
+                document.getElementById('emo-heading').innerText = "Emocionómetro";
+                document.getElementById('emo-sub').innerText = "Tu registro y progreso de paz emocional.";
+                document.getElementById('emo-question').innerText = "¿Cómo te sientes en este instante?";
+                document.getElementById('emo-summary-title').innerText = "Resumen de su estado habitual";
+                document.getElementById('emo-history-title').innerText = "Historial de emociones";
+
+                document.getElementById('nav-text-daily').innerText = "Camino";
+                document.getElementById('nav-text-bh').innerText = "Agujero";
+                document.getElementById('nav-text-piropo').innerText = "Piropero";
+                document.getElementById('nav-text-emo').innerText = "Emocionómetro";
+            }
+        }
+
+        function switchLanguage(lang) {
+            currentLanguage = lang;
+            try { localStorage.setItem('te_lang', lang); } catch (e) { /* nada */ }
+            loadAppData();
+        }
+
+        // ================= ALMACENAMIENTO POR USUARIO =================
+        // Cada código de activación tiene su propio espacio (progreso, piropos y emociones).
+        // Sin código (versión de prueba) se usa el espacio "trial". Otro código = aplicación limpia.
+        const BUILTIN_CODES = ["TEA-MINI-1971", "REGALO-JUDIT-2026", "TEA-PRUEBA-2026", "NURIA2026", "ELRECREOMENTAL"];
+        let validCodesList = [];
+        let codesLoaded = false;
+
+        function normCode(c) { return String(c || '').trim().toUpperCase().replace(/\s+/g, ''); }
+
+        async function loadCodes() {
+            if (codesLoaded) return validCodesList;
+            let list = [];
+            try {
+                const res = await fetch('codes.json?v=' + Date.now(), { cache: 'no-store' });
+                if (res.ok) {
+                    const text = await res.text();
+                    try { list = JSON.parse(text).codes || []; }
+                    catch (e) { list = (text.match(/"([A-Za-z0-9][A-Za-z0-9\-]{5,})"/g) || []).map(function (s) { return s.slice(1, -1); }).filter(function (s) { return s.toLowerCase() !== 'codes'; }); }
+                }
+            } catch (e) { list = []; }
+            validCodesList = list.concat(BUILTIN_CODES).map(normCode);
+            codesLoaded = true;
+            return validCodesList;
+        }
+
+        function lsGet(key, def) { try { const v = localStorage.getItem(key); return v === null ? def : JSON.parse(v); } catch (e) { return def; } }
+        function lsSet(key, val) { try { localStorage.setItem(key, JSON.stringify(val)); } catch (e) { /* almacenamiento bloqueado */ } }
+        function currentUid() { try { return normCode(localStorage.getItem('te_active_code')) || 'trial'; } catch (e) { return 'trial'; } }
+        function ukey(name) { return 'te:' + currentUid() + ':' + name; }
+
+        function isAppActivated() {
+            try { return !!normCode(localStorage.getItem('te_active_code')); } catch (e) { return false; }
+        }
+
+        // Datos de versiones anteriores de la app (una sola vez)
+        function migrateLegacy() {
+            try {
+                if (localStorage.getItem('te_legacy_done')) return;
+                if (localStorage.getItem('te_pack_activated') === 'true' && !localStorage.getItem('te_active_code')) {
+                    localStorage.setItem('te_active_code', 'USUARIO-ANTERIOR');
+                }
+                const p = localStorage.getItem('piropos_v2');
+                const m = localStorage.getItem('emocionometro_history');
+                if (p && localStorage.getItem(ukey('piropos')) === null) localStorage.setItem(ukey('piropos'), p);
+                if (m && localStorage.getItem(ukey('moods')) === null) localStorage.setItem(ukey('moods'), m);
+                ['te_pack_activated', 'piropos_v2', 'emocionometro_history'].forEach(function (k) { localStorage.removeItem(k); });
+                localStorage.setItem('te_legacy_done', '1');
+            } catch (e) { /* nada */ }
+        }
+
+        async function verifyActivationCode() {
+            const input = document.getElementById('activation-code-input');
+            const errorMsg = document.getElementById('activation-error');
+            const code = normCode(input.value);
+            if (!code) return;
+
+            const codes = await loadCodes();
+            if (codes.includes(code)) {
+                try { localStorage.setItem('te_active_code', code); } catch (e) { /* nada */ }
+                closeActivationModal();
+                initUserSpace();
+                alert(currentLanguage === 'ca' ? "Pack activat amb èxit! Gaudeix de tot el contingut." : "¡Pack activado con éxito! Disfruta de todo el contenido.");
+            } else {
+                errorMsg.classList.remove('hidden');
+            }
+        }
+
+        function logoutUser() {
+            const msg = currentLanguage === 'ca'
+                ? "Vols tancar la sessió? El teu progrés queda desat amb el teu codi."
+                : "¿Quieres cerrar la sesión? Tu progreso queda guardado con tu código.";
+            if (!confirm(msg)) return;
+            try { localStorage.removeItem('te_active_code'); } catch (e) { /* nada */ }
+            initUserSpace();
+            showSection('daily');
+        }
+
+        // ---- Progreso: ejercicios completados ----
+        function getCompleted() { return lsGet(ukey('completed'), []); }
+
+        function nextDayToDo() {
+            const done = getCompleted();
+            const max = done.length ? Math.max.apply(null, done) : 0;
+            let next = Math.min(365, max + 1);
+            if (!isAppActivated() && next > 3) next = 3;
+            return next;
+        }
+
+        function restoreProgress() { currentDayIndex = nextDayToDo() - 1; }
+
+        function completeToday() {
+            const day = currentDayIndex + 1;
+            const done = getCompleted();
+            if (!done.includes(day)) { done.push(day); lsSet(ukey('completed'), done); }
+            updateCompleteButton();
+        }
+
+        function updateCompleteButton() {
+            const btn = document.getElementById('btn-complete-day');
+            if (!btn) return;
+            const done = getCompleted().includes(currentDayIndex + 1);
+            const ca = currentLanguage === 'ca';
+            btn.disabled = done;
+            btn.innerText = done
+                ? (ca ? "✓ Exercici completat" : "✓ Ejercicio completado")
+                : (ca ? "✅ He completat l'exercici d'avui" : "✅ He completado el ejercicio de hoy");
+            btn.className = 'mt-3 w-full py-2.5 font-bold rounded-xl text-xs shadow-sm transition ' +
+                (done ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/50 dark:text-emerald-200 cursor-default'
+                      : 'bg-brand-purple hover:bg-purple-700 text-white');
+        }
+
+        // Pinta de nuevo todo lo que depende del usuario activo
+        function initUserSpace() {
+            restoreProgress();
+            renderMoodButtons();
+            renderPiropos();
+            renderMoodHistory();
+            resetBlackHole();
+            const affCard = document.getElementById('piropo-affirmation-card');
+            if (affCard) affCard.classList.add('hidden');
+            checkActivationStatus();
+            updateDayUI();
+        }
+
+        // ================= FRASES (benefit) DE LOS ARCHIVOS .js PARA PIROPERO Y AGUJERO NEGRO =================
+        // Días cuyo tema encaja con cada pestaña (mismos números de día en castellano y catalán)
+        const PIROPO_DAYS = [13, 14, 19, 29, 31, 35, 36, 37, 38, 40, 42, 45, 50, 54, 55, 59, 60, 61, 62, 63, 64, 65, 66, 68, 69, 70, 71, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 94, 95, 96, 98, 109, 110, 115, 125, 126, 131, 141, 143, 147, 148, 149, 150, 152, 154, 157, 162, 166, 167, 171, 172, 173, 174, 175, 176, 177, 178, 180, 182, 183, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 206, 207, 208, 210, 222, 227, 237, 238, 243, 253, 255, 259, 260, 261, 262, 264, 266, 269, 274, 278, 279, 283, 284, 285, 286, 287, 288, 289, 290, 292, 293, 294, 303, 304, 305, 306, 307, 308, 309, 310, 311, 312, 313, 317, 318, 319, 321, 332, 333, 338, 348, 349, 354, 365];
+        const BH_DAYS = [1, 2, 3, 4, 5, 6, 10, 11, 12, 15, 16, 17, 21, 22, 23, 24, 28, 34, 46, 47, 48, 51, 75, 76, 77, 78, 101, 102, 103, 104, 105, 107, 108, 117, 118, 120, 121, 122, 123, 124, 127, 128, 129, 134, 135, 136, 140, 146, 158, 159, 160, 163, 187, 188, 189, 190, 213, 214, 215, 216, 217, 219, 220, 221, 229, 230, 232, 233, 234, 235, 236, 239, 240, 241, 246, 247, 248, 252, 258, 270, 271, 272, 275, 298, 299, 300, 301, 324, 325, 326, 327, 328, 330, 331, 340, 341, 343, 344, 345, 346, 347, 350, 351, 352, 357, 358, 359, 361, 362, 364];
+        // Para el Piropero solo se usan frases positivas (amor, luz, paz, fuerza, belleza...) y sin palabras negativas
+        const POS_RE = /amor|luz|llum|paz|\bpau\b|bell|hermos|bonit|bonic|fuerz|forc|valios|valuos|alegr|carin|cuidad|cura\b|bondad|bondat|regalo|regal|felic|calma|serenid|tranquil|segur|brill|poder|bendic|gratitud|confian|conf|inocen|sagrad|sant|infinit|etern/;
+        const NEG_RE = /feas|feos|fea\b|laig|mal\b|malament|tris|enfer|malalt|enoj|enutj|enfad|enuig|miedo|\bpor\b|ataq|atac|rencor|crueld|cruel|culp|odio|sufr|dolor|disgust|falso|fals|irreal|muert|mort|guerra|peligro|perill|asust|espant|preocup|ilusi|pasado|passat|recuerdos|records|equivoc|error|juzg|jutj|defend|defens/;
+        const STOPWORDS = new Set(['para','pero','como','esto','esta','este','esos','esas','estoy','muy','porque','cuando','donde','tengo','tiene','algo','todo','toda','todos','todas','sobre','entre','desde','hasta','siempre','nunca','tambien','cada','unos','unas','aquest','aquesta','molt','perque','quan','amb','dels','pels','tinc','estic','tot','tota']);
+
+        function normText(s) { return String(s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
+        function wordStems(s) {
+            const out = new Set();
+            normText(s).split(/[^a-z0-9]+/).forEach(function (w) { if (w.length >= 4 && !STOPWORDS.has(w)) out.add(w.slice(0, 5)); });
+            return out;
+        }
+        function hashText(s) { let x = 5381; for (let i = 0; i < s.length; i++) x = ((x << 5) + x + s.charCodeAt(i)) | 0; return Math.abs(x); }
+        function escapeHtml(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+
+        // Elige el benefit más coherente con lo que escribió la persona: primero por palabras en común
+        // con la frase (benefit, té y lección del día) y, a igualdad, por el tema de la pestaña.
+        // Si no hay palabras en común, elige una frase del tema de forma estable según el texto.
+        function pickBenefit(text, mode) {
+            let pool = (lessonsData || []).filter(function (d) { return d && d.benefit; });
+            if (!pool.length) return null;
+            if (mode !== 'bh') {
+                const good = pool.filter(function (d) { const t = normText(d.benefit); return POS_RE.test(t) && !NEG_RE.test(t); });
+                if (good.length >= 10) pool = good;
+            }
+            const themeDays = mode === 'bh' ? BH_DAYS : PIROPO_DAYS;
+            const mine = wordStems(text);
+            let best = [], bestScore = -1;
+            pool.forEach(function (d) {
+                let overlap = 0;
+                wordStems(d.benefit + ' ' + d.teaName + ' ' + d.lesson).forEach(function (w) { if (mine.has(w)) overlap++; });
+                const score = overlap * 2 + (themeDays.includes(Number(d.day)) ? 1 : 0);
+                if (score > bestScore) { bestScore = score; best = [d]; }
+                else if (score === bestScore) best.push(d);
+            });
+            return best[hashText(normText(text)) % best.length];
+        }
+
+        function getDayData(dayNum) {
+            let found = null;
+            if (lessonsData && lessonsData.length > 0) {
+                found = lessonsData.find(d => Number(d.day) === Number(dayNum));
+                if (!found && lessonsData[dayNum - 1]) {
+                    found = lessonsData[dayNum - 1];
+                }
+            }
+
+            if (found) {
+                return {
+                    day: found.day || dayNum,
+                    title: found.title || (currentLanguage === 'ca' ? "Dia " + dayNum : "Día " + dayNum),
+                    teaName: found.teaName || (currentLanguage === 'ca' ? "Infusió de pau" : "Infusión de paz"),
+                    benefit: found.benefit || "",
+                    glassesTitle: found.glassesTitle || (currentLanguage === 'ca' ? "ULLERES DE PAU" : "GAFAS DE PAZ"),
+                    lesson: found.lesson || "",
+                    exercise: found.exercise || ""
+                };
+            }
+
+            return {
+                day: dayNum,
+                title: (currentLanguage === 'ca' ? "Dia " : "Día ") + dayNum,
+                teaName: "",
+                benefit: "",
+                glassesTitle: "",
+                lesson: "",
+                exercise: ""
+            };
+        }
+
+        let currentDayIndex = 0;
+        let currentActiveKey = null;
+
+        function showSection(id) {
+            if (!isAppActivated() && ['blackhole', 'piropero', 'mirror'].includes(id)) {
+                document.getElementById('lock-message').innerText = currentLanguage === 'ca' 
+                    ? "Has gaudit de la versió de prova (Dies 1 al 3 i SOS). Per desbloquejar el Forat Negre, El Piropero i l'Emocionòmetre, introdueix el teu codi d'activació."
+                    : "Has disfrutado de la versión de prueba (Días 1 a 3 y SOS). Para desbloquear el Agujero Negro, El Piropero y el Emocionómetro, introduce tu código de activación.";
+                document.getElementById('lock-modal').classList.remove('hidden');
+                return;
+            }
+
+            const sections = document.querySelectorAll('main > section');
+            sections.forEach(s => s.classList.add('hidden'));
+
+            const targetSection = document.getElementById('sec-' + id);
+            if (targetSection) {
+                targetSection.classList.remove('hidden');
+            }
+
+            const mobileNavs = ['daily', 'sos', 'blackhole', 'piropero', 'mirror'];
+            mobileNavs.forEach(navKey => {
+                const navBtn = document.getElementById('nav-' + navKey);
+                if (navBtn) {
+                    navBtn.className = (navKey === id) 
+                        ? 'flex flex-col items-center text-brand-purple dark:text-purple-300 font-bold'
+                        : 'flex flex-col items-center text-slate-400 font-normal';
+                }
+                const topBtn = document.getElementById('top-btn-' + navKey);
+                if (topBtn) {
+                    topBtn.className = (navKey === id)
+                        ? 'tab-btn flex-1 py-2 px-1 rounded-xl bg-brand-purple text-white transition flex items-center justify-center space-x-1'
+                        : 'tab-btn flex-1 py-2 px-1 rounded-xl text-purple-600 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/40 transition flex items-center justify-center space-x-1';
+                }
+            });
+        }
+
+        function updateDayUI() {
+            const data = getDayData(currentDayIndex + 1);
+            const percent = Math.round(((currentDayIndex + 1) / 365) * 100);
+
+            const dayHeader = document.getElementById('day-header');
+            const progressPercent = document.getElementById('progress-percent');
+            const progressBar = document.getElementById('progress-bar');
+            const teaSlogan = document.getElementById('tea-slogan');
+            const teaTitle = document.getElementById('tea-title');
+            const teaType = document.getElementById('tea-type');
+            const teaBenefit = document.getElementById('tea-benefit');
+            const dayLesson = document.getElementById('day-lesson');
+            const dayExercise = document.getElementById('day-exercise');
+            const daySelect = document.getElementById('day-select');
+            const glassesLabel = document.getElementById('glasses-title-label');
+
+            if (dayHeader) dayHeader.innerText = (currentLanguage === 'ca' ? "Dia " : "Día ") + data.day + ": " + (data.title || "");
+            if (progressPercent) progressPercent.innerText = percent + "%";
+            if (progressBar) progressBar.style.width = percent + "%";
+
+            if (teaSlogan) teaSlogan.innerText = (currentLanguage === 'ca' ? "TÈ SUGERIT DEL DIA " : "TE SUGERIDO DEL DÍA ") + data.day;
+            if (teaTitle) teaTitle.innerText = data.title || "";
+            if (teaType) teaType.innerText = data.teaName || "";
+            if (teaBenefit) teaBenefit.innerText = data.benefit || "";
+            if (dayLesson) dayLesson.innerText = '"' + (data.lesson || "") + '"';
+            if (dayExercise) dayExercise.innerText = data.exercise || "";
+            if (glassesLabel) glassesLabel.innerText = data.glassesTitle ? '(' + data.glassesTitle + ')' : '';
+
+            if (daySelect) {
+                daySelect.value = data.day;
+                daySelect.max = 365;
+            }
+            updateCompleteButton();
+        }
+
+        function changeDay(delta) {
+            const newIndex = currentDayIndex + delta;
+            
+            if (!isAppActivated() && newIndex > 2) {
+                document.getElementById('lock-message').innerText = currentLanguage === 'ca'
+                    ? "La versió de prova inclou els Dies 1 al 3. Introdueix el codi secret del teu pack físic per accedir als 365 dies."
+                    : "La versión de prueba incluye los Días 1 al 3. Introduce el código secreto de tu pack físico para acceder a los 365 días.";
+                document.getElementById('lock-modal').classList.remove('hidden');
+                return;
+            }
+
+            currentDayIndex = Math.max(0, Math.min(364, newIndex));
+            updateDayUI();
+        }
+
+        function jumpToDay(val) {
+            const dayNum = parseInt(val) || 1;
+            const targetIndex = dayNum - 1;
+
+            if (!isAppActivated() && targetIndex > 2) {
+                document.getElementById('lock-message').innerText = currentLanguage === 'ca'
+                    ? "La versió de prova inclou els Dies 1 al 3. Introdueix el codi secret del teu pack físic per accedir als 365 dies."
+                    : "La versión de prueba incluye los Días 1 al 3. Introduce el código secreto de tu pack físico para acceder a los 365 días.";
+                document.getElementById('lock-modal').classList.add('hidden'); // Corregido
+                document.getElementById('lock-modal').classList.remove('hidden');
+                document.getElementById('day-select').value = currentDayIndex + 1;
+                return;
+            }
+
+            currentDayIndex = Math.max(0, Math.min(364, targetIndex));
+            updateDayUI();
+        }
+
+        function openActivationModal() {
+            document.getElementById('lock-modal').classList.add('hidden');
+            document.getElementById('activation-modal').classList.remove('hidden');
+        }
+
+        function closeActivationModal() {
+            document.getElementById('activation-modal').classList.add('hidden');
+            document.getElementById('activation-error').classList.add('hidden');
+            document.getElementById('activation-code-input').value = '';
+        }
+
+        function checkActivationStatus() {
+            const trialBanner = document.getElementById('trial-banner');
+            const activateBtn = document.getElementById('activate-top-btn');
+            const logoutWrap = document.getElementById('logout-wrap');
+            const logoutBtn = document.getElementById('logout-btn');
+            if (logoutWrap) logoutWrap.classList.toggle('hidden', !isAppActivated());
+            if (logoutBtn) logoutBtn.innerText = currentLanguage === 'ca' ? 'Tancar sessió' : 'Cerrar sesión';
+            
+            if (isAppActivated()) {
+                if (trialBanner) trialBanner.classList.add('hidden');
+                if (activateBtn) activateBtn.classList.add('hidden');
+            } else {
+                if (trialBanner) trialBanner.classList.remove('hidden');
+                if (activateBtn) activateBtn.classList.remove('hidden');
+            }
+        }
+
+        let breathTimeCounter = 0;
+        function startBreathingTimer() {
+            const actionElem = document.getElementById('breath-action');
+            const timerElem = document.getElementById('breath-timer');
+
+            setInterval(() => {
+                breathTimeCounter = (breathTimeCounter + 1) % 16;
+                const cycleSecond = (breathTimeCounter % 4) + 1;
+                const remainingSecs = 5 - cycleSecond;
+
+                const ca = currentLanguage === 'ca';
+                const words = ca ? ["Inspira", "Reté", "Expira", "Reté"] : ["Inhala", "Sostén", "Exhala", "Sostén"];
+                if (actionElem) actionElem.innerText = words[Math.floor(breathTimeCounter / 4)];
+
+                if (timerElem) timerElem.innerText = remainingSecs;
+            }, 1000);
+        }
+
+        function toggleAudio(key, filename) {
+            const player = document.getElementById('audio-player');
+            const buttons = document.querySelectorAll('#sec-sos button');
+
+            buttons.forEach(b => b.classList.remove('border-purple-400', 'bg-purple-100', 'dark:bg-purple-900'));
+
+            if (currentActiveKey === key) {
+                player.pause();
+                currentActiveKey = null;
+                return;
+            }
+
+            player.src = filename;
+            player.play().then(() => {
+                currentActiveKey = key;
+                document.getElementById('btn-' + key).classList.add('border-purple-400', 'bg-purple-100');
+            }).catch(err => {
+                console.error("Error al reproducir el audio:", err);
+            });
+        }
+
+        let explosionCanvas, ctx;
+        let particles = [];
+        let flashOpacity = 0;
+
+        function initCanvas() {
+            explosionCanvas = document.getElementById('explosion-canvas');
+            if (explosionCanvas) {
+                ctx = explosionCanvas.getContext('2d');
+                resizeCanvas();
+                window.addEventListener('resize', resizeCanvas);
+            }
+        }
+
+        function resizeCanvas() {
+            if (explosionCanvas) {
+                explosionCanvas.width = window.innerWidth;
+                explosionCanvas.height = window.innerHeight;
+            }
+        }
+
+        function triggerBrightExplosion() {
+            if (!explosionCanvas || !ctx) return;
+            const cx = window.innerWidth / 2;
+            const cy = window.innerHeight / 2;
+            particles = [];
+            flashOpacity = 1.0;
+            const colors = ['#FFFFFF', '#FFF9C4', '#FEF08A', '#FDE047', '#F59E0B', '#E9D8FD', '#C084FC'];
+
+            for (let i = 0; i < 280; i++) {
+                const angle = Math.random() * Math.PI * 2;
+                const speed = Math.random() * 18 + 4;
+                particles.push({
+                    x: cx, y: cy,
+                    vx: Math.cos(angle) * speed,
+                    vy: Math.sin(angle) * speed,
+                    radius: Math.random() * 7 + 2,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    alpha: 1,
+                    decay: Math.random() * 0.02 + 0.015,
+                    glow: Math.random() * 25 + 15
+                });
+            }
+            requestAnimationFrame(animateExplosion);
+        }
+
+        function animateExplosion() {
+            ctx.clearRect(0, 0, explosionCanvas.width, explosionCanvas.height);
+            if (flashOpacity > 0) {
+                ctx.fillStyle = `rgba(255, 255, 255, ${flashOpacity * 0.75})`;
+                ctx.fillRect(0, 0, explosionCanvas.width, explosionCanvas.height);
+                flashOpacity -= 0.06;
+            }
+            ctx.globalCompositeOperation = 'lighter';
+            particles.forEach((p, idx) => {
+                p.x += p.vx; p.y += p.vy;
+                p.alpha -= p.decay;
+                if (p.alpha > 0) {
+                    ctx.save();
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = p.color;
+                    ctx.shadowColor = p.color;
+                    ctx.shadowBlur = p.glow;
+                    ctx.globalAlpha = p.alpha;
+                    ctx.fill();
+                    ctx.restore();
+                } else {
+                    particles.splice(idx, 1);
+                }
+            });
+            if (particles.length > 0 || flashOpacity > 0) {
+                requestAnimationFrame(animateExplosion);
+            } else {
+                ctx.clearRect(0, 0, explosionCanvas.width, explosionCanvas.height);
+            }
+        }
+
+        function disintegrateThought() {
+            const txt = document.getElementById('thought-input');
+            if (!txt || !txt.value.trim()) return;
+            const inputWrapper = document.getElementById('input-box-wrapper');
+            if (inputWrapper) inputWrapper.classList.add('shake-box');
+            triggerBrightExplosion();
+            const pick = pickBenefit(txt.value, 'bh');
+
+            setTimeout(() => {
+                if (inputWrapper) {
+                    inputWrapper.classList.remove('shake-box');
+                    inputWrapper.classList.add('disintegrate-card');
+                }
+            }, 300);
+
+            setTimeout(() => {
+                if (inputWrapper) {
+                    inputWrapper.classList.add('hidden');
+                    inputWrapper.classList.remove('disintegrate-card');
+                }
+                const reflCard = document.getElementById('reflection-card');
+                const titleElem = document.getElementById('congratulations-title');
+                const explElem = document.getElementById('mental-explanation');
+
+                if (titleElem) titleElem.innerText = currentLanguage === 'ca' ? "Felicitats! Ja has alliberat aquest pensament." : "¡Felicidades! Ya has soltado este pensamiento.";
+                if (explElem) {
+                    const intro = currentLanguage === 'ca'
+                        ? "Al desintegrar aquest pensament, li restes valor real. La teva ment recupera de seguida el seu estat natural de claredat i pau."
+                        : "Al desintegrar el pensamiento, le quitas el valor real. Tu mente recupera de inmediato su estado natural de claridad y paz.";
+                    const intLabel = currentLanguage === 'ca' ? "Frase per integrar:" : "Frase para integrar:";
+                    explElem.innerHTML = `
+                        <p class="font-bold text-amber-900 dark:text-amber-300 text-xs">✨ ${currentLanguage === 'ca' ? "Benefici per a la teva ment:" : "Beneficio para tu mente:"}</p>
+                        <p class="text-slate-700 dark:text-slate-300 leading-relaxed">${intro}</p>
+                        ${pick ? `<p class="font-bold text-amber-900 dark:text-amber-300 text-xs pt-1">🌿 ${intLabel}</p>
+                        <p class="text-slate-800 dark:text-slate-200 italic leading-relaxed">"${escapeHtml(pick.benefit)}"</p>` : ''}
+                    `;
+                }
+                if (reflCard) reflCard.classList.remove('hidden');
+            }, 900);
+        }
+
+        function resetBlackHole() {
+            const inputWrapper = document.getElementById('input-box-wrapper');
+            const reflCard = document.getElementById('reflection-card');
+            const txt = document.getElementById('thought-input');
+            if (txt) txt.value = '';
+            if (reflCard) reflCard.classList.add('hidden');
+            if (inputWrapper) inputWrapper.classList.remove('hidden', 'disintegrate-card', 'shake-box');
+        }
+
+        function addPiropo() {
+            const input = document.getElementById('piropero-input');
+            if (!input) return;
+            const val = input.value.trim();
+            if (!val) return;
+
+            // Frase coherente: un benefit de los archivos .js (days-data.js / days-ca-data.js)
+            const pick = pickBenefit(val, 'piropo');
+            const affirmation = pick ? pick.benefit : (currentLanguage === 'ca'
+                ? "Accepto aquesta qualitat com un regal que enforteix la meva pau."
+                : "Acepto esta cualidad como un regalo que fortalece mi paz.");
+
+            const list = lsGet(ukey('piropos'), []);
+            list.unshift({ text: val, affirmation: affirmation });
+            lsSet(ukey('piropos'), list);
+            input.value = '';
+
+            const affCard = document.getElementById('piropo-affirmation-card');
+            const affText = document.getElementById('piropo-affirmation-text');
+            if (affCard && affText) {
+                affText.innerText = `"${affirmation}"`;
+                affCard.classList.remove('hidden');
+            }
+            renderPiropos();
+        }
+
+        function renderPiropos() {
+            const list = lsGet(ukey('piropos'), []);
+            const container = document.getElementById('piropero-list');
+            if (!container) return;
+            if (list.length === 0) {
+                container.innerHTML = `<p class="text-xs text-slate-400 italic text-center py-2">${currentLanguage === 'ca' ? "Encara no has desat cap piropo. Escriu el primer!" : "Aún no has guardado ningún piropo. ¡Escribe el primero!"}</p>`;
+                return;
+            }
+            container.innerHTML = list.map(function (p) { return `
+                <div class="bg-purple-50/60 dark:bg-purple-950/40 dynamic-card p-3.5 rounded-2xl border border-purple-100 dark:border-purple-900 text-xs text-purple-900 dark:text-purple-200 space-y-1">
+                    <div class="font-bold text-brand-darkPurple dark:text-purple-200 flex items-center space-x-1.5">
+                        <img src="assets/icono-piropero.png" alt="Piropo" class="w-3.5 h-3.5 object-contain flex-shrink-0">
+                        <span>${escapeHtml(p.text)}</span>
+                    </div>
+                    <p class="text-slate-600 dark:text-slate-300 italic text-[11px] leading-relaxed pl-5">
+                        ✨ "${escapeHtml(p.affirmation)}"
+                    </p>
+                </div>`; }).join('');
+        }
+
+        // Emociones: la clave interna no cambia (se guarda así); la etiqueta depende del idioma
+        const MOODS = [
+            { key: 'Feliz',   icon: 'assets/mood-feliz.png',  es: 'Feliz',   ca: 'Feliç' },
+            { key: 'En Paz',  icon: 'assets/mood-paz.png',    es: 'En Paz',  ca: 'En Pau' },
+            { key: 'Neutro',  icon: 'assets/mood-neutro.png', es: 'Neutro',  ca: 'Neutre' },
+            { key: 'Triste',  icon: 'assets/mood-triste.png', es: 'Triste',  ca: 'Trista' },
+            { key: 'Intenso', icon: 'assets/mood-fuego.png',  es: 'Intensa', ca: 'Intensa' }
+        ];
+        function moodLabel(m) { return currentLanguage === 'ca' ? m.ca : m.es; }
+        function moodByKey(key) { return MOODS.find(function (m) { return m.key === key; }); }
+
+        function renderMoodButtons() {
+            const box = document.getElementById('mood-buttons');
+            if (!box) return;
+            box.innerHTML = MOODS.map(function (m) {
+                return `<button onclick="saveMood('${m.key}')" class="hover:scale-125 transition w-10 h-10 overflow-hidden" title="${moodLabel(m)}">
+                            <img src="${m.icon}" alt="${moodLabel(m)}" class="w-full h-full object-contain">
+                        </button>`;
+            }).join('');
+        }
+
+        function saveMood(key) {
+            const m = moodByKey(key);
+            if (!m) return;
+            const date = new Date();
+            const loc = currentLanguage === 'ca' ? 'ca-ES' : 'es-ES';
+            const dateStr = date.toLocaleDateString(loc, { day: 'numeric', month: 'short' });
+            const timeStr = date.toLocaleTimeString(loc, { hour: '2-digit', minute: '2-digit' });
+
+            const history = lsGet(ukey('moods'), []);
+            history.unshift({ name: m.key, iconSrc: m.icon, dateStr: dateStr, timeStr: timeStr, timestamp: date.getTime() });
+            lsSet(ukey('moods'), history);
+            renderMoodHistory();
+        }
+
+        function renderMoodHistory() {
+            const history = lsGet(ukey('moods'), []);
+            const historyContainer = document.getElementById('mood-history-list');
+            const summaryContainer = document.getElementById('mood-summary');
+
+            const counts = {};
+            MOODS.forEach(function (m) { counts[m.key] = 0; });
+            history.forEach(function (item) { if (counts[item.name] !== undefined) counts[item.name]++; });
+
+            if (summaryContainer) {
+                summaryContainer.innerHTML = MOODS.map(function (m) { return `
+                    <div class="flex flex-col items-center">
+                        <img src="${m.icon}" alt="${moodLabel(m)}" class="w-6 h-6 object-contain mb-1">
+                        <span class="font-bold text-brand-darkPurple dark:text-purple-200">${counts[m.key]}</span>
+                        <span class="text-[9px] text-slate-500 dark:text-slate-400">${moodLabel(m)}</span>
+                    </div>`; }).join('');
+            }
+
+            if (historyContainer) {
+                if (history.length === 0) {
+                    historyContainer.innerHTML = `<p class="text-xs text-slate-400 italic text-center py-2">${currentLanguage === 'ca' ? "Encara no has registrat la teva emoció d'avui." : "Aún no has registrado tu emoción de hoy."}</p>`;
+                    return;
+                }
+                historyContainer.innerHTML = history.map(function (item) {
+                    const m = moodByKey(item.name);
+                    const label = m ? moodLabel(m) : item.name;
+                    const icon = m ? m.icon : item.iconSrc;
+                    return `
+                    <div class="bg-purple-50/60 dark:bg-purple-950/40 dynamic-card p-3 rounded-2xl border border-purple-100 dark:border-purple-900 flex items-center justify-between text-xs">
+                        <div class="flex items-center space-x-2.5">
+                            <img src="${icon}" alt="${label}" class="w-7 h-7 object-contain">
+                            <div>
+                                <span class="font-bold text-brand-darkPurple dark:text-purple-200 block">${label}</span>
+                                <span class="text-[10px] text-slate-400">${currentLanguage === 'ca' ? "Registrat amb èxit" : "Registrado con éxito"}</span>
+                            </div>
+                        </div>
+                        <span class="text-[10px] font-bold text-purple-600 dark:text-purple-300 bg-white dark:bg-purple-950 dynamic-card px-2.5 py-1 rounded-xl border border-purple-100 dark:border-purple-800">
+                            ${item.dateStr} - ${item.timeStr}
+                        </span>
+                    </div>`;
+                }).join('');
+            }
+        }
+
+        function toggleLegalModal() {
+            const modal = document.getElementById('legal-modal');
+            if (modal) modal.classList.toggle('hidden');
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            migrateLegacy();
+            try {
+                const savedLang = localStorage.getItem('te_lang');
+                if (savedLang === 'es' || savedLang === 'ca') currentLanguage = savedLang;
+            } catch (e) { /* nada */ }
+            initCanvas();
+            restoreProgress();
+            loadAppData();
+            initUserSpace();
+            startBreathingTimer();
+            loadCodes();
+        });
+    </script>
+</body>
+</html>
