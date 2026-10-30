@@ -36,7 +36,7 @@ const DAYS_ES = [
     "day": 5,
     "title": "indaga-TE",
     "teaName": "Infusión de profundidad y autoconocimiento",
-    "benefit": "Nunca me siento mal o disgustado por la razón que creo.",
+    "benefit": "Nunca me siento mal o disgustada por la razón que creo.",
     "lesson": "Es como mirar dentro de tu habitación secreta con mucho cuidado y mucha ternura, sin juzgarte, para entender por qué estás triste o enfadada y abrazarlo con cariño.",
     "exercise": "Sostén tu taza tibia con ambas manos, toma un sorbo despacio y di en voz baja: \"Indago en mi interior hoy. Yo elijo mirar mis sentimientos con una perspectiva amable.\""
   },
@@ -156,7 +156,7 @@ const DAYS_ES = [
     "day": 20,
     "title": "decide-TE",
     "teaName": "Infusión de determinación luminosa",
-    "benefit": "¡Estoy totalmente decidido a abrir los ojos y ver de verdad!",
+    "benefit": "¡Estoy totalmente decidida a abrir los ojos y ver de verdad!",
     "lesson": "Es como cuando dices: \"¡Hoy sí que acabaré este trabajo!\" Tomas la decisión valientesima de dejar de cerrar los ojos y decides ver la realidad con total claridad.",
     "exercise": "Sostén tu taza tibia con ambas manos, toma un sorbo despacio y di en voz baja: \"Decido ver con claridad hoy. Yo elijo abrir los ojos a la verdad.\""
   },
@@ -164,7 +164,7 @@ const DAYS_ES = [
     "day": 21,
     "title": "transforma-TE",
     "teaName": "Infusión de perspectiva renovada",
-    "benefit": "Estoy decidido a mirar todas las cosas de una manera bonita y diferente.",
+    "benefit": "Estoy decidida a mirar todas las cosas de una manera bonita y diferente.",
     "lesson": "Es como pintar de colores brillantes y alegres un dibujo que antes se veía apagado. Tú decides encontrar un detalle bonito y especial en todo lo que miras.",
     "exercise": "Sostén tu taza tibia con ambas manos, toma un sorbo despacio y di en voz baja: \"Transformo mi mirada hoy. Yo elijo ver lo bello en cada detalle.\""
   },
@@ -1116,7 +1116,7 @@ const DAYS_ES = [
     "day": 140,
     "title": "transforma-TE",
     "teaName": "Infusión de perspectiva renovada",
-    "benefit": "Estoy decidido a mirar todas las cosas de una manera bonita y diferente.",
+    "benefit": "Estoy decidida a mirar todas las cosas de una manera bonita y diferente.",
     "lesson": "Es como abrir un regalo mágico y darte cuenta de que la paz y la alegría ya eran tuyas antes de pedirlas. ¡Ya están en tu corazón!",
     "exercise": "Sostén tu taza tibia con ambas manos, toma un sorbo despacio y di en voz baja: \"Transformo mi mirada hoy. Yo elijo ver lo bello en cada detalle.\""
   },
@@ -1860,7 +1860,7 @@ const DAYS_ES = [
     "day": 233,
     "title": "centra-TE",
     "teaName": "Infusión de centrado estable",
-    "benefit": "Quiero recordar siempre que estoy unido a la gran fuerza del bien.",
+    "benefit": "Quiero recordar siempre que estoy unida a la gran fuerza del bien.",
     "lesson": "Es recordar siempre que caminas cogida de la mano de la gran fuerza del bien, así que nunca estás sola.",
     "exercise": "Sostén tu taza tibia con ambas manos, toma un sorbo despacio y di en voz baja: \"Me centro en mi unión hoy. Yo elijo recordar que voy de la mano de la fuerza del bien.\""
   },
@@ -2012,7 +2012,7 @@ const DAYS_ES = [
     "day": 252,
     "title": "transforma-TE",
     "teaName": "Infusión de perspectiva renovada",
-    "benefit": "Estoy decidido a mirar todas las cosas de una manera bonita y diferente.",
+    "benefit": "Estoy decidida a mirar todas las cosas de una manera bonita y diferente.",
     "lesson": "Es ponerte unas gafas alegres para mirar cada pequeña cosa de tu día con mucha amabilidad y ganas de aprender.",
     "exercise": "Sostén tu taza tibia con ambas manos, toma un sorbo despacio y di en voz baja: \"Transformo mi mirada hoy. Yo elijo ver lo bello en cada detalle.\""
   },
@@ -2748,7 +2748,7 @@ const DAYS_ES = [
     "day": 344,
     "title": "centra-TE",
     "teaName": "Infusión de centrado estable",
-    "benefit": "Quiero recordar siempre que estoy unido a la gran fuerza del bien.",
+    "benefit": "Quiero recordar siempre que estoy unida a la gran fuerza del bien.",
     "lesson": "Es descubrir que cuando te quedas en calma y silencio, recibes los mejores consejos de amor para saber qué hacer.",
     "exercise": "Sostén tu taza tibia con ambas manos, toma un sorbo despacio y di en voz baja: \"Me centro en mi unión hoy. Yo elijo recordar que voy de la mano de la fuerza del bien.\""
   },
@@ -2836,7 +2836,7 @@ const DAYS_ES = [
     "day": 355,
     "title": "decide-TE",
     "teaName": "Infusión de determinación luminosa",
-    "benefit": "¡Estoy totalmente decidido a abrir los ojos y ver de verdad!",
+    "benefit": "¡Estoy totalmente decidida a abrir los ojos y ver de verdad!",
     "lesson": "Es ver cómo tu propia sonrisa y tu corazón limpio ayudan a que todos tus amigos y tu familia se sientan bien.",
     "exercise": "Sostén tu taza tibia con ambas manos, toma un sorbo despacio y di en voz baja: \"Decido ver con claridad hoy. Yo elijo abrir los ojos a la verdad.\""
   },
