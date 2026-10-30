@@ -490,28 +490,10 @@
         let lessonsData = [];
         let validCodesList = [];
 
-        // BASE DE DATOS COMPLETA INTEGRADA (DIAS 1 AL 6 Y SUPERIORES)
-        const embeddedDaysCa = [
-            { day: 1, title: "qüestionar-TE", teaName: "Infusió de claredat i discerniment", benefit: "Res del que veig en aquesta habitació té un significat real per si mateix.", glassesTitle: "ULLERES DE PAU", lesson: "Imagina que la teva ment és com una pissarra plena de dibuixos antics que vas fer fa temps. Aquest exercici t'enya a netejar la pissarra per mirar tot el que t'envolta com si fos la primera vegada, sense posar-li etiquetes de bo o dolent.", exercise: "Aguanta la teva tassa mig tèbia amb les dues mans, pren un xarrup a poc a poc i diu en veu baixa: \"Qüestiono els meus pensaments avui. Jo trio mirar aquest moment amb absoluta neutralitat.\"" },
-            { day: 2, title: "reinterpretar-TE", teaName: "Infusió de sobirania interior", benefit: "Tot el que veig en aquesta habitació significa per a mi exactament el que jo he volgut que signifiqui.", glassesTitle: "ULLERES DE PAU", lesson: "És com quan ets al teatre i decideixes quin vestit li poses al teu personatge. Aquí descobreixes que les coses no et fan enfadar per si soles, sinó que tu mateixa decideixes quin significat les hi dones al teu cap.", exercise: "Aguanta la teva tassa mig tèbia amb les dues mans, pren un xarrup a poc a poc i diu en veu baixa: \"Reinterpreto el meu món avui. Jo trio donar-li un significat de pau.\"" },
-            { day: 3, title: "buidar-TE", teaName: "Infusió d'alleujament i acceptació", benefit: "No entenc res del que veig en aquesta habitació, i això està bé!", glassesTitle: "ULLERES DE PAU", lesson: "És com quan et treus una motxilla molt pesada que portaves a l'esquena. Admetre que no ho saps tot et dona una pau enorme i deixa espai perquè les coses bones passin soles.", exercise: "Aguanta la teva tassa mig tèbia amb les dues mans, pren un xarrup a poc a poc i diu en veu baixa: \"Em buido d'expectatives avui. Jo trio acceptar aquest moment tal com és.\"" },
-            { day: 4, title: "alliberar-TE", teaName: "Infusió de lleugeresa mental", benefit: "Aquests pensaments que tinc ara mateix no signifiquen res d'important.", glassesTitle: "ULLERES DE PAU", lesson: "De vegades el cap ens dóna voltes a coses que no serveixen per a res, com núvols passatgers. Aquesta infusió t'ajuda a deixar anar aquests pensaments pesats perquè puguis volar lleuger.", exercise: "Aguanta la teva tassa mig tèbia amb les dues mans, pren un xarrup a poc a poc i diu en veu baixa: \"Allibero la meva ment avui. Jo trio deixar anar els pensaments que no em donen pau.\"" },
-            { day: 5, title: "indagar-TE", teaName: "Infusió de profunditat i autoconeixement", benefit: "Mai em sento malament o enujada per la raó que crec.", glassesTitle: "ULLERES DE PAU", lesson: "És com mirar dins de la teva habitació secreta amb molta cura i molta tendresa, sense jutjar-te, per entendre per què estàs trista o enfadada i abraçar-ho amb carinyo.", exercise: "Aguanta la teva tassa mig tèbia amb les dues mans, pren un xarrup a poc a poc i diu en veu baixa: \"M'indago amb amor avui. Jo trio comprendre'm en lloc de jutjar-me.\"" },
-            { day: 6, title: "desengaña-TE", teaName: "Infusió de despertar conscient", benefit: "Em sento mal perquè estic viendo cosas en mi mente que no son reales.", glassesTitle: "ULLERES DE PAU", lesson: "Imagina que lleves unas gafas oscuras y ves monstruos que no existen. Este juego te enseña a quitarte las gafas para darte cuenta de que todo está bien y que solo eran historias de tu imaginación.", exercise: "Aguanta la teva tassa mig tèbia amb les dues mans, pren un xarrup a poc a poc i diu en veu baixa: \"Desperto de les il·lusions avui. Jo trio veure la realitat amb claredat i pau.\"" }
-        ];
-
-        const embeddedDaysEs = [
-            { day: 1, title: "cuestiona-TE", teaName: "Infusión de claridad y discernimiento", benefit: "Nada de lo que veo en esta habitación, tiene un significado real por sí mismo", glassesTitle: "GAFAS DE PAZ", lesson: "Imagina que tu mente es como una pizarra llena de dibujos antiguos que hiciste hace tiempo. Este ejercicio te enseña a limpiar la pizarra para mirar todo lo que te rodea como si fuera la primera vez, sin ponerle etiquetas de bueno o malo.", exercise: "Sostén tu taza tibia con ambas manos, toma un sorbo despacio y di en voz baja: \"Cuestiono mis pensamientos hoy. Yo elijo mirar este momento con absoluta neutralidad.\"" },
-            { day: 2, title: "reinterpreta-TE", teaName: "Infusión de soberanía interior", benefit: "Todo lo que veo en esta habitación significa para mí exactamente lo que yo he querido que signifique.", glassesTitle: "GAFAS DE PAZ", lesson: "Es como cuando estás en el teatro y decides qué vestido le pones a tu personaje. Aquí descubres que las cosas no te hacen enfadar por sí solas, sino que tú misma decides qué significado les das en tu cabeza.", exercise: "Sostén tu taza tibia con ambas manos, toma un sorbo despacio y di en voz baja: \"Reinterpreto mi mundo hoy. Yo elijo darle un significado de paz.\"" },
-            { day: 3, title: "vacia-TE", teaName: "Infusión de alivio y aceptación", benefit: "¡No entiendo nada de lo que veo en esta habitación, y eso está bien!", glassesTitle: "GAFAS DE PAZ", lesson: "Es como cuando te quitas una mochila muy pesada que llevabas a la espalda. Admitir que no lo sabes todo te da una paz enorme y deja espacio para que las cosas buenas pasen solas.", exercise: "Sostén tu taza tibia con ambas manos, toma un sorbo despacio y di en voz baja: \"Me vacío de expectativas hoy. Yo elijo aceptar este momento tal como es.\"" },
-            { day: 4, title: "libera-TE", teaName: "Infusión de ligereza mental", benefit: "Estos pensamientos que tengo ahora mismo no significan nada importante.", glassesTitle: "GAFAS DE PAZ", lesson: "A veces la cabeza nos da vueltas a cosas que no sirven para nada, como nubes pasajeras. Esta infusión te ayuda a soltar esos pensamientos pesados para que puedas volar ligero.", exercise: "Sostén tu taza tibia con ambas manos, toma un sorbo despacio y di en voz baja: \"Libero mi mente hoy. Yo elijo soltar los pensamientos que no me dan paz.\"" },
-            { day: 5, title: "indaga-TE", teaName: "Infusión de profundidad y autoconocimiento", benefit: "Nunca me siento mal o enojada por la razón que creo.", glassesTitle: "GAFAS DE PAZ", lesson: "Es como mirar dentro de tu habitación secreta con mucho cuidado y ternura, sin juzgarte, para entender por qué estás triste o enfadada y abrazarlo con cariño.", exercise: "Sostén tu taza tibia con ambas manos, toma un sorbo despacio y di en voz baja: \"Me indago con amor hoy. Yo elijo comprenderme en lugar de juzgarme.\"" },
-            { day: 6, title: "desengaña-TE", teaName: "Infusión de despertar consciente", benefit: "Me siento mal porque estoy viendo cosas en mi mente que no son reales.", glassesTitle: "GAFAS DE PAZ", lesson: "Imagina que llevas unas gafas oscuras y ves monstruos que no existen. Este juego te enseña a quitarte las gafas para darte cuenta de que todo está bien y que solo eran historias de tu imaginación.", exercise: "Sostén tu taza tibia con ambas manos, toma un sorbo despacio y di en voz baja: \"Despierto de las ilusiones hoy. Yo elijo ver la realidad con claridad.\"" }
-        ];
-
         async function loadAppData() {
             updateInterfaceTexts();
             
+            // Cargar códigos desde codes.json
             try {
                 const response = await fetch('codes.json');
                 if (response.ok) {
@@ -523,27 +505,32 @@
                     }
                 }
             } catch (err) {
-                console.log("codes.json local.");
+                console.log("codes.json cargado localmente.");
             }
 
             const fallbackCodes = ["TEA-MINI-1971", "REGALO-JUDIT-2026", "NURIA2026", "ELRECREOMENTAL"];
             validCodesList = [...new Set([...validCodesList, ...fallbackCodes])];
 
-            lessonsData = (currentLanguage === 'ca') ? embeddedDaysCa : embeddedDaysEs;
+            // CARGAR ESTRICTAMENTE EL ARCHIVO JSON CORRESPONDIENTE AL IDIOMA SELECCIONADO
+            const jsonFileName = (currentLanguage === 'ca') ? 'days-ca.json' : 'days.json';
 
-            // Intentar cargar archivos externos opcionales
             try {
-                const fileName = currentLanguage === 'ca' ? 'days-ca.json' : 'days.json';
-                const response = await fetch(fileName);
+                const response = await fetch(jsonFileName);
                 if (response.ok) {
                     const data = await response.json();
                     const rawList = Array.isArray(data) ? data : (data.lessons || data.days || Object.values(data)[0]);
                     if (Array.isArray(rawList) && rawList.length > 0) {
                         lessonsData = rawList;
+                    } else {
+                        lessonsData = [];
                     }
+                } else {
+                    console.error("No se pudo cargar el archivo " + jsonFileName);
+                    lessonsData = [];
                 }
             } catch (err) {
-                console.log("Usando base de datos interna integrada de forma segura.");
+                console.error("Error al leer el archivo JSON de idioma:", err);
+                lessonsData = [];
             }
 
             checkActivationStatus();
@@ -684,9 +671,7 @@
         function getDayData(dayNum) {
             let found = null;
             if (lessonsData && lessonsData.length > 0) {
-                // Primero buscamos por el campo 'day' exacto
                 found = lessonsData.find(d => Number(d.day) === Number(dayNum));
-                // Si no se encuentra por propiedad, usamos el índice exacto del array (dayNum - 1)
                 if (!found && lessonsData[dayNum - 1]) {
                     found = lessonsData[dayNum - 1];
                 }
