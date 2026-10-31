@@ -418,14 +418,14 @@
             <div class="w-14 h-14 bg-purple-100 dark:bg-purple-950 rounded-2xl mx-auto flex items-center justify-center text-2xl">
                 🔒
             </div>
-            <h3 class="text-lg font-bold text-brand-darkPurple dark:text-purple-200">Contenido Exclusivo del Pack</h3>
+            <h3 id="lock-title" class="text-lg font-bold text-brand-darkPurple dark:text-purple-200">Contenido Exclusivo del Pack</h3>
             <p id="lock-message" class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
                 Has disfrutado de la versión de prueba (Días 1 a 3 y SOS). Para desbloquear los 365 días y todas las herramientas de bienestar, introduce el código único incluido en tu pack físico de tés.
             </p>
-            <button onclick="openActivationModal()" class="w-full py-3 bg-brand-purple hover:bg-purple-700 text-white font-bold rounded-2xl text-xs shadow-md transition">
+            <button id="lock-code-btn" onclick="openActivationModal()" class="w-full py-3 bg-brand-purple hover:bg-purple-700 text-white font-bold rounded-2xl text-xs shadow-md transition">
                 🔑 Introducir Código de Activación
             </button>
-            <button onclick="showSection('daily')" class="w-full py-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-xs">
+            <button id="lock-back-btn" onclick="showSection('daily')" class="w-full py-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-xs">
                 Volver al inicio (Versión prueba)
             </button>
         </div>
@@ -437,16 +437,16 @@
             <div class="w-14 h-14 bg-amber-100 dark:bg-amber-950 rounded-2xl mx-auto flex items-center justify-center text-2xl">
                 🍵
             </div>
-            <h3 class="text-lg font-bold text-brand-darkPurple dark:text-purple-200">Activa tu Pack de Tés</h3>
-            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+            <h3 id="act-title" class="text-lg font-bold text-brand-darkPurple dark:text-purple-200">Activa tu Pack de Tés</h3>
+            <p id="act-desc" class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
                 Escribe el código secreto que encontrarás en la tarjeta dentro de tu caja física.
             </p>
             <input type="text" id="activation-code-input" placeholder="Ej: TEA-482-XR-9152" class="w-full bg-purple-50 dark:bg-purple-950/50 border border-purple-200 dark:border-purple-700 rounded-xl px-4 py-2.5 text-center text-sm font-bold text-brand-darkPurple dark:text-purple-200 uppercase tracking-widest outline-none focus:border-brand-purple">
             <p id="activation-error" class="text-[11px] text-red-500 font-bold hidden">Código incorrecto. Comprueba las letras y números.</p>
-            <button onclick="verifyActivationCode()" class="w-full py-3 bg-amber-400 hover:bg-amber-500 text-slate-900 font-bold rounded-2xl text-xs shadow-md transition">
+            <button id="act-submit" onclick="verifyActivationCode()" class="w-full py-3 bg-amber-400 hover:bg-amber-500 text-slate-900 font-bold rounded-2xl text-xs shadow-md transition">
                 ✨ Desbloquear Aplicación Completa
             </button>
-            <button onclick="closeActivationModal()" class="w-full py-2 text-slate-400 hover:text-slate-600 text-xs">
+            <button id="act-cancel" onclick="closeActivationModal()" class="w-full py-2 text-slate-400 hover:text-slate-600 text-xs">
                 Cancelar
             </button>
         </div>
@@ -566,9 +566,25 @@
             return [];
         }
 
+        function applyModalTexts() {
+            const ca = currentLanguage === 'ca';
+            const set = function (id, txt) { const e = document.getElementById(id); if (e) e.innerText = txt; };
+            set('lock-title', ca ? "Contingut exclusiu del Pack" : "Contenido Exclusivo del Pack");
+            set('lock-code-btn', ca ? "🔑 Introdueix el codi d'activació" : "🔑 Introducir Código de Activación");
+            set('lock-back-btn', ca ? "Tornar a l'inici (Versió de prova)" : "Volver al inicio (Versión prueba)");
+            set('act-title', ca ? "Activa el teu Pack de Tes" : "Activa tu Pack de Tés");
+            set('act-desc', ca ? "Escriu el codi secret que trobaràs a la targeta dins de la teva caixa física." : "Escribe el código secreto que encontrarás en la tarjeta dentro de tu caja física.");
+            set('activation-error', ca ? "Codi incorrecte. Comprova les lletres i els números." : "Código incorrecto. Comprueba las letras y números.");
+            set('act-submit', ca ? "✨ Desbloquejar l'aplicació completa" : "✨ Desbloquear Aplicación Completa");
+            set('act-cancel', ca ? "Cancel·lar" : "Cancelar");
+            const inp = document.getElementById('activation-code-input');
+            if (inp) inp.placeholder = ca ? "Ex: TEA-482-XR-9152" : "Ej: TEA-482-XR-9152";
+        }
+
         async function loadAppData() {
             const lang = currentLanguage;
             updateInterfaceTexts();
+            applyModalTexts();
             renderMoodButtons();
             renderMoodHistory();
             renderPiropos();
@@ -630,6 +646,8 @@
                 document.getElementById('bh-title').innerText = "El Forat Negre";
                 document.getElementById('bh-desc').innerText = "Escriu el que sents o et preocupa avui i transforma'l en llum.";
                 document.getElementById('bh-btn-text').innerText = "Desintegrar en Gran Explosió Estelar";
+                document.getElementById('thought-input').placeholder = "Exemple: 'Avui em sento fatal'...";
+                document.getElementById('piropero-input').placeholder = "Escriu una qualitat bonica sobre tu...";
                 document.getElementById('bh-reset-btn').innerText = "✨ Alliberar un altre pensament";
 
                 document.getElementById('piropo-heading').innerText = "El Piropero";
@@ -679,6 +697,8 @@
                 document.getElementById('bh-title').innerText = "El Agujero Negro";
                 document.getElementById('bh-desc').innerText = "Escribe lo que sientes o te preocupa hoy y transfórmalo en luz.";
                 document.getElementById('bh-btn-text').innerText = "Desintegrar en Gran Explosión Estelar";
+                document.getElementById('thought-input').placeholder = "Ejemplo: 'Hoy me siento horrible'...";
+                document.getElementById('piropero-input').placeholder = "Escribe una cualidad bonita sobre ti...";
                 document.getElementById('bh-reset-btn').innerText = "✨ Liberar otro pensamiento";
 
                 document.getElementById('piropo-heading').innerText = "El Piropero";
