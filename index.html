@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EL -TE DE LES EMOCIONS | Un glopet de pau per la teva ment cada dia</title>
+    <meta name="theme-color" content="#612481">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 624 614'%3E%3Cpath fill='%23AB69BB' fill-rule='evenodd' d='M156,55 L130,84 L110,113 L91,149 L78,182 L69,215 L63,253 L62,306 L64,327 L71,365 L84,406 L103,446 L133,491 L173,533 L189,547 L224,568 L202,550 L181,529 L163,504 L150,482 L134,448 L123,416 L113,368 L111,348 L111,303 L114,276 L121,242 L130,213 L141,186 L161,149 L181,121 L164,77 L159,55Z'/%3E%3Cpath fill='%23612481' fill-rule='evenodd' d='M12,193 L8,215 L6,244 L8,289 L16,333 L34,385 L55,425 L72,450 L91,473 L115,497 L133,512 L165,534 L179,540 L149,510 L121,476 L101,444 L81,400 L69,360 L62,318 L61,266 L65,232 L36,212 L15,193Z M355,7 L334,13 L302,26 L277,39 L249,57 L219,81 L197,103 L172,134 L153,164 L141,188 L123,238 L113,291 L112,349 L117,387 L123,413 L140,460 L166,507 L182,529 L203,550 L238,575 L280,594 L327,605 L374,608 L415,604 L446,597 L486,582 L515,566 L548,541 L563,526 L579,506 L590,489 L604,459 L615,415 L617,397 L617,368 L613,344 L603,320 L596,310 L581,297 L569,291 L554,287 L524,286 L485,288 L457,282 L435,271 L415,256 L398,239 L383,220 L372,202 L357,169 L349,142 L343,100 L344,65 L348,40 L357,8Z'/%3E%3C/svg%3E">
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -24,7 +26,10 @@
                 var span = document.createElement('span');
                 span.textContent = EMOJI[key] || '✨';
                 span.className = 'inline-block flex-shrink-0 leading-none';
-                span.style.fontSize = /\bw-full\b/.test(img.className) ? '1.75rem' : '0.95rem';
+                var fill = /\bw-full\b/.test(img.className) && img.parentNode;
+                var wpx = fill ? img.parentNode.clientWidth : (img.offsetWidth || 20);
+                span.style.fontSize = Math.max(14, Math.round(wpx * 0.75)) + 'px';
+                if (fill) { span.style.display = 'flex'; span.style.alignItems = 'center'; span.style.justifyContent = 'center'; span.style.width = '100%'; span.style.height = '100%'; }
                 span.title = img.alt || '';
                 if (img.parentNode) img.parentNode.replaceChild(span, img);
             }, true);
@@ -35,14 +40,25 @@
             theme: {
                 extend: {
                     colors: {
+                        // Colores corporativos (de las tarjetas): verde #C3E1BB, morado #612481, lavanda #AB69BB
                         brand: {
-                            purple: '#6B46C1',
-                            darkPurple: '#4A1D96',
-                            softBg: '#F4EFFC',
+                            purple: '#612481',
+                            darkPurple: '#4A1A63',
+                            lavender: '#AB69BB',
+                            green: '#C3E1BB',
+                            softBg: '#E3F1DD',
                             cardBg: '#FFFFFF',
-                            greenPastel: '#E6F4EA',
+                            greenPastel: '#E3F1DD',
                             yellowPastel: '#FEF7E0',
-                            borderPastel: '#E9D8FD'
+                            borderPastel: '#E0C5EC'
+                        },
+                        purple: {
+                            50: '#F8F1FB', 100: '#F0E2F6', 200: '#E0C5EC', 300: '#CBA0DC', 400: '#AB69BB',
+                            500: '#8A3FA0', 600: '#612481', 700: '#521D6D', 800: '#421756', 900: '#331243', 950: '#220B2E'
+                        },
+                        emerald: {
+                            50: '#F2F9EF', 100: '#E3F1DD', 200: '#C3E1BB', 300: '#A4D098', 400: '#82BB74',
+                            500: '#5F9F52', 600: '#4A8240', 700: '#3B6734', 800: '#2F522B', 900: '#243F22', 950: '#142514'
                         }
                     }
                 }
@@ -53,32 +69,39 @@
         @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap');
         
         :root {
-            --bg-color: #F4EFFC;
-            --text-color: #2D3748;
+            --bg-color: #CFE6C8;
+            --text-color: #2E2238;
             --card-bg: #FFFFFF;
-            --border-color: #E9D8FD;
+            --border-color: #DCEBD6;
         }
 
         @media (prefers-color-scheme: dark) {
             :root {
-                --bg-color: #1A1528;
-                --text-color: #E2D9F3;
-                --card-bg: #27213C;
-                --border-color: #4D3B73;
+                --bg-color: #170F20;
+                --text-color: #EADFF2;
+                --card-bg: #251A33;
+                --border-color: #46305E;
             }
         }
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: var(--bg-color);
+            background-image: linear-gradient(180deg, #E4F1DF 0%, #C3E1BB 55%, #B6D8AD 100%);
+            background-attachment: fixed;
             color: var(--text-color);
             transition: background 0.3s ease, color 0.3s ease;
+        }
+        @media (prefers-color-scheme: dark) {
+            body { background-image: linear-gradient(180deg, #1D1429 0%, #170F20 100%); }
         }
 
         .dynamic-card {
             background-color: var(--card-bg) !important;
             border-color: var(--border-color) !important;
+            box-shadow: 0 10px 24px -14px rgba(97, 36, 129, 0.45);
         }
+        .dynamic-card .dynamic-card { box-shadow: none; }
 
         h1, h2, h3, .font-heading {
             font-family: 'Fredoka', cursive, sans-serif;
@@ -139,22 +162,23 @@
     <audio id="audio-player" loop></audio>
 
     <!-- HEADER / NAVEGACIÓN SUPERIOR -->
-    <header class="max-w-md mx-auto w-full pt-6 px-4">
+    <header class="w-full bg-gradient-to-br from-purple-700 via-purple-600 to-purple-500 rounded-b-[2rem] shadow-lg pb-5">
+    <div class="max-w-md mx-auto w-full pt-6 px-4">
         <div class="flex items-center justify-between mb-4">
             <div class="flex items-center space-x-3">
-                <div class="w-12 h-12 rounded-2xl bg-purple-100 dark:bg-purple-950 flex items-center justify-center overflow-hidden p-1.5 shadow-sm border border-purple-200 dark:border-purple-800">
-                    <img src="assets/icono-camino.png" alt="Logo Te" class="w-full h-full object-contain">
+                <div class="w-14 h-14 rounded-2xl bg-white flex items-center justify-center shadow-md p-2 flex-shrink-0">
+                    <svg viewBox="0 0 624 614" class="w-full h-full" role="img" aria-label="Emocionómetro"><path fill="#AB69BB" fill-rule="evenodd" d="M156,55 L130,84 L110,113 L91,149 L78,182 L69,215 L63,253 L62,306 L64,327 L71,365 L84,406 L103,446 L133,491 L173,533 L189,547 L224,568 L202,550 L181,529 L163,504 L150,482 L134,448 L123,416 L113,368 L111,348 L111,303 L114,276 L121,242 L130,213 L141,186 L161,149 L181,121 L164,77 L159,55Z"/><path fill="#612481" fill-rule="evenodd" d="M12,193 L8,215 L6,244 L8,289 L16,333 L34,385 L55,425 L72,450 L91,473 L115,497 L133,512 L165,534 L179,540 L149,510 L121,476 L101,444 L81,400 L69,360 L62,318 L61,266 L65,232 L36,212 L15,193Z M355,7 L334,13 L302,26 L277,39 L249,57 L219,81 L197,103 L172,134 L153,164 L141,188 L123,238 L113,291 L112,349 L117,387 L123,413 L140,460 L166,507 L182,529 L203,550 L238,575 L280,594 L327,605 L374,608 L415,604 L446,597 L486,582 L515,566 L548,541 L563,526 L579,506 L590,489 L604,459 L615,415 L617,397 L617,368 L613,344 L603,320 L596,310 L581,297 L569,291 L554,287 L524,286 L485,288 L457,282 L435,271 L415,256 L398,239 L383,220 L372,202 L357,169 L349,142 L343,100 L344,65 L348,40 L357,8Z"/></svg>
                 </div>
                 <div>
-                    <h1 id="app-title" class="text-xl md:text-2xl font-bold text-brand-darkPurple dark:text-purple-300 tracking-wide leading-none">EL -TE DE LES EMOCIONS</h1>
-                    <p id="app-subtitle" class="text-xs text-purple-400 font-medium mt-1">Un glopet de pau per la teva ment cada dia</p>
+                    <h1 id="app-title" class="text-xl md:text-2xl font-bold text-white tracking-wide leading-none">EL -TE DE LES EMOCIONS</h1>
+                    <p id="app-subtitle" class="text-xs text-emerald-200 font-medium mt-1">Un glopet de pau per la teva ment cada dia</p>
                 </div>
             </div>
             <!-- SELECTOR DE IDIOMA Y BOTÓN ACTIVAR -->
             <div class="flex items-center space-x-2">
-                <div class="bg-white dynamic-card p-1 rounded-xl border border-purple-100 dark:border-purple-800 flex space-x-1">
-                    <button id="lang-es-btn" onclick="switchLanguage('es')" class="px-2 py-1 bg-purple-50 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300 rounded-lg text-[10px] font-bold">ES</button>
-                    <button id="lang-ca-btn" onclick="switchLanguage('ca')" class="px-2 py-1 bg-brand-purple text-white rounded-lg text-[10px] font-bold shadow-sm">CA</button>
+                <div class="bg-white/15 p-1 rounded-xl border border-white/25 flex space-x-1">
+                    <button id="lang-es-btn" onclick="switchLanguage('es')" class="px-2.5 py-1 text-white/85 rounded-lg text-[10px] font-bold">ES</button>
+                    <button id="lang-ca-btn" onclick="switchLanguage('ca')" class="px-2.5 py-1 bg-white text-purple-700 rounded-lg text-[10px] font-bold shadow-sm">CA</button>
                 </div>
                 <button id="activate-top-btn" onclick="openActivationModal()" class="text-[10px] bg-amber-400 hover:bg-amber-500 text-slate-900 font-bold px-3 py-1.5 rounded-xl shadow-sm transition flex items-center space-x-1">
                     <span>🔑</span> <span id="btn-activate-text">Activar</span>
@@ -163,22 +187,23 @@
         </div>
 
         <!-- PESTAÑAS SUPERIORES PERFECTAMENTE DISTRIBUIDAS (PC Y MÓVIL) -->
-        <div class="bg-white dynamic-card p-1.5 rounded-2xl shadow-sm border border-purple-100 flex flex-nowrap items-center justify-between text-[10px] sm:text-[11px] font-bold text-brand-darkPurple dark:text-purple-200 gap-1">
-            <button onclick="showSection('daily')" id="top-btn-daily" class="tab-btn flex-1 py-2 px-1 rounded-xl bg-brand-purple text-white transition flex items-center justify-center space-x-1">
-                <img src="assets/icono-camino.png" alt="Camino" class="w-3.5 h-3.5 object-contain flex-shrink-0"> <span id="tab-daily-text">365 dies</span>
+        <div class="bg-white dynamic-card p-1.5 rounded-2xl shadow-md border border-purple-100 hidden md:flex flex-nowrap items-center justify-between text-[9px] min-[380px]:text-[10px] sm:text-[11px] font-bold text-brand-darkPurple dark:text-purple-200 gap-1">
+            <button onclick="showSection('daily')" id="top-btn-daily" class="tab-btn flex-1 py-2 px-1 rounded-xl bg-purple-100 dark:bg-purple-900/60 text-brand-darkPurple dark:text-purple-100 ring-1 ring-purple-300 dark:ring-purple-700 shadow-inner transition flex flex-col items-center justify-center gap-0.5 leading-tight">
+                <img src="assets/icono-camino.png" alt="Camino" class="w-7 h-7 object-contain flex-shrink-0"> <span id="tab-daily-text">365 dies</span>
             </button>
-            <button onclick="showSection('sos')" id="top-btn-sos" class="tab-btn flex-1 py-2 px-1 rounded-xl text-purple-600 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/40 transition flex items-center justify-center space-x-1">
-                <img src="assets/icono-sos.png" alt="Emergencia" class="w-3.5 h-3.5 object-contain flex-shrink-0"> <span>SOS</span>
+            <button onclick="showSection('sos')" id="top-btn-sos" class="tab-btn flex-1 py-2 px-1 rounded-xl text-purple-600 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/40 transition flex flex-col items-center justify-center gap-0.5 leading-tight">
+                <img src="assets/icono-sos.png" alt="Emergencia" class="w-7 h-7 object-contain flex-shrink-0"> <span>SOS</span>
             </button>
-            <button onclick="showSection('blackhole')" id="top-btn-blackhole" class="tab-btn flex-1 py-2 px-1 rounded-xl text-purple-600 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/40 transition flex items-center justify-center space-x-1">
-                <img src="assets/icono-agujero.png" alt="Agujero" class="w-3.5 h-3.5 object-contain flex-shrink-0"> <span id="tab-blackhole-text">forat</span>
+            <button onclick="showSection('blackhole')" id="top-btn-blackhole" class="tab-btn flex-1 py-2 px-1 rounded-xl text-purple-600 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/40 transition flex flex-col items-center justify-center gap-0.5 leading-tight">
+                <img src="assets/icono-agujero.png" alt="Agujero" class="w-7 h-7 object-contain flex-shrink-0"> <span id="tab-blackhole-text">forat</span>
             </button>
-            <button onclick="showSection('piropero')" id="top-btn-piropero" class="tab-btn flex-1 py-2 px-1 rounded-xl text-purple-600 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/40 transition flex items-center justify-center space-x-1">
-                <img src="assets/icono-piropero.png" alt="Piropero" class="w-3.5 h-3.5 object-contain flex-shrink-0"> <span id="tab-piropero-text">Piropero</span>
+            <button onclick="showSection('piropero')" id="top-btn-piropero" class="tab-btn flex-1 py-2 px-1 rounded-xl text-purple-600 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/40 transition flex flex-col items-center justify-center gap-0.5 leading-tight">
+                <img src="assets/icono-piropero.png" alt="Piropero" class="w-7 h-7 object-contain flex-shrink-0"> <span id="tab-piropero-text">Piropero</span>
             </button>
-            <button onclick="showSection('mirror')" id="top-btn-mirror" class="tab-btn flex-1 py-2 px-1 rounded-xl text-purple-600 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/40 transition flex items-center justify-center space-x-1">
-                <img src="assets/icono-emocionometro.png" alt="Emocionómetro" class="w-3.5 h-3.5 object-contain flex-shrink-0"> <span id="tab-mirror-text">Emocionòmetre</span>
+            <button onclick="showSection('mirror')" id="top-btn-mirror" class="tab-btn flex-1 py-2 px-1 rounded-xl text-purple-600 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/40 transition flex flex-col items-center justify-center gap-0.5 leading-tight">
+                <img src="assets/icono-emocionometro.png" alt="Emocionómetro" class="w-7 h-7 object-contain flex-shrink-0"> <span id="tab-mirror-text">Emocionòmetre</span>
             </button>
+        </div>
         </div>
     </header>
 
@@ -204,19 +229,20 @@
                 <div class="flex justify-between items-start">
                     <div>
                         <span id="progress-title-label" class="text-xs uppercase tracking-wider text-purple-400 font-bold flex items-center space-x-1">
-                            <img src="assets/icono-progreso.png" alt="Progreso" class="w-4 h-4 object-contain inline-block flex-shrink-0">
+                            <img src="assets/icono-progreso.png" alt="Progreso" class="w-6 h-6 object-contain inline-block flex-shrink-0">
                             <span>EL TEU PROGRÈS DE TRANSFORMACIÓ</span>
                         </span>
                         <h2 class="text-xl font-bold text-brand-darkPurple dark:text-purple-200 mt-1 flex items-center space-x-1.5">
                             <span id="day-header">Dia 1: qüestiona-TE</span>
-                            <img src="assets/icono-flor.png" alt="Flor" class="w-5 h-5 object-contain inline-block flex-shrink-0">
+                            <img src="assets/icono-flor.png" alt="Flor" class="w-7 h-7 object-contain inline-block flex-shrink-0">
                         </h2>
                     </div>
-                    <span id="progress-percent" class="text-3xl font-extrabold text-brand-darkPurple dark:text-purple-200">1%</span>
+                    <span id="progress-percent" class="text-3xl font-extrabold text-brand-darkPurple dark:text-purple-200">0%</span>
                 </div>
                 <div class="w-full bg-purple-100 dark:bg-purple-950 h-2.5 rounded-full overflow-hidden">
-                    <div id="progress-bar" class="bg-gradient-to-r from-purple-400 to-brand-purple h-full rounded-full transition-all duration-500" style="width: 1%;"></div>
+                    <div id="progress-bar" class="bg-gradient-to-r from-purple-400 to-brand-purple h-full rounded-full transition-all duration-500" style="width: 0%;"></div>
                 </div>
+                <p id="progress-count" class="text-[11px] text-purple-500 dark:text-purple-300 font-medium -mt-1">0 de 365 ejercicios completados</p>
                 <div class="flex justify-between items-center pt-1">
                     <button onclick="changeDay(-1)" id="btn-prev" class="px-3 py-1.5 bg-purple-50 dark:bg-purple-900/50 hover:bg-purple-100 dark:hover:bg-purple-900 text-purple-700 dark:text-purple-300 font-bold rounded-xl text-xs transition">⬅️ Anterior</button>
                     <div class="flex items-center space-x-1 text-xs text-purple-600 dark:text-purple-300 font-medium">
@@ -230,21 +256,21 @@
 
             <div class="bg-white dynamic-card p-5 rounded-3xl shadow-sm border border-purple-100 space-y-4">
                 <div class="flex items-center space-x-3">
-                    <div class="w-12 h-12 rounded-2xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-100 dark:border-emerald-900 flex items-center justify-center overflow-hidden p-1.5">
+                    <div class="w-16 h-16 rounded-2xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-100 dark:border-emerald-900 flex items-center justify-center overflow-hidden p-2 shadow-sm flex-shrink-0">
                         <img src="assets/icono-te.png" alt="Te sugerido" class="w-full h-full object-contain">
                     </div>
                     <div>
                         <p class="text-xs text-purple-400 font-bold uppercase tracking-wider" id="tea-slogan">TÈ SUGERIT DEL DIA 1</p>
                         <h3 class="text-xl font-bold text-brand-darkPurple dark:text-purple-200 flex items-center space-x-1.5">
                             <span id="tea-title">qüestiona-TE</span>
-                            <img src="assets/icono-flor.png" alt="Flor" class="w-5 h-5 object-contain inline-block flex-shrink-0">
+                            <img src="assets/icono-flor.png" alt="Flor" class="w-7 h-7 object-contain inline-block flex-shrink-0">
                         </h3>
                         <p id="tea-type" class="text-xs text-slate-500 dark:text-slate-400 font-medium">Infusió de claredat i discerniment</p>
                     </div>
                 </div>
 
                 <div class="bg-emerald-50/80 dark:bg-emerald-950/40 p-4 rounded-2xl border border-emerald-100 dark:border-emerald-900/60 text-xs text-emerald-900 dark:text-emerald-200 leading-relaxed flex items-start space-x-2">
-                    <img src="assets/icono-beneficio.png" alt="Beneficios" class="w-4 h-4 object-contain flex-shrink-0 mt-0.5">
+                    <img src="assets/icono-beneficio.png" alt="Beneficios" class="w-6 h-6 object-contain flex-shrink-0 mt-0.5">
                     <div>
                         <strong class="font-bold block text-emerald-950 dark:text-emerald-100 mb-0.5" id="benefit-question-label">Quina emoció desperta i els seus beneficis?</strong>
                         <span id="tea-benefit">Res del que veig en aquesta habitació té un significat real per si mateix</span>
@@ -253,7 +279,7 @@
 
                 <div class="bg-amber-50/80 dark:bg-amber-950/30 p-4 rounded-2xl border border-amber-100 dark:border-amber-950 text-xs text-amber-950 dark:text-amber-200 leading-relaxed space-y-1">
                     <p class="font-bold text-amber-900 dark:text-amber-300 flex items-center space-x-1">
-                        <img src="assets/icono-idea.png" alt="Idea" class="w-4 h-4 object-contain flex-shrink-0">
+                        <img src="assets/icono-idea.png" alt="Idea" class="w-6 h-6 object-contain flex-shrink-0">
                         <span id="idea-label">LA IDEA D'AVUI <span id="glasses-title-label"></span></span>
                     </p>
                     <p id="day-lesson" class="text-slate-700 dark:text-slate-300 text-xs md:text-sm">
@@ -263,7 +289,7 @@
 
                 <div class="bg-purple-50/60 dark:bg-purple-950/30 p-4 rounded-2xl border border-purple-100 dark:border-purple-900/60 text-xs text-purple-900 dark:text-purple-200 leading-relaxed space-y-1">
                     <strong class="font-bold text-brand-purple dark:text-purple-300 flex items-center space-x-1">
-                        <img src="assets/icono-sorbito.png" alt="Sorbito" class="w-4 h-4 object-contain flex-shrink-0">
+                        <img src="assets/icono-sorbito.png" alt="Sorbito" class="w-6 h-6 object-contain flex-shrink-0">
                         <span id="sorbito-label">Glopet d'1 minut:</span>
                     </strong>
                     <p id="day-exercise" class="text-slate-600 dark:text-slate-300 italic">
@@ -273,12 +299,27 @@
                     <p id="complete-note" class="hidden text-[11px] text-emerald-800 dark:text-emerald-200 text-center pt-1"></p>
                 </div>
             </div>
+
+            <!-- INSTAGRAM: Drama King y Queen Zen -->
+            <a id="ig-card" href="https://www.instagram.com/elrecreomental/" target="_blank" rel="noopener noreferrer" class="block rounded-3xl p-5 bg-gradient-to-br from-purple-700 via-purple-600 to-purple-500 text-white shadow-lg hover:shadow-xl transition">
+                <div class="flex items-center space-x-3">
+                    <div class="text-4xl flex-shrink-0" aria-hidden="true">🎭</div>
+                    <div class="flex-1">
+                        <p id="ig-title" class="font-heading font-bold text-lg leading-tight">Intégralo con humor</p>
+                        <p id="ig-text" class="text-xs text-purple-100 leading-snug mt-1">Drama King y Queen Zen te ayudan a integrar el ejercicio de hoy con humor y una sonrisa. ¡Pásate por Instagram!</p>
+                    </div>
+                </div>
+                <div class="mt-4 flex items-center justify-center space-x-2 bg-white text-purple-700 font-bold rounded-2xl py-2.5 text-xs shadow-sm">
+                    <svg viewBox="0 0 24 24" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+                    <span id="ig-btn">Seguir a @elrecreomental</span>
+                </div>
+            </a>
         </section>
 
         <!-- 2. SORBITO DE EMERGENCIA (SOS) -->
         <section id="sec-sos" class="hidden space-y-4 text-center">
             <div class="bg-white dynamic-card p-6 rounded-3xl shadow-sm border border-purple-100 space-y-4">
-                <div class="w-12 h-12 mx-auto overflow-hidden">
+                <div class="w-20 h-20 mx-auto overflow-hidden">
                     <img src="assets/icono-sos.png" alt="SOS" class="w-full h-full object-contain">
                 </div>
                 <h2 id="sos-title" class="text-2xl font-bold text-brand-darkPurple dark:text-purple-200">Sorbito de Emergencia</h2>
@@ -286,19 +327,19 @@
 
                 <div class="grid grid-cols-2 gap-2.5 pt-2">
                     <button onclick="toggleAudio('cuencos', 'assets/cuencos.mp3')" id="btn-cuencos" class="p-3 bg-purple-50/80 dark:bg-purple-950/40 border border-purple-100 dark:border-purple-900 hover:border-purple-300 rounded-2xl text-xs font-bold text-purple-900 dark:text-purple-200 transition flex items-center justify-center space-x-1.5">
-                        <img src="assets/icono-cuencos.png" alt="Cuencos" class="w-4 h-4 object-contain flex-shrink-0">
+                        <img src="assets/icono-cuencos.png" alt="Cuencos" class="w-6 h-6 object-contain flex-shrink-0">
                         <span id="sos-lbl-cuencos">Cuencos tibetanos</span>
                     </button>
                     <button onclick="toggleAudio('olas', 'assets/olas.mp3')" id="btn-olas" class="p-3 bg-purple-50/80 dark:bg-purple-950/40 border border-purple-100 dark:border-purple-900 hover:border-purple-300 rounded-2xl text-xs font-bold text-purple-900 dark:text-purple-200 transition flex items-center justify-center space-x-1.5">
-                        <img src="assets/icono-olas.png" alt="Olas" class="w-4 h-4 object-contain flex-shrink-0">
+                        <img src="assets/icono-olas.png" alt="Olas" class="w-6 h-6 object-contain flex-shrink-0">
                         <span id="sos-lbl-olas">Olas del mar</span>
                     </button>
                     <button onclick="toggleAudio('agua', 'assets/agua.mp3')" id="btn-agua" class="p-3 bg-purple-50/80 dark:bg-purple-950/40 border border-purple-100 dark:border-purple-900 hover:border-purple-300 rounded-2xl text-xs font-bold text-purple-900 dark:text-purple-200 transition flex items-center justify-center space-x-1.5">
-                        <img src="assets/icono-agua.png" alt="Agua" class="w-4 h-4 object-contain flex-shrink-0">
+                        <img src="assets/icono-agua.png" alt="Agua" class="w-6 h-6 object-contain flex-shrink-0">
                         <span id="sos-lbl-agua">Movimiento del agua</span>
                     </button>
                     <button onclick="toggleAudio('campanitas', 'assets/campanitas.mp3')" id="btn-campanitas" class="p-3 bg-purple-50/80 dark:bg-purple-950/40 border border-purple-100 dark:border-purple-900 hover:border-purple-300 rounded-2xl text-xs font-bold text-purple-900 dark:text-purple-200 transition flex items-center justify-center space-x-1.5">
-                        <img src="assets/icono-campanitas.png" alt="Campanitas" class="w-4 h-4 object-contain flex-shrink-0">
+                        <img src="assets/icono-campanitas.png" alt="Campanitas" class="w-6 h-6 object-contain flex-shrink-0">
                         <span id="sos-lbl-campanitas">Campanitas de cristal</span>
                     </button>
                 </div>
@@ -317,7 +358,7 @@
         <section id="sec-blackhole" class="hidden space-y-4">
             <div class="bg-white dynamic-card p-6 rounded-3xl shadow-sm border border-purple-100 space-y-4 relative overflow-hidden" id="blackhole-container">
                 <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 overflow-hidden">
+                    <div class="w-14 h-14 overflow-hidden flex-shrink-0">
                         <img src="assets/icono-agujero.png" alt="Agujero Negro" class="w-full h-full object-contain">
                     </div>
                     <div>
@@ -351,7 +392,7 @@
         <section id="sec-piropero" class="hidden space-y-4">
             <div class="bg-white dynamic-card p-6 rounded-3xl shadow-sm border border-purple-100 space-y-4">
                 <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 overflow-hidden">
+                    <div class="w-14 h-14 overflow-hidden flex-shrink-0">
                         <img src="assets/icono-piropero.png" alt="Piropero" class="w-full h-full object-contain">
                     </div>
                     <div>
@@ -361,7 +402,7 @@
                 </div>
 
                 <div class="flex space-x-2">
-                    <input type="text" id="piropero-input" placeholder="Escribe una cualidad bonita sobre ti..." class="flex-grow bg-purple-50/50 dark:bg-purple-950/40 dynamic-card border border-purple-100 dark:border-purple-900 rounded-xl px-4 py-2 text-xs outline-none focus:border-purple-300 text-slate-700 dark:text-slate-200">
+                    <input type="text" id="piropero-input" placeholder="Una cualidad bonita sobre ti..." class="flex-grow bg-purple-50/50 dark:bg-purple-950/40 dynamic-card border border-purple-100 dark:border-purple-900 rounded-xl px-4 py-2 text-xs outline-none focus:border-purple-300 text-slate-700 dark:text-slate-200">
                     <button onclick="addPiropo()" id="piropo-save-btn" class="px-4 py-2 bg-amber-400 hover:bg-amber-500 text-slate-900 font-bold rounded-xl text-xs shadow-sm transition">Guardar</button>
                 </div>
 
@@ -380,7 +421,7 @@
         <section id="sec-mirror" class="hidden space-y-4">
             <div class="bg-white dynamic-card p-6 rounded-3xl shadow-sm border border-purple-100 space-y-5">
                 <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 overflow-hidden">
+                    <div class="w-14 h-14 overflow-hidden flex-shrink-0">
                         <img src="assets/icono-emocionometro.png" alt="Emocionómetro" class="w-full h-full object-contain">
                     </div>
                     <div>
@@ -455,32 +496,33 @@
     </div>
 
     <!-- NAVEGACIÓN INFERIOR (MÓVIL) -->
-    <nav class="fixed bottom-0 left-0 right-0 bg-white dynamic-card border-t border-purple-100 dark:border-purple-900 py-2 px-4 md:hidden flex justify-around shadow-lg z-50">
-        <button onclick="showSection('daily')" id="nav-daily" class="flex flex-col items-center text-brand-purple font-bold">
-            <img src="assets/icono-camino.png" alt="Camino" class="w-5 h-5 object-contain">
+    <nav class="fixed bottom-0 left-0 right-0 bg-white dynamic-card border-t border-purple-100 dark:border-purple-900 py-2 px-3 md:hidden flex justify-around rounded-t-3xl shadow-[0_-8px_24px_-12px_rgba(97,36,129,0.45)] z-50">
+        <button onclick="showSection('daily')" id="nav-daily" class="flex flex-col items-center text-brand-purple dark:text-purple-200 font-bold bg-purple-100 dark:bg-purple-900/60 rounded-2xl px-3 py-1">
+            <img src="assets/icono-camino.png" alt="Camino" class="w-6 h-6 object-contain">
             <span id="nav-text-daily" class="text-[10px] font-bold mt-1">365 dies</span>
         </button>
-        <button onclick="showSection('sos')" id="nav-sos" class="flex flex-col items-center text-slate-400 font-normal">
-            <img src="assets/icono-sos.png" alt="Emergencia" class="w-5 h-5 object-contain">
+        <button onclick="showSection('sos')" id="nav-sos" class="flex flex-col items-center text-purple-400 font-normal px-3 py-1">
+            <img src="assets/icono-sos.png" alt="Emergencia" class="w-6 h-6 object-contain">
             <span class="text-[10px] font-bold mt-1">SOS</span>
         </button>
-        <button onclick="showSection('blackhole')" id="nav-blackhole" class="flex flex-col items-center text-slate-400 font-normal">
-            <img src="assets/icono-agujero.png" alt="Agujero" class="w-5 h-5 object-contain">
+        <button onclick="showSection('blackhole')" id="nav-blackhole" class="flex flex-col items-center text-purple-400 font-normal px-3 py-1">
+            <img src="assets/icono-agujero.png" alt="Agujero" class="w-6 h-6 object-contain">
             <span id="nav-text-bh" class="text-[10px] font-bold mt-1">forat</span>
         </button>
-        <button onclick="showSection('piropero')" id="nav-piropero" class="flex flex-col items-center text-slate-400 font-normal">
-            <img src="assets/icono-piropero.png" alt="Piropero" class="w-5 h-5 object-contain">
+        <button onclick="showSection('piropero')" id="nav-piropero" class="flex flex-col items-center text-purple-400 font-normal px-3 py-1">
+            <img src="assets/icono-piropero.png" alt="Piropero" class="w-6 h-6 object-contain">
             <span id="nav-text-piropo" class="text-[10px] font-bold mt-1">Piropero</span>
         </button>
-        <button onclick="showSection('mirror')" id="nav-mirror" class="flex flex-col items-center text-slate-400 font-normal">
-            <img src="assets/icono-emocionometro.png" alt="Emocionómetro" class="w-5 h-5 object-contain">
+        <button onclick="showSection('mirror')" id="nav-mirror" class="flex flex-col items-center text-purple-400 font-normal px-3 py-1">
+            <img src="assets/icono-emocionometro.png" alt="Emocionómetro" class="w-6 h-6 object-contain">
             <span id="nav-text-emo" class="text-[10px] font-bold mt-1">Emocionòmetre</span>
         </button>
     </nav>
 
     <!-- FOOTER LEGAL -->
-    <footer class="max-w-md mx-auto w-full text-center py-4 text-[10px] text-slate-400 space-y-1">
+    <footer class="max-w-md mx-auto w-full text-center py-4 text-[10px] text-purple-900/70 dark:text-purple-200/70 space-y-1">
         <p>© 2026 Núria / El Recreo Mental. Todos los derechos reservados.</p>
+        <p><a href="https://www.instagram.com/elrecreomental/" target="_blank" rel="noopener noreferrer" class="underline hover:text-purple-600">Instagram @elrecreomental</a></p>
         <p id="logout-wrap" class="hidden">
             <button id="logout-btn" onclick="logoutUser()" class="underline hover:text-purple-600">Cerrar sesión</button>
         </p>
@@ -579,6 +621,9 @@
             set('activation-error', ca ? "Codi incorrecte. Comprova les lletres i els números." : "Código incorrecto. Comprueba las letras y números.");
             set('act-submit', ca ? "✨ Desbloquejar l'aplicació completa" : "✨ Desbloquear Aplicación Completa");
             set('act-cancel', ca ? "Cancel·lar" : "Cancelar");
+            set('ig-title', ca ? "Integra-ho amb humor" : "Intégralo con humor");
+            set('ig-text', ca ? "Drama King i Queen Zen t'ajuden a integrar l'exercici d'avui amb humor i un somriure. Passa't per Instagram!" : "Drama King y Queen Zen te ayudan a integrar el ejercicio de hoy con humor y una sonrisa. ¡Pásate por Instagram!");
+            set('ig-btn', ca ? "Segueix @elrecreomental" : "Seguir a @elrecreomental");
             const inp = document.getElementById('activation-code-input');
             if (inp) inp.placeholder = ca ? "Ex: TEA-482-XR-9152" : "Ej: TEA-482-XR-9152";
         }
@@ -609,11 +654,11 @@
             const btnCa = document.getElementById('lang-ca-btn');
             
             if (currentLanguage === 'es') {
-                if (btnEs) btnEs.className = 'px-2 py-1 bg-brand-purple text-white rounded-lg text-[10px] font-bold shadow-sm';
-                if (btnCa) btnCa.className = 'px-2 py-1 bg-purple-50 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300 rounded-lg text-[10px] font-bold';
+                if (btnEs) btnEs.className = 'px-2.5 py-1 bg-white text-purple-700 rounded-lg text-[10px] font-bold shadow-sm';
+                if (btnCa) btnCa.className = 'px-2.5 py-1 text-white/85 rounded-lg text-[10px] font-bold';
             } else {
-                if (btnCa) btnCa.className = 'px-2 py-1 bg-brand-purple text-white rounded-lg text-[10px] font-bold shadow-sm';
-                if (btnEs) btnEs.className = 'px-2 py-1 bg-purple-50 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300 rounded-lg text-[10px] font-bold';
+                if (btnCa) btnCa.className = 'px-2.5 py-1 bg-white text-purple-700 rounded-lg text-[10px] font-bold shadow-sm';
+                if (btnEs) btnEs.className = 'px-2.5 py-1 text-white/85 rounded-lg text-[10px] font-bold';
             }
 
             if (currentLanguage === 'ca') {
@@ -636,7 +681,7 @@
                 document.getElementById('sos-lbl-agua').innerText = "Moviment de l'aigua";
                 document.getElementById('sos-lbl-campanitas').innerText = "Campanetes de cristall";
 
-                document.getElementById('progress-title-label').innerHTML = `<img src="assets/icono-progreso.png" alt="Progreso" class="w-4 h-4 object-contain inline-block flex-shrink-0"><span>EL TEU PROGRÈS DE TRANSFORMACIÓ</span>`;
+                document.getElementById('progress-title-label').innerHTML = `<img src="assets/icono-progreso.png" alt="Progreso" class="w-6 h-6 object-contain inline-block flex-shrink-0"><span>EL TEU PROGRÈS DE TRANSFORMACIÓ</span>`;
                 document.getElementById('btn-prev').innerText = "⬅️ Anterior";
                 document.getElementById('goto-label').innerText = "Anar al dia:";
                 document.getElementById('btn-next').innerText = "Següent ➡️";
@@ -649,7 +694,7 @@
                 document.getElementById('bh-desc').innerText = "Escriu el que sents o et preocupa avui i transforma'l en llum.";
                 document.getElementById('bh-btn-text').innerText = "Desintegrar en Gran Explosió Estelar";
                 document.getElementById('thought-input').placeholder = "Exemple: 'Avui em sento fatal'...";
-                document.getElementById('piropero-input').placeholder = "Escriu una qualitat bonica sobre tu...";
+                document.getElementById('piropero-input').placeholder = "Una qualitat bonica sobre tu...";
                 document.getElementById('bh-reset-btn').innerText = "✨ Alliberar un altre pensament";
 
                 document.getElementById('piropo-heading').innerText = "El Piropero";
@@ -687,7 +732,7 @@
                 document.getElementById('sos-lbl-agua').innerText = "Movimiento del agua";
                 document.getElementById('sos-lbl-campanitas').innerText = "Campanitas de cristal";
 
-                document.getElementById('progress-title-label').innerHTML = `<img src="assets/icono-progreso.png" alt="Progreso" class="w-4 h-4 object-contain inline-block flex-shrink-0"><span>TU PROGRESO DE TRANSFORMACIÓN</span>`;
+                document.getElementById('progress-title-label').innerHTML = `<img src="assets/icono-progreso.png" alt="Progreso" class="w-6 h-6 object-contain inline-block flex-shrink-0"><span>TU PROGRESO DE TRANSFORMACIÓN</span>`;
                 document.getElementById('btn-prev').innerText = "⬅️ Anterior";
                 document.getElementById('goto-label').innerText = "Ir al día:";
                 document.getElementById('btn-next').innerText = "Siguiente ➡️";
@@ -700,7 +745,7 @@
                 document.getElementById('bh-desc').innerText = "Escribe lo que sientes o te preocupa hoy y transfórmalo en luz.";
                 document.getElementById('bh-btn-text').innerText = "Desintegrar en Gran Explosión Estelar";
                 document.getElementById('thought-input').placeholder = "Ejemplo: 'Hoy me siento horrible'...";
-                document.getElementById('piropero-input').placeholder = "Escribe una cualidad bonita sobre ti...";
+                document.getElementById('piropero-input').placeholder = "Una cualidad bonita sobre ti...";
                 document.getElementById('bh-reset-btn').innerText = "✨ Liberar otro pensamiento";
 
                 document.getElementById('piropo-heading').innerText = "El Piropero";
@@ -854,7 +899,23 @@
                 const at = getCompletedAt(); at[day] = todayStr(); lsSet(ukey('completedAt'), at);
             }
             updateCompleteButton();
+            updateProgress();
             const wn = document.getElementById('day-wait-note'); if (wn) wn.classList.add('hidden');
+        }
+
+        // Progreso = ejercicios completados / 365 (no el día en que se está mirando)
+        function updateProgress() {
+            const n = getCompleted().length;
+            const pct = Math.min(100, (n / 365) * 100);
+            const txt = (pct === 0 || pct >= 10) ? String(Math.round(pct)) : pct.toFixed(1).replace('.', currentLanguage === 'ca' || currentLanguage === 'es' ? ',' : '.');
+            const pEl = document.getElementById('progress-percent');
+            const bar = document.getElementById('progress-bar');
+            const cnt = document.getElementById('progress-count');
+            if (pEl) pEl.innerText = txt + "%";
+            if (bar) bar.style.width = (n > 0 ? Math.max(pct, 2) : 0) + "%";
+            if (cnt) cnt.innerText = currentLanguage === 'ca'
+                ? n + " de 365 exercicis completats"
+                : n + " de 365 ejercicios completados";
         }
 
         function updateCompleteButton() {
@@ -988,21 +1049,20 @@
                 const navBtn = document.getElementById('nav-' + navKey);
                 if (navBtn) {
                     navBtn.className = (navKey === id) 
-                        ? 'flex flex-col items-center text-brand-purple dark:text-purple-300 font-bold'
-                        : 'flex flex-col items-center text-slate-400 font-normal';
+                        ? 'flex flex-col items-center text-brand-purple dark:text-purple-200 font-bold bg-purple-100 dark:bg-purple-900/60 rounded-2xl px-3 py-1'
+                        : 'flex flex-col items-center text-purple-400 font-normal px-3 py-1';
                 }
                 const topBtn = document.getElementById('top-btn-' + navKey);
                 if (topBtn) {
                     topBtn.className = (navKey === id)
-                        ? 'tab-btn flex-1 py-2 px-1 rounded-xl bg-brand-purple text-white transition flex items-center justify-center space-x-1'
-                        : 'tab-btn flex-1 py-2 px-1 rounded-xl text-purple-600 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/40 transition flex items-center justify-center space-x-1';
+                        ? 'tab-btn flex-1 py-2 px-1 rounded-xl bg-purple-100 dark:bg-purple-900/60 text-brand-darkPurple dark:text-purple-100 ring-1 ring-purple-300 dark:ring-purple-700 shadow-inner transition flex flex-col items-center justify-center gap-0.5 leading-tight'
+                        : 'tab-btn flex-1 py-2 px-1 rounded-xl text-purple-600 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/40 transition flex flex-col items-center justify-center gap-0.5 leading-tight';
                 }
             });
         }
 
         function updateDayUI() {
             const data = getDayData(currentDayIndex + 1);
-            const percent = Math.round(((currentDayIndex + 1) / 365) * 100);
 
             const dayHeader = document.getElementById('day-header');
             const progressPercent = document.getElementById('progress-percent');
@@ -1017,8 +1077,7 @@
             const glassesLabel = document.getElementById('glasses-title-label');
 
             if (dayHeader) dayHeader.innerText = (currentLanguage === 'ca' ? "Dia " : "Día ") + data.day + ": " + (data.title || "");
-            if (progressPercent) progressPercent.innerText = percent + "%";
-            if (progressBar) progressBar.style.width = percent + "%";
+            updateProgress();
 
             if (teaSlogan) teaSlogan.innerText = (currentLanguage === 'ca' ? "TÈ SUGERIT DEL DIA " : "TE SUGERIDO DEL DÍA ") + data.day;
             if (teaTitle) teaTitle.innerText = data.title || "";
@@ -1307,7 +1366,7 @@
             container.innerHTML = list.map(function (p) { return `
                 <div class="bg-purple-50/60 dark:bg-purple-950/40 dynamic-card p-3.5 rounded-2xl border border-purple-100 dark:border-purple-900 text-xs text-purple-900 dark:text-purple-200 space-y-1">
                     <div class="font-bold text-brand-darkPurple dark:text-purple-200 flex items-center space-x-1.5">
-                        <img src="assets/icono-piropero.png" alt="Piropo" class="w-3.5 h-3.5 object-contain flex-shrink-0">
+                        <img src="assets/icono-piropero.png" alt="Piropo" class="w-5 h-5 object-contain flex-shrink-0">
                         <span>${escapeHtml(p.text)}</span>
                     </div>
                     <p class="text-slate-600 dark:text-slate-300 italic text-[11px] leading-relaxed pl-5">
@@ -1331,7 +1390,7 @@
             const box = document.getElementById('mood-buttons');
             if (!box) return;
             box.innerHTML = MOODS.map(function (m) {
-                return `<button onclick="saveMood('${m.key}')" class="hover:scale-125 transition w-10 h-10 overflow-hidden" title="${moodLabel(m)}">
+                return `<button onclick="saveMood('${m.key}')" class="hover:scale-110 transition w-12 h-12 overflow-hidden" title="${moodLabel(m)}">
                             <img src="${m.icon}" alt="${moodLabel(m)}" class="w-full h-full object-contain">
                         </button>`;
             }).join('');
@@ -1363,9 +1422,9 @@
             if (summaryContainer) {
                 summaryContainer.innerHTML = MOODS.map(function (m) { return `
                     <div class="flex flex-col items-center">
-                        <img src="${m.icon}" alt="${moodLabel(m)}" class="w-6 h-6 object-contain mb-1">
+                        <img src="${m.icon}" alt="${moodLabel(m)}" class="w-9 h-9 object-contain mb-1">
                         <span class="font-bold text-brand-darkPurple dark:text-purple-200">${counts[m.key]}</span>
-                        <span class="text-[9px] text-slate-500 dark:text-slate-400">${moodLabel(m)}</span>
+                        <span class="text-[10px] text-slate-500 dark:text-slate-400">${moodLabel(m)}</span>
                     </div>`; }).join('');
             }
 
@@ -1381,7 +1440,7 @@
                     return `
                     <div class="bg-purple-50/60 dark:bg-purple-950/40 dynamic-card p-3 rounded-2xl border border-purple-100 dark:border-purple-900 flex items-center justify-between text-xs">
                         <div class="flex items-center space-x-2.5">
-                            <img src="${icon}" alt="${label}" class="w-7 h-7 object-contain">
+                            <img src="${icon}" alt="${label}" class="w-9 h-9 object-contain">
                             <div>
                                 <span class="font-bold text-brand-darkPurple dark:text-purple-200 block">${label}</span>
                                 <span class="text-[10px] text-slate-400">${currentLanguage === 'ca' ? "Registrat amb èxit" : "Registrado con éxito"}</span>
