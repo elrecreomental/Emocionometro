@@ -225,6 +225,7 @@
                     </div>
                     <button onclick="changeDay(1)" id="btn-next" class="px-3 py-1.5 bg-purple-50 dark:bg-purple-900/50 hover:bg-purple-100 dark:hover:bg-purple-900 text-purple-700 dark:text-purple-300 font-bold rounded-xl text-xs transition">Següent ➡️</button>
                 </div>
+                <p id="day-wait-note" class="hidden text-[11px] text-amber-900 dark:text-amber-200 bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-900 p-2.5 rounded-xl text-center leading-snug"></p>
             </div>
 
             <div class="bg-white dynamic-card p-5 rounded-3xl shadow-sm border border-purple-100 space-y-4">
@@ -269,6 +270,7 @@
                         Aguanta la teva tassa mig tèbia...
                     </p>
                     <button id="btn-complete-day" onclick="completeToday()" class="mt-3 w-full py-2.5 bg-brand-purple text-white font-bold rounded-xl text-xs shadow-sm transition">✅ He completat l'exercici d'avui</button>
+                    <p id="complete-note" class="hidden text-[11px] text-emerald-800 dark:text-emerald-200 text-center pt-1"></p>
                 </div>
             </div>
         </section>
@@ -805,10 +807,39 @@
         // ---- Progreso: ejercicios completados ----
         function getCompleted() { return lsGet(ukey('completed'), []); }
 
+        // ---- Un ejercicio al día: el siguiente se desbloquea al día siguiente (a medianoche, hora local) ----
+        function todayStr() {
+            const d = new Date();
+            return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+        }
+        function getCompletedAt() { return lsGet(ukey('completedAt'), {}); }
+        function dailyWaitEnabled() { return currentUid() !== 'TEA-PRUEBA-2026'; } // el código de prueba no espera
+        function lastCompletedDay() { const done = getCompleted(); return done.length ? Math.max.apply(null, done) : 0; }
+        function waitingForTomorrow() {
+            const max = lastCompletedDay();
+            if (!max || !dailyWaitEnabled()) return false;
+            const at = getCompletedAt()[max];
+            return !!at && at >= todayStr();
+        }
+        function maxUnlockedDay() {
+            const max = lastCompletedDay();
+            if (!max) return 1;
+            return Math.min(365, waitingForTomorrow() ? max : max + 1);
+        }
+        function showWaitNote() {
+            const note = document.getElementById('day-wait-note');
+            if (!note) return;
+            const ca = currentLanguage === 'ca';
+            note.innerText = waitingForTomorrow()
+                ? (ca ? "🌙 Has completat l'exercici d'avui. El següent es desbloqueja demà." : "🌙 Has completado el ejercicio de hoy. El siguiente se desbloquea mañana.")
+                : (ca ? "Completa l'exercici d'aquest dia i demà es desbloquejarà el següent." : "Completa el ejercicio de este día y mañana se desbloqueará el siguiente.");
+            note.classList.remove('hidden');
+            clearTimeout(showWaitNote._t);
+            showWaitNote._t = setTimeout(function () { note.classList.add('hidden'); }, 6000);
+        }
+
         function nextDayToDo() {
-            const done = getCompleted();
-            const max = done.length ? Math.max.apply(null, done) : 0;
-            let next = Math.min(365, max + 1);
+            let next = maxUnlockedDay();
             if (!isAppActivated() && next > 3) next = 3;
             return next;
         }
@@ -818,8 +849,12 @@
         function completeToday() {
             const day = currentDayIndex + 1;
             const done = getCompleted();
-            if (!done.includes(day)) { done.push(day); lsSet(ukey('completed'), done); }
+            if (!done.includes(day)) {
+                done.push(day); lsSet(ukey('completed'), done);
+                const at = getCompletedAt(); at[day] = todayStr(); lsSet(ukey('completedAt'), at);
+            }
             updateCompleteButton();
+            const wn = document.getElementById('day-wait-note'); if (wn) wn.classList.add('hidden');
         }
 
         function updateCompleteButton() {
@@ -834,6 +869,12 @@
             btn.className = 'mt-3 w-full py-2.5 font-bold rounded-xl text-xs shadow-sm transition ' +
                 (done ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/50 dark:text-emerald-200 cursor-default'
                       : 'bg-brand-purple hover:bg-purple-700 text-white');
+            const cn = document.getElementById('complete-note');
+            if (cn) {
+                const show = done && (currentDayIndex + 1) === lastCompletedDay() && waitingForTomorrow();
+                cn.classList.toggle('hidden', !show);
+                cn.innerText = ca ? "🌙 El següent exercici es desbloqueja demà." : "🌙 El siguiente ejercicio se desbloquea mañana.";
+            }
         }
 
         // Pinta de nuevo todo lo que depende del usuario activo
@@ -1005,6 +1046,8 @@
                 return;
             }
 
+            if (newIndex + 1 > currentDayIndex + 1 && newIndex + 1 > maxUnlockedDay()) { showWaitNote(); return; }
+
             currentDayIndex = Math.max(0, Math.min(364, newIndex));
             updateDayUI();
         }
@@ -1020,6 +1063,12 @@
                 document.getElementById('lock-modal').classList.add('hidden'); // Corregido
                 document.getElementById('lock-modal').classList.remove('hidden');
                 document.getElementById('day-select').value = currentDayIndex + 1;
+                return;
+            }
+
+            if (targetIndex + 1 > maxUnlockedDay()) {
+                document.getElementById('day-select').value = currentDayIndex + 1;
+                showWaitNote();
                 return;
             }
 
