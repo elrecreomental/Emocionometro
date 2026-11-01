@@ -794,9 +794,11 @@
         // ================= ALMACENAMIENTO POR USUARIO =================
         // Cada código de activación tiene su propio espacio (progreso, piropos y emociones).
         // Sin código (versión de prueba) se usa el espacio "trial". Otro código = aplicación limpia.
-        // Código de administradora: acceso a todos los días sin esperas
-        const ADMIN_CODES = ["TEA-MINI-1971"];
-        const BUILTIN_CODES = ["TEA-MINI-1971", "REGALO-JUDIT-2026", "TEA-PRUEBA-2026", "NURIA2026", "ELRECREOMENTAL"];
+        // Códigos especiales guardados solo como huella cifrada (SHA-256): no se pueden leer en el código de la página.
+        // ADMIN = acceso a todos los días sin esperas. EXTRA = códigos válidos que no están en codes.json.
+        const HASH_SALT = 'te-recreo-codes-v1';
+        const ADMIN_HASHES = ['fb373295dedf1c58ce398fc24bd0843a860fa6a6bdd5e2746b474a72f9f50164'];
+        const EXTRA_HASHES = ['008cd48d91e25ae63f07c1307dcba5cc98fe171636955b9ecd5bb52c0f1a5a5a', '387ab74cfbf86a62604884cc7090cc0f85fec2fa6f453eaf98995fe6186ec1db', '65f9715047f33bdeb806f46d325cacf789a55f8fb4b5473f6b3cd323a97d3b6a', 'e1ef3d1c0548cdf82428562e1b8a7fe58bfb59ef7b1c68d8fbb4d5d08663f8df'];
         let validCodesList = [];
         let codesLoaded = false;
 
@@ -813,7 +815,7 @@
                     catch (e) { list = (text.match(/"([A-Za-z0-9][A-Za-z0-9\-]{5,})"/g) || []).map(function (s) { return s.slice(1, -1); }).filter(function (s) { return s.toLowerCase() !== 'codes'; }); }
                 }
             } catch (e) { list = []; }
-            validCodesList = list.concat(BUILTIN_CODES).map(normCode);
+            validCodesList = list.map(normCode);
             codesLoaded = true;
             return validCodesList;
         }
@@ -850,8 +852,11 @@
             if (!code) return;
 
             const codes = await loadCodes();
-            if (codes.includes(code)) {
+            let special = false;
+            try { const hh = await codeHash(code); special = ADMIN_HASHES.includes(hh) || EXTRA_HASHES.includes(hh); } catch (e) { special = false; }
+            if (codes.includes(code) || special) {
                 try { localStorage.setItem('te_active_code', code); } catch (e) { /* nada */ }
+                await refreshAdmin();
                 closeActivationModal();
                 initUserSpace();
                 alert(currentLanguage === 'ca' ? "Pack activat amb èxit! Gaudeix de tot el contingut." : "¡Pack activado con éxito! Disfruta de todo el contenido.");
@@ -866,6 +871,7 @@
                 : "¿Quieres cerrar la sesión? Tu progreso queda guardado con tu código.";
             if (!confirm(msg)) return;
             try { localStorage.removeItem('te_active_code'); } catch (e) { /* nada */ }
+            adminFlag = false;
             initUserSpace();
             showSection('daily');
         }
@@ -994,7 +1000,20 @@
             return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
         }
         function getCompletedAt() { return lsGet(ukey('completedAt'), {}); }
-        function isAdmin() { return ADMIN_CODES.includes(currentUid()); }
+        let adminFlag = false;
+        function isAdmin() { return adminFlag; }
+        async function sha256Hex(s) {
+            const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s));
+            return Array.from(new Uint8Array(buf)).map(function (b) { return b.toString(16).padStart(2, '0'); }).join('');
+        }
+        async function codeHash(code) { return sha256Hex(HASH_SALT + '|' + normCode(code)); }
+        async function refreshAdmin() {
+            try {
+                const code = localStorage.getItem('te_active_code');
+                adminFlag = !!code && ADMIN_HASHES.includes(await codeHash(code));
+            } catch (e) { adminFlag = false; }
+            return adminFlag;
+        }
         function dailyWaitEnabled() { return !isAdmin(); } // solo la administradora no espera
         function lastCompletedDay() { const done = getCompleted(); return done.length ? Math.max.apply(null, done) : 0; }
         function waitingForTomorrow() {
@@ -1811,6 +1830,7 @@
             initUserSpace();
             startBreathingTimer();
             loadCodes();
+            refreshAdmin().then(function (isAdm) { if (isAdm) initUserSpace(); });
         });
     </script>
 </body>
